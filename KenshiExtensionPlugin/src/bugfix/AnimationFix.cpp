@@ -487,6 +487,7 @@ namespace
 		}
 
 		self->runAnimation(idleState, idleState->playSpeed, idleState->layername, 1.0f);
+		self->isIdle = true;
 	}
 }
 
