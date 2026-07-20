@@ -4,6 +4,7 @@
 #include <Debug.h>
 #include <kep/utility.h>
 #include <kep/version_info.h>
+#include <Re_Dev.h>
 #include <DevToolsPanel.h>
 #include <utility.h>
 

@@ -340,36 +340,11 @@ namespace
 		}
 	}
 
-	void (*Crossbow_getTooltipData2_orig)(Crossbow*, Ogre::vector<StringPair>::type&);
-	void Crossbow_getTooltipData2_hook(Crossbow* self, Ogre::vector<StringPair>::type& lines)
-	{
-		Crossbow_getTooltipData2_orig(self, lines);
-		if (KEP::settings._weaponExtension && !self->crafter.empty())
-		{
-			auto& mainColour = KEP::GUIColor::getMain();
-			lines.push_back(StringPair("", ""));
-
-			lines.push_back(
-				StringPair(
-					mainColour + "[" + KEP::TranslationUtility::format_main(boost::locale::format(boost::locale::translate(msg_craftedBy)) % self->crafter) + "]"
-				)
-			);
-
-			auto& secondaryColour = KEP::GUIColor::getSecondary();
-			auto id = self->level_0_100 < 70 ? "Crafted by the smith {1} of {2}." : "A masterful weapon crafted by the renowned smith {1} of {2}.";
-			lines.push_back(
-				StringPair(
-					secondaryColour + KEP::TranslationUtility::format_main(boost::locale::format(boost::locale::translate(id)) % self->crafter % ou->player->participant->name)
-				)
-			);
-		}
-	}
-
 	void (*RobotLimbItem_getTooltipData2_orig)(RobotLimbItem*, Ogre::vector<StringPair>::type&);
 	void RobotLimbItem_getTooltipData2_hook(RobotLimbItem* self, Ogre::vector<StringPair>::type& lines)
 	{
 		RobotLimbItem_getTooltipData2_orig(self, lines);
-		if (KEP::settings._weaponExtension && !self->crafter.empty())
+		if (KEP::settings._showCrafter && !self->crafter.empty())
 		{
 			auto& mainColour = KEP::GUIColor::getMain();
 			lines.push_back(StringPair("", ""));
@@ -477,12 +452,28 @@ namespace
 	void setTotalCoverage_hook(GameData* data)
 	{
 		setTotalCoverage_orig(data);
-		if (KEP::settings._weaponExtension)
+		if (KEP::settings._sortArmorCoverage)
 		{
 			auto listIt = data->objectReferences.find("part coverage");
 			if (listIt != data->objectReferences.end() && listIt->second.size() != 0)
 				std::sort(listIt->second.begin(), listIt->second.end(), LessLocationalDamage());
 		}
+	}
+
+	Armour* (*Armour__CONSTRUCTOR_orig)(Armour*, GameData*, GameData*, hand&, Faction*, int);
+	Armour* Armour__CONSTRUCTOR_hook(Armour* self, GameData* baseData, GameData* _materialData, hand _handle, Faction* _uniformFlag, int _level)
+	{
+		Armour__CONSTRUCTOR_orig(self, baseData, _materialData, _handle, _uniformFlag, _level);
+		if (KEP::settings._armorEx)
+		{
+			float craftTimeMult = self->data->fdata["craft time mult"];
+			if (0.0f < craftTimeMult)
+				self->craftTime *= craftTimeMult;
+
+			if (self->data->bdata["weight override"])
+				self->weight = self->data->fdata["weight kg"];
+		}
+		return self;
 	}
 }
 
@@ -497,12 +488,12 @@ void KEP::ItemExtension::init()
 	if (KenshiLib::SUCCESS != KenshiLib::AddHook(KenshiLib::GetRealAddress(&Sword::_NV_getTooltipData1), &Sword_getTooltipData1_hook, &Sword_getTooltipData1_orig))
 		ErrorLog("[Sword::getTooltipData1] could not install hook!");
 
-	if (KenshiLib::SUCCESS != KenshiLib::AddHook(KenshiLib::GetRealAddress(&Crossbow::_NV_getTooltipData2), &Crossbow_getTooltipData2_hook, &Crossbow_getTooltipData2_orig))
-		ErrorLog("[Crossbow::getTooltipData2] could not install hook!");
-
 	if (KenshiLib::SUCCESS != KenshiLib::AddHook(KenshiLib::GetRealAddress(&RobotLimbItem::_NV_getTooltipData2), &RobotLimbItem_getTooltipData2_hook, &RobotLimbItem_getTooltipData2_orig))
 		ErrorLog("[RobotLimbItem::getTooltipData2] could not install hook!");
 
 	if (KenshiLib::SUCCESS != KenshiLib::AddHook(KEP::functions->setTotalCoverage, &setTotalCoverage_hook, &setTotalCoverage_orig))
 		ErrorLog("[setTotalCoverage] could not install hook!");
+
+	if (KenshiLib::SUCCESS != KenshiLib::AddHook(KenshiLib::GetRealAddress(&Armour::_CONSTRUCTOR), &Armour__CONSTRUCTOR_hook, &Armour__CONSTRUCTOR_orig))
+		ErrorLog("[Armour::Armour] could not install hook!");
 }

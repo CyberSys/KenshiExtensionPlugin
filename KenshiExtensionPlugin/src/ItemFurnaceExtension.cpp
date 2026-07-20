@@ -244,7 +244,7 @@ namespace
 			}
 
 			if (0 < count)
-				reinterpret_cast<FurnaceBuilding*>(storage)->incinerate(nullptr);
+				static_cast<FurnaceBuilding*>(storage)->incinerate(nullptr);
 
 			return count;
 		}
@@ -258,7 +258,7 @@ namespace
 		auto count = Task_FillMachine_FUN_00343720_orig(self, storage, inventory);
 
 		if (0 < count && storage->getSpecialFunction() == BF_ITEM_FURNACE && storage->manyLimitItems.size() != 0)
-			reinterpret_cast<FurnaceBuilding*>(storage)->incinerate(nullptr);
+			static_cast<FurnaceBuilding*>(storage)->incinerate(nullptr);
 
 		return count;
 	}

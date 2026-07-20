@@ -11,6 +11,7 @@ namespace KEP
 	{
 	public:
 		static void init(unsigned int platform, const std::string& version, uintptr_t baseAddr);
+		static void initHook();
 		static DECLSPEC const std::string& getLanguage();
 		static DECLSPEC std::string gettext_main(const char* id);
 		static DECLSPEC std::string gettext_main(const boost::locale::message& msg);

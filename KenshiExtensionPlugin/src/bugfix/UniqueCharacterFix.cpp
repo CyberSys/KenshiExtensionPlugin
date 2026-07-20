@@ -118,7 +118,7 @@ namespace
 				bool needReplacement = true;
 
 				auto platoon = (uniqueNPCMgr.*KEP::externalFunctions->FUN_009AFCA0)(characterTemplate).getPlatoon();
-				if (platoon != nullptr && owner->getType() == DataObjectContainer::TYPE_PLATOON && reinterpret_cast<ActivePlatoon*>(owner)->me != platoon && isBeforeTownOverride(platoon)) // 現在の所有者が街のオーバーライドで消滅予定の場合は所有権を奪い取って強制的に出現させる
+				if (platoon != nullptr && owner->getType() == DataObjectContainer::TYPE_PLATOON && static_cast<ActivePlatoon*>(owner)->me != platoon && isBeforeTownOverride(platoon)) // 現在の所有者が街のオーバーライドで消滅予定の場合は所有権を奪い取って強制的に出現させる
 				{
 					auto& characterState = uniqueNPCMgr.uniqueCharacterStates[characterTemplate];
 					if (characterState.state == ALIVE || characterState.state == IMPRISONED)
@@ -164,8 +164,8 @@ namespace
 						platoon = (uniqueNPCMgr.*KEP::externalFunctions->FUN_009AFCA0)(replacementCharacterTemplate).getPlatoon();
 						if (platoon != nullptr &&
 							owner->getType() == DataObjectContainer::TYPE_PLATOON &&
-							reinterpret_cast<ActivePlatoon*>(owner)->me != nullptr &&
-							platoon->getOwnerships()->_homeTown == reinterpret_cast<ActivePlatoon*>(owner)->me->getOwnerships()->_homeTown || KEP::externalFunctions->FUN_005E7D60(uniqueNPCMgr, replacementCharacterTemplate) != ALIVE)
+							static_cast<ActivePlatoon*>(owner)->me != nullptr &&
+							platoon->getOwnerships()->_homeTown == static_cast<ActivePlatoon*>(owner)->me->getOwnerships()->_homeTown || KEP::externalFunctions->FUN_005E7D60(uniqueNPCMgr, replacementCharacterTemplate) != ALIVE)
 							return nullptr;
 					}
 
@@ -174,7 +174,7 @@ namespace
 			}
 		}
 
-		auto character = reinterpret_cast<Character*>(self->create(characterTemplate, position, false, faction, Ogre::Quaternion::IDENTITY, nullptr, owner, nullptr, false, home, age));
+		auto character = static_cast<Character*>(self->create(characterTemplate, position, false, faction, Ogre::Quaternion::IDENTITY, nullptr, owner, nullptr, false, home, age));
 
 		if (character != nullptr)
 		{
@@ -210,7 +210,7 @@ namespace
 	{
 		if ((KEP::settings._fixspawningOfUniqueCharacters || KEP::settings._fixHousemateInventoryRefresh) && ownr != nullptr && ownr->getType() == DataObjectContainer::TYPE_PLATOON)
 		{
-			ActivePlatoon* activePlatoon = reinterpret_cast<ActivePlatoon*>(ownr);
+			ActivePlatoon* activePlatoon = static_cast<ActivePlatoon*>(ownr);
 			bool refreshed = activePlatoon->me->messageOnActivation == CM_REFRESH;
 			if (KEP::settings._fixspawningOfUniqueCharacters && refreshed)
 			{
@@ -407,7 +407,7 @@ namespace
 			}
 			else if (self->things.size() == 1) // プレイヤーに担がれている間は初期化判定の対象外とする
 			{
-				auto character = reinterpret_cast<Character*>(self->things[0]);
+				auto character = static_cast<Character*>(self->things[0]);
 				if (character->_isBeingCarried)
 				{
 					auto carryingCharacter = character->carryingObject.getCharacter();

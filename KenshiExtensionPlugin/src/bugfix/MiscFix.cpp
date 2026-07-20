@@ -22,11 +22,19 @@
 #include <kenshi/gui/NewGameWindow.h>
 #include <kenshi/Building/TortureBuilding.h>
 #include <kenshi/Character.h>
+#include <kenshi/Faction.h>
+#include <kenshi/Platoon.h>
+#include <kenshi/AI/AI.h>
+#include <kenshi/StateBroadcastData.h>
+#include <kenshi/Item.h>
+#include <kenshi/gui/ProspectingWindow.h>
+#include <kenshi/SaveManager.h>
 
 #include <extern/TownBase.h>
 #include <extern/BasePopulationManager.h>
-#include <extern/Research.h>
+#include <extern/Blackboard.h>
 
+#include <kep/functions.h>
 #include <ExternalFunctions.h>
 #include <Settings.h>
 #include <bugfix/MiscFix.h>
@@ -130,7 +138,7 @@ namespace
 	void (*DistantTown_FUN_000D8620_orig)(DistantTown*, bool);
 	void DistantTown_FUN_000D8620_hook(DistantTown* self, bool visible)
 	{
-		if (visible && visible != self->visible && self->_0x8 == 0)
+		if (KEP::settings._enableCrashPrevention && visible && visible != self->visible && self->_0x8 == 0)
 		{
 			auto resourceMgr = Ogre::ResourceGroupManager::getSingletonPtr();
 			std::string meshfile;
@@ -146,27 +154,6 @@ namespace
 		}
 
 		DistantTown_FUN_000D8620_orig(self, visible);
-	}
-
-	void (*Research_FUN_00830b90_orig)(Research*, GameData*);
-	void Research_FUN_00830b90_hook(Research* self, GameData* gameData)
-	{
-		if (!KEP::settings._fixBuildingImprovements)
-		{
-			Research_FUN_00830b90_orig(self, gameData);
-			return;
-		}
-
-		lektor<GameData*> improveBuildings;
-		gameData->getAllFromListAsDatas("improve buildings", improveBuildings, &ou->gamedata, BUILDING);
-
-		for (auto it = improveBuildings.begin(); it != improveBuildings.end(); ++it)
-		{
-			auto& buidingUpgrade = self->buildingUpgradeResearchs[*it];
-			buidingUpgrade.productionMult *= gameData->fdata["production mult"];
-			buidingUpgrade.powerOutput += gameData->idata["power increase"];
-			buidingUpgrade.powerCapacity += gameData->idata["power capacity increase"];
-		}
 	}
 
 	void (*FUN_004B0B60_orig)(void*, MyGUI::ItemBox*, MyGUI::types::TCoord<int>&, bool);
@@ -244,6 +231,60 @@ namespace
 			}
 		}
 	}
+
+	bool (*AI_itemOnGroundStealingCheckIsSafe_orig)(AI*, Item*);
+	bool AI_itemOnGroundStealingCheckIsSafe_hook(AI* self, Item* item)
+	{
+		if (!KEP::settings._fixStealingCheck)
+			return AI_itemOnGroundStealingCheckIsSafe_orig(self, item);
+
+		auto town = self->me->getStateBroadcast()->currentTownLocation;
+		bool inPlayerTown = town != nullptr ? town->getFaction()->isPlayer != nullptr : false;
+
+		auto building = item->isIndoors().getBuilding();
+		bool inNpcBuilding = building != nullptr ? building->getFaction()->isPlayer == nullptr : false;
+
+		if (inNpcBuilding || !inPlayerTown)
+		{
+			if (inNpcBuilding && building != nullptr)
+			{
+				auto residentSquad = building->residentSquad.getPlatoon();
+				if (residentSquad != nullptr && residentSquad->blackboard->homelok)
+					return false;
+			}
+			auto platoon = item->getProperOwner().getPlatoon();
+			if (platoon != nullptr)
+				return self->me->getFaction() == platoon->getFaction();
+		}
+
+		return true;
+	}
+
+	void (*ProspectiongWindow_showT_orig)(ProspectingWindow*, const Ogre::Vector3&, float, const std::string&);
+	void ProspectiongWindow_showT_hook(ProspectingWindow* self, const Ogre::Vector3& pos, float skill, const std::string& name)
+	{
+		if (KEP::settings._enableCrashPrevention && skill < 0.0f)
+			skill = 0.0f;
+		ProspectiongWindow_showT_orig(self, pos, skill, name);
+	}
+
+	int (*SaveManager_importGame_orig)(SaveManager*, const std::string&, const std::string&, int);
+	int SaveManager_importGame_hook(SaveManager* self, const std::string& location, const std::string& name, int flags)
+	{
+		int res = SaveManager_importGame_orig(self, location, name, flags);
+		if (KEP::settings._importingNegativeMoney && (res == 0 || res == 2))
+		{
+			lektor<GameData*> list;
+			ou->savedata.getDataOfType(list, CAMERA);
+			if (list.size() != 0)
+			{
+				int money = list[0]->idata["player money"];
+				if (money < 0)
+					ou->player->participant->factionOwnerships->money = money;
+			}
+		}
+		return res;
+	}
 }
 
 void KEP::MiscFix::init()
@@ -270,14 +311,8 @@ void KEP::MiscFix::init()
 	if (KenshiLib::SUCCESS != KenshiLib::AddHook(externalFunctions->FUN_000D5FD0, &DistantTown__CONSTRUCTOR_hook, &DistantTown__CONSTRUCTOR_orig))
 		ErrorLog("[DistantTown::DistantTown] could not install hook!");
 
-	if (settings._enableCrashPrevention)
-	{
-		if (KenshiLib::SUCCESS != KenshiLib::AddHook(externalFunctions->FUN_000D8620, &DistantTown_FUN_000D8620_hook, &DistantTown_FUN_000D8620_orig))
-			ErrorLog("[FUN_000D8620] could not install hook!");
-	}
-
-	if (KenshiLib::SUCCESS != KenshiLib::AddHook(externalFunctions->FUN_00830B90, &Research_FUN_00830b90_hook, &Research_FUN_00830b90_orig))
-		ErrorLog("FUN_00830B90] could not install hook!");
+	if (KenshiLib::SUCCESS != KenshiLib::AddHook(externalFunctions->FUN_000D8620, &DistantTown_FUN_000D8620_hook, &DistantTown_FUN_000D8620_orig))
+		ErrorLog("[FUN_000D8620] could not install hook!");
 
 	if (settings._fixTechAndCraftingQueue)
 	{
@@ -300,6 +335,15 @@ void KEP::MiscFix::init()
 			ErrorLog("[TortureBuilding::_NV_update] could not install hook!");
 	}
 
-	if (KenshiLib::SUCCESS != KenshiLib::AddHook(KenshiLib::GetRealAddress(UtilityT::getResourceFilePath), &UtilityT_getResourceFilePath_hook, &UtilityT_getResourceFilePath_orig))
+	if (KenshiLib::SUCCESS != KenshiLib::AddHook(KenshiLib::GetRealAddress(&UtilityT::getResourceFilePath), &UtilityT_getResourceFilePath_hook, &UtilityT_getResourceFilePath_orig))
 		ErrorLog("[UtilityT::getResourceFilePath] could not install hook!");
+
+	if (KenshiLib::SUCCESS != KenshiLib::AddHook(KenshiLib::GetRealAddress(&AI::itemOnGroundStealingCheckIsSafe), &AI_itemOnGroundStealingCheckIsSafe_hook, &AI_itemOnGroundStealingCheckIsSafe_orig))
+		ErrorLog("[AI::itemOnGroundStealingCheckIsSafe] could not install hook!");
+
+	if (KenshiLib::SUCCESS != KenshiLib::AddHook(KenshiLib::GetRealAddress(&ProspectingWindow::showT), &ProspectiongWindow_showT_hook, &ProspectiongWindow_showT_orig))
+		ErrorLog("[ProspectingWindow::showT] could not install hook!");
+
+	if (KenshiLib::SUCCESS != KenshiLib::AddHook(KenshiLib::GetRealAddress(&SaveManager::importGame), &SaveManager_importGame_hook, &SaveManager_importGame_orig))
+		ErrorLog("[SaveManager::importGame] could not install hook!");
 }

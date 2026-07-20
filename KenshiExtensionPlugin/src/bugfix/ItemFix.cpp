@@ -193,7 +193,7 @@ namespace
 
 		if (self->parentInventory->owner != nullptr && self->parentInventory->owner->data->type == BUILDING)
 		{
-			auto storage = reinterpret_cast<Building*>(self->parentInventory->owner)->getFunctionStuff();
+			auto storage = static_cast<Building*>(self->parentInventory->owner)->getFunctionStuff();
 			if (storage != nullptr && (storage->specialItemTypesOnly == CROSSBOW || storage->specialItemTypesOnly == LIMB_REPLACEMENT || storage->specialItemTypesOnly == CONTAINER || storage->specialItemTypesOnly == NEST_ITEM || storage->specialItemTypesOnly == MAP_ITEM))
 				return storage->specialItemTypesOnly == itemGamedata->type;
 		}
@@ -207,6 +207,12 @@ namespace
 	void (*SeveredLimbItem_destroyPhysical_orig)(SeveredLimbItem*);
 	void SeveredLimbItem_destroyPhysical_hook(SeveredLimbItem* self)
 	{
+		if (!KEP::settings._enableCrashPrevention)
+		{
+			SeveredLimbItem_destroyPhysical_orig(self);
+			return;
+		}
+
 		lektor<ZoneMap*> loadedZones;
 		ou->zoneMgr->getAllActiveZones(loadedZones);
 		hand handle(self);
@@ -271,12 +277,9 @@ void KEP::ItemFix::init()
 	if (KenshiLib::SUCCESS != KenshiLib::AddHook(KenshiLib::GetRealAddress(&BlueprintItem::_CONSTRUCTOR), &BlueprintItem__CONSTRUCTOR_hook, &BlueprintItem__CONSTRUCTOR_orig))
 		ErrorLog("[BlueprintItem::BlueprintItem] could not install hook!");
 
-	if (KenshiLib::SUCCESS != KenshiLib::AddHook(KenshiLib::GetRealAddress((bool (InventorySection::*)(Item*)) & InventorySection::isLimitedSlotCompatible), &InventorySection_isLimitedSlotCompatible_hook, &InventorySection_isLimitedSlotCompatible_orig))
+	if (KenshiLib::SUCCESS != KenshiLib::AddHook(KenshiLib::GetRealAddress((bool (InventorySection::*)(Item*))&InventorySection::isLimitedSlotCompatible), &InventorySection_isLimitedSlotCompatible_hook, &InventorySection_isLimitedSlotCompatible_orig))
 		ErrorLog("[InventorySection::isLimitedSlotCompatible(Item*)] could not install hook!");
 
-	if (settings._enableCrashPrevention)
-	{
-		if (KenshiLib::SUCCESS != KenshiLib::AddHook(KenshiLib::GetRealAddress(&SeveredLimbItem::_NV_destroyPhysical), &SeveredLimbItem_destroyPhysical_hook, &SeveredLimbItem_destroyPhysical_orig))
-			ErrorLog("[SeveredLimbItem::destroyPhysical] could not install hook!");
-	}
+	if (KenshiLib::SUCCESS != KenshiLib::AddHook(KenshiLib::GetRealAddress(&SeveredLimbItem::_NV_destroyPhysical), &SeveredLimbItem_destroyPhysical_hook, &SeveredLimbItem_destroyPhysical_orig))
+		ErrorLog("[SeveredLimbItem::destroyPhysical] could not install hook!");
 }

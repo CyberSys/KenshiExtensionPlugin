@@ -19,7 +19,7 @@ namespace KEP
 	class ConfigManager
 	{
 	public:
-		static void init(unsigned int platform, const std::string& version, uintptr_t baseAddr);
+		static void initHook();
 		DECLSPEC static ConfigManager& getSingleton();
 		DECLSPEC void addItem(IPluginOption* option);
 		void create(OptionsWindow* win);

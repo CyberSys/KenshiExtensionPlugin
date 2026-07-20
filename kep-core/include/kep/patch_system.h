@@ -8,7 +8,7 @@ namespace KEP
 {
 	namespace PatchSystem
 	{
-		void init();
+		void initHook();
 
 		class ModReader
 		{

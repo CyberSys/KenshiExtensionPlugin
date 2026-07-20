@@ -259,7 +259,7 @@ namespace
 		size_t numObj = parentSceneNode->numAttachedObjects();
 		for (size_t i = 0; i < numObj; ++i)
 		{
-			auto obj = reinterpret_cast<Ogre::Entity*>(parentSceneNode->getAttachedObject(i));
+			auto obj = static_cast<Ogre::Entity*>(parentSceneNode->getAttachedObject(i));
 			auto& meshPtr = obj->getMesh();
 			auto ent = self->sceneManager->createEntity(meshPtr);
 			auto& materialPtr = obj->getSubEntity(0)->getMaterial();

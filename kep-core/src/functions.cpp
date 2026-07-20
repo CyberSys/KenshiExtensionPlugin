@@ -32,6 +32,14 @@ KEP::FunctionPointers::FunctionPointers()
 	, Research_init(nullptr)
 	, setTotalCoverage(nullptr)
 	, loadPartmap(nullptr)
+	, Harpoon_destroy(nullptr)
+	, HarpoonManager_create(nullptr)
+	, CharacterMemory_getCharacterMemoryTag(nullptr)
+	, Harpoon_trace(nullptr)
+	, convertRarityToLevel(nullptr)
+	, crossbowLevelSelector(nullptr)
+	, calculateStatsMult(nullptr)
+	, InventoryManager_refreshSquadInventory(nullptr)
 	, timer(nullptr)
 	, NULL_HAND(nullptr)
 	, _interior(nullptr)
@@ -39,6 +47,8 @@ KEP::FunctionPointers::FunctionPointers()
 	, _GameplayOptions(nullptr)
 	, _attacks(nullptr)
 	, _blocks(nullptr)
+	, _harpoon(nullptr)
+	, _shapeBuffer(nullptr)
 {
 }
 
@@ -76,6 +86,14 @@ void KEP::FunctionPointers::init(unsigned int platform, const std::string& versi
 			*(uintptr_t*)&Research_init = baseAddr + 0x833ca0;
 			*(uintptr_t*)&setTotalCoverage = baseAddr + 0x82eeb0;
 			*(uintptr_t*)&loadPartmap = baseAddr + 0x755c0;
+			*(uintptr_t*)&Harpoon_destroy = baseAddr + 0x435610;
+			*(uintptr_t*)&HarpoonManager_create = baseAddr + 0x439f50;
+			*(uintptr_t*)&CharacterMemory_getCharacterMemoryTag = baseAddr + 0x677da0;
+			*(uintptr_t*)&Harpoon_trace = baseAddr + 0x4354d0;
+			*(uintptr_t*)&convertRarityToLevel = baseAddr + 0x620660;
+			*(uintptr_t*)&crossbowLevelSelector = baseAddr + 0x954340;
+			*(uintptr_t*)&calculateStatsMult = baseAddr + 0xcd4c0;
+			*(uintptr_t*)&InventoryManager_refreshSquadInventory = baseAddr + 0x959c40;
 			*(uintptr_t*)&timer = baseAddr + 0x2132730;
 			*(uintptr_t*)&NULL_HAND = baseAddr + 0x1e395f8;
 			*(uintptr_t*)&_interior = baseAddr + 0x212ec50;
@@ -83,6 +101,8 @@ void KEP::FunctionPointers::init(unsigned int platform, const std::string& versi
 			*(uintptr_t*)&_GameplayOptions = baseAddr + 0x2132528;
 			*(uintptr_t*)&_attacks = baseAddr + 0x2010f68;
 			*(uintptr_t*)&_blocks = baseAddr + 0x2010f80;
+			*(uintptr_t*)&_harpoon = baseAddr + 0x212e1d0;
+			*(uintptr_t*)&_shapeBuffer = baseAddr + 0x212de98;
 		}
 	}
 	else if (platform == 0)
@@ -117,6 +137,14 @@ void KEP::FunctionPointers::init(unsigned int platform, const std::string& versi
 			*(uintptr_t*)&Research_init = baseAddr + 0x8335e0;
 			*(uintptr_t*)&setTotalCoverage = baseAddr + 0x82e7f0;
 			*(uintptr_t*)&loadPartmap = baseAddr + 0x755c0;
+			*(uintptr_t*)&Harpoon_destroy = baseAddr + 0x435230;
+			*(uintptr_t*)&HarpoonManager_create = baseAddr + 0x439b70;
+			*(uintptr_t*)&CharacterMemory_getCharacterMemoryTag = baseAddr + 0x6780b0;
+			*(uintptr_t*)&Harpoon_trace = baseAddr + 0x4350f0;
+			*(uintptr_t*)&crossbowLevelSelector = baseAddr + 0x953a60;
+			*(uintptr_t*)&convertRarityToLevel = baseAddr + 0x620970;
+			*(uintptr_t*)&calculateStatsMult = baseAddr + 0xcd4c0;
+			*(uintptr_t*)&InventoryManager_refreshSquadInventory = baseAddr + 0x959360;
 			*(uintptr_t*)&timer = baseAddr + 0x21306a0;
 			*(uintptr_t*)&NULL_HAND = baseAddr + 0x1e375f8;
 			*(uintptr_t*)&_interior = baseAddr + 0x212cb90;
@@ -124,6 +152,8 @@ void KEP::FunctionPointers::init(unsigned int platform, const std::string& versi
 			*(uintptr_t*)&_GameplayOptions = baseAddr + 0x2130498;
 			*(uintptr_t*)&_attacks = baseAddr + 0x200ef78;
 			*(uintptr_t*)&_blocks = baseAddr + 0x200ef90;
+			*(uintptr_t*)&_harpoon = baseAddr + 0x212c110;
+			*(uintptr_t*)&_shapeBuffer = baseAddr + 0x212bdd8;
 		}
 	}
 }
@@ -135,3 +165,5 @@ ogre_unordered_map<GameData*, DialogLineData*>::type& KEP::FunctionPointers::get
 GameplayOptions* KEP::FunctionPointers::getGameplayOptions() const { return _GameplayOptions; }
 lektor<CombatTechniqueData*>& KEP::FunctionPointers::getAttacks() const { return *_attacks; }
 lektor<CombatTechniqueData*>& KEP::FunctionPointers::getBlocks() const { return *_blocks; }
+HarpoonManager* KEP::FunctionPointers::getHarpoonManager() const { return _harpoon; }
+NxShape**& KEP::FunctionPointers::getShapeBuffer() const { return *_shapeBuffer; }

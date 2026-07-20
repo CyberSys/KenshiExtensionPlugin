@@ -74,13 +74,29 @@ namespace
 		settingsDocument.AddMember("enable_crash_prevention", settings._enableCrashPrevention, settingsDocument.GetAllocator());
 		settingsDocument.AddMember("crafting_item_extension", settings._craftingItemExtension, settingsDocument.GetAllocator());
 		settingsDocument.AddMember("weapon_extension", settings._weaponExtension, settingsDocument.GetAllocator());
+		settingsDocument.AddMember("show_crafter", settings._showCrafter, settingsDocument.GetAllocator());
+		settingsDocument.AddMember("sort_armor_coverage", settings._sortArmorCoverage, settingsDocument.GetAllocator());
+		settingsDocument.AddMember("armor_ex", settings._armorEx, settingsDocument.GetAllocator());
 		settingsDocument.AddMember("dialogue_extension", settings._dialogueExtension, settingsDocument.GetAllocator());
+		settingsDocument.AddMember("animal_dialogue_package", settings._animalDialoguePackage, settingsDocument.GetAllocator());
 		settingsDocument.AddMember("sorted_new_game_starts", settings._sortedNewGameStarts, settingsDocument.GetAllocator());
-		settingsDocument.AddMember("character_extension", settings._characterExtension, settingsDocument.GetAllocator());
+		settingsDocument.AddMember("extend_init_inventory", settings._extendInitInventory, settingsDocument.GetAllocator());
+		settingsDocument.AddMember("fix_npc_money", settings._fixNpcMoney, settingsDocument.GetAllocator());
+		settingsDocument.AddMember("keep_character_type", settings._keepCharacterType, settingsDocument.GetAllocator());
 		settingsDocument.AddMember("fix_GetResourceFilePath", settings._fixGetResourceFilePath, settingsDocument.GetAllocator());
 		settingsDocument.AddMember("fix_TortureBuilding", settings._fixTortureBuilding, settingsDocument.GetAllocator());
 		settingsDocument.AddMember("fix_AnimalAge", settings._fixAnimalAge, settingsDocument.GetAllocator());
 		settingsDocument.AddMember("fix_idle_animation", settings._fixIdleAnimation, settingsDocument.GetAllocator());
+		settingsDocument.AddMember("research_ex", settings._researchEx, settingsDocument.GetAllocator());
+		settingsDocument.AddMember("combat_techniques_ex", settings._combatTechniquesEx, settingsDocument.GetAllocator());
+		settingsDocument.AddMember("ranged_weapons_ex", settings._rangedWeaponsEx, settingsDocument.GetAllocator());
+		settingsDocument.AddMember("shopping_ex", settings._shoppingEx, settingsDocument.GetAllocator());
+		settingsDocument.AddMember("fix_stealing_check", settings._fixStealingCheck, settingsDocument.GetAllocator());
+		settingsDocument.AddMember("importing_negative_money", settings._importingNegativeMoney, settingsDocument.GetAllocator());
+		settingsDocument.AddMember("combat_ex", settings._combatEx, settingsDocument.GetAllocator());
+		settingsDocument.AddMember("fix_unarmed_block_chance", settings._fixUnarmedBlockChance, settingsDocument.GetAllocator());
+		settingsDocument.AddMember("fix_damage_calculation", settings._fixDamageCalculation, settingsDocument.GetAllocator());
+		settingsDocument.AddMember("fix_getEquippedArmour", settings._getEquippedArmour, settingsDocument.GetAllocator());
 
 		return settingsDocument;
 	}
@@ -135,16 +151,32 @@ KEP::Settings::Settings()
 	, _animalArmor(true)
 	, _fixTechAndCraftingQueue(false)
 	, _enableCrashPrevention(true)
-	, _craftingItemExtension(false)
-	, _weaponExtension(false)
+	, _craftingItemExtension(true)
+	, _weaponExtension(true)
+	, _showCrafter(true)
+	, _sortArmorCoverage(true)
+	, _armorEx(true)
 	, _dialogueExtension(false)
+	, _animalDialoguePackage(true)
 	, _sortedNewGameStarts(false)
 	, _xpMod(false)
-	, _characterExtension(true)
+	, _fixNpcMoney(true)
+	, _extendInitInventory(true)
+	, _keepCharacterType(true)
 	, _fixGetResourceFilePath(true)
 	, _fixTortureBuilding(true)
 	, _fixAnimalAge(true)
 	, _fixIdleAnimation(true)
+	, _researchEx(false)
+	, _combatTechniquesEx(false)
+	, _rangedWeaponsEx(false)
+	, _shoppingEx(false)
+	, _fixStealingCheck(true)
+	, _importingNegativeMoney(false)
+	, _combatEx(false)
+	, _fixUnarmedBlockChance(false)
+	, _fixDamageCalculation(0)
+	, _getEquippedArmour(0)
 {
 }
 
@@ -278,12 +310,24 @@ void KEP::Settings::loadSettings()
 		this->_craftingItemExtension = settingsDocument["crafting_item_extension"].GetBool();
 	if (settingsDocument.HasMember("weapon_extension"))
 		this->_weaponExtension = settingsDocument["weapon_extension"].GetBool();
+	if (settingsDocument.HasMember("show_crafter"))
+		this->_showCrafter = settingsDocument["show_crafter"].GetBool();
+	if (settingsDocument.HasMember("sort_armor_coverage"))
+		this->_sortArmorCoverage = settingsDocument["sort_armor_coverage"].GetBool();
+	if (settingsDocument.HasMember("armor_ex"))
+		this->_armorEx = settingsDocument["armor_ex"].GetBool();
 	if (settingsDocument.HasMember("dialogue_extension"))
 		this->_dialogueExtension = settingsDocument["dialogue_extension"].GetBool();
+	if (settingsDocument.HasMember("animal_dialogue_package"))
+		this->_animalDialoguePackage = settingsDocument["animal_dialogue_package"].GetBool();
 	if (settingsDocument.HasMember("sorted_new_game_starts"))
 		this->_sortedNewGameStarts = settingsDocument["sorted_new_game_starts"].GetBool();
-	if (settingsDocument.HasMember("character_extension"))
-		this->_characterExtension = settingsDocument["character_extension"].GetBool();
+	if (settingsDocument.HasMember("fix_npc_money"))
+		this->_fixNpcMoney = settingsDocument["fix_npc_money"].GetBool();
+	if (settingsDocument.HasMember("extend_init_inventory"))
+		this->_extendInitInventory = settingsDocument["extend_init_inventory"].GetBool();
+	if (settingsDocument.HasMember("keep_character_type"))
+		this->_keepCharacterType = settingsDocument["keep_character_type"].GetBool();
 	if (settingsDocument.HasMember("fix_GetResourceFilePath"))
 		this->_fixGetResourceFilePath = settingsDocument["fix_GetResourceFilePath"].GetBool();
 	if (settingsDocument.HasMember("fix_TortureBuilding"))
@@ -292,6 +336,26 @@ void KEP::Settings::loadSettings()
 		this->_fixAnimalAge = settingsDocument["fix_AnimalAge"].GetBool();
 	if (settingsDocument.HasMember("fix_idle_animation"))
 		this->_fixIdleAnimation = settingsDocument["fix_idle_animation"].GetBool();
+	if (settingsDocument.HasMember("research_ex"))
+		this->_researchEx = settingsDocument["research_ex"].GetBool();
+	if (settingsDocument.HasMember("combat_techniques_ex"))
+		this->_combatTechniquesEx = settingsDocument["combat_techniques_ex"].GetBool();
+	if (settingsDocument.HasMember("ranged_weapons_ex"))
+		this->_rangedWeaponsEx = settingsDocument["ranged_weapons_ex"].GetBool();
+	if (settingsDocument.HasMember("shopping_ex"))
+		this->_shoppingEx = settingsDocument["shopping_ex"].GetBool();
+	if (settingsDocument.HasMember("fix_stealing_check"))
+		this->_fixStealingCheck = settingsDocument["fix_stealing_check"].GetBool();
+	if (settingsDocument.HasMember("importing_negative_money"))
+		this->_importingNegativeMoney = settingsDocument["importing_negative_money"].GetBool();
+	if (settingsDocument.HasMember("combat_ex"))
+		this->_combatEx = settingsDocument["combat_ex"].GetBool();
+	if (settingsDocument.HasMember("fix_unarmed_block_chance"))
+		this->_fixUnarmedBlockChance = settingsDocument["fix_unarmed_block_chance"].GetBool();
+	if (settingsDocument.HasMember("fix_damage_calculation"))
+		this->_fixDamageCalculation = settingsDocument["fix_damage_calculation"].GetInt();
+	if (settingsDocument.HasMember("fix_getEquippedArmour"))
+		this->_getEquippedArmour = settingsDocument["fix_getEquippedArmour"].GetInt();
 }
 
 KEP::Settings::~Settings()
@@ -409,15 +473,15 @@ void KEP::Settings::create(DatapanelGUI* panel, int category, ToolTip* tooltip)
 	panel->setLineCheckbox(KEP::TranslationUtility::gettext("Fix UtilityT::getResourceFilePath"), &this->_fixGetResourceFilePath, category)
 		->setToolTip(KEP::TranslationUtility::gettext("Change the search path priority for `UtilityT::getResourceFilePath` to match that of the OGRE resource manager."), tooltip);
 
+	panel->setLineCheckbox(KEP::TranslationUtility::gettext("Fix item stealing checks in tasks"), &this->_fixStealingCheck, category)
+		->setToolTip(KEP::TranslationUtility::gettext("Prevents characters assigned tasks such as crafting armor in town from stealing items that have been dropped."), tooltip);
+
 	panel->setLineCheckbox(KEP::TranslationUtility::gettext("Enable crash prevention"), &this->_enableCrashPrevention, category)
-		->setToolTip(KEP::TranslationUtility::gettext("Fixes two causes of random crashes. See the documentation for details. (REQURIES RESTART)\nNote: This doesn't prevent all crashes."), tooltip);
+		->setToolTip(KEP::TranslationUtility::gettext("Fixes some causes of random crashes. See the documentation for details.\nNote: This doesn't prevent all crashes."), tooltip);
 
 	panel->addSpace(category, 1.0f);
 
 	panel->setLine(KEP::GUIColor::getMain() + KEP::TranslationUtility::gettext("[KEP Features]"), "", category, false, true);
-
-	panel->setLineCheckbox(KEP::TranslationUtility::gettext("Sort idle stances"), &this->_sortedIdleStances, category)
-		->setToolTip(KEP::TranslationUtility::gettext("Sort idle stances by Mod load order and dictionary order of names. (REQURIES RESTART)"), tooltip);
 
 	panel->setLineCheckbox(KEP::TranslationUtility::gettext("Sort New Game Starts"), &this->_sortedNewGameStarts, category)
 		->setToolTip(KEP::TranslationUtility::gettext("Sort New Game Starts by Mod load order and dictionary order of stringID. (REQURIES RESTART)"), tooltip);
@@ -428,61 +492,127 @@ void KEP::Settings::create(DatapanelGUI* panel, int category, ToolTip* tooltip)
 	panel->setLineCheckbox(KEP::TranslationUtility::gettext("Save reputation points"), &this->_saveReputation, category)
 		->setToolTip(KEP::TranslationUtility::gettext("Saving reputation points."), tooltip);
 
-	auto panelLine_portraitExtension = panel->setLineDropBox(KEP::TranslationUtility::gettext("Player portrait capacity cap"), category, &this->_portraitExtension, false, 0.4f);
-	panelLine_portraitExtension->setToolTip(KEP::TranslationUtility::gettext("Select player portrait capacity caps. Default is 256 people. (REQURIES RESTART)"), tooltip);
-	panelLine_portraitExtension->addAValue("256", 0);
-	panelLine_portraitExtension->addAValue("1024", 1);
-	panelLine_portraitExtension->refresh();
+	panel->setLineCheckbox(KEP::TranslationUtility::gettext("Importing negative money"), &this->_importingNegativeMoney, category)
+		->setToolTip(KEP::TranslationUtility::gettext("Enables the import of negative money."), tooltip);
 
-	panel->setLineCheckbox(KEP::TranslationUtility::gettext("Extension: Character Dismissal"), &this->_dismissedCharacterExtension, category)
-		->setToolTip(KEP::TranslationUtility::gettext("Enable extension function for Character Dismissal."), tooltip);
+	panel->setLineCheckbox(KEP::TranslationUtility::gettext("Fix the Scythe path"), &this->_scythePathExtension, category)
+		->setToolTip(KEP::TranslationUtility::gettext("Get .phs files from the OGRE resource manager."), tooltip);
 
-	panel->setLineCheckbox(KEP::TranslationUtility::gettext("Extension: Item Furnace"), &this->_furnaceExtension, category)
-		->setToolTip(KEP::TranslationUtility::gettext("Enable extension function for Item Furnaces. (REQURIES RESTART)"), tooltip);
+	auto dropbox = panel->setLineDropBox(KEP::TranslationUtility::gettext("Player portrait capacity cap"), category, &this->_portraitExtension, false, 0.4f);
+	dropbox->setToolTip(KEP::TranslationUtility::gettext("Select player portrait capacity caps. Default is 256 people. (REQURIES RESTART)"), tooltip);
+	dropbox->addAValue("256", 0);
+	dropbox->addAValue("1024", 1);
+	dropbox->refresh();
 
-	panel->setLineCheckbox(KEP::TranslationUtility::gettext("Extension: Race Equipment Limits"), &this->_raceEquipmentLimitsExtension, category)
-		->setToolTip(KEP::TranslationUtility::gettext("Enable extension function for Race Equipment Limits. (REQURIES RESTART)"), tooltip);
+	panel->addSpace(category, 0.25f);
 
-	panel->setLineCheckbox(KEP::TranslationUtility::gettext("Extension: Scythe Path"), &this->_scythePathExtension, category)
-		->setToolTip(KEP::TranslationUtility::gettext("Enable extension function for Scythe Path."), tooltip);
+	panel->setLineCheckbox(KEP::TranslationUtility::gettext("Fix NPC money"), &this->_fixNpcMoney, category)
+		->setToolTip(KEP::TranslationUtility::gettext("Prevents non-merchant units that include animals from spawning with 0 cats."), tooltip);
 
-	panel->setLineCheckbox(KEP::TranslationUtility::gettext("Extension: Bulk Limits"), &this->_bulkLimitsExtension, category)
-		->setToolTip(KEP::TranslationUtility::gettext("Enable extension function for Bulk Limits."), tooltip);
+	panel->setLineCheckbox(KEP::TranslationUtility::gettext("Inventory Item Expansion"), &this->_extendInitInventory, category)
+		->setToolTip(KEP::TranslationUtility::gettext("Provides features to add settings related to character inventory items."), tooltip);
 
-	auto panelLine_bulkStatMaxMale = panel->setLineSliderEditable(KEP::TranslationUtility::gettext("Max Bulk Stat for Males"), category, true, -2000.0f, 2000.0f, &this->_bulkStatMaxMale);
-	panelLine_bulkStatMaxMale->setToolTip(KEP::TranslationUtility::gettext("Sets the max value for stats affecting bulk. Setting both to 20 will lock them at the standard size."), tooltip);
-	panelLine_bulkStatMaxMale->setPrecision(0);
+	panel->setLineCheckbox(KEP::TranslationUtility::gettext("Change the faction of a dismissed character"), &this->_dismissedCharacterExtension, category)
+		->setToolTip(KEP::TranslationUtility::gettext("Provides features to change the faction of dismissed characters."), tooltip);
 
-	auto panelLine_bulkStatMinMale = panel->setLineSliderEditable(KEP::TranslationUtility::gettext("Min Bulk Stat for Males"), category, true, -2000.0f, 2000.0f, &this->_bulkStatMinMale);
-	panelLine_bulkStatMinMale->setToolTip(KEP::TranslationUtility::gettext("Sets the min value for stats affecting bulk. Setting both to 20 will lock them at the standard size."), tooltip);
-	panelLine_bulkStatMinMale->setPrecision(0);
+	panel->setLineCheckbox(KEP::TranslationUtility::gettext("Animal Dialogue Package"), &this->_animalDialoguePackage, category)
+		->setToolTip(KEP::TranslationUtility::gettext("Provides features to set individual dialog packages for each animal."), tooltip);
 
-	auto panelLine_bulkStatMaxFemale = panel->setLineSliderEditable(KEP::TranslationUtility::gettext("Max Bulk Stat for Females"), category, true, -2000.0f, 2000.0f, &this->_bulkStatMaxFemale);
-	panelLine_bulkStatMaxFemale->setToolTip(KEP::TranslationUtility::gettext("Sets the max value for stats affecting bulk. Setting both to 20 will lock them at the standard size."), tooltip);
-	panelLine_bulkStatMaxFemale->setPrecision(0);
+	panel->setLineCheckbox(KEP::TranslationUtility::gettext("Limit bulk"), &this->_bulkLimitsExtension, category)
+		->setToolTip(KEP::TranslationUtility::gettext("This feature allows you to set limits on character bulk. Additionally, mods can change these limits for each race."), tooltip);
 
-	auto panelLine_bulkStatMinFemale = panel->setLineSliderEditable(KEP::TranslationUtility::gettext("Min Bulk Stat for Females"), category, true, -2000.0f, 2000.0f, &this->_bulkStatMinFemale);
-	panelLine_bulkStatMinFemale->setToolTip(KEP::TranslationUtility::gettext("Sets the min value for stats affecting bulk. Setting both to 20 will lock them at the standard size."), tooltip);
-	panelLine_bulkStatMinFemale->setPrecision(0);
+	auto slider = panel->setLineSliderEditable(KEP::TranslationUtility::gettext("Max Bulk Stat for Males"), category, true, -2000.0f, 2000.0f, &this->_bulkStatMaxMale);
+	slider->setToolTip(KEP::TranslationUtility::gettext("Sets the max value for stats affecting bulk. Setting both to 20 will lock them at the standard size."), tooltip);
+	slider->setPrecision(0);
 
-	panel->setLineCheckbox(KEP::TranslationUtility::gettext("Extension: Idle Stance"), &this->_idleStanceExtension, category)
-		->setToolTip(KEP::TranslationUtility::gettext("Enable extension function for Idle Stance."), tooltip);
+	slider = panel->setLineSliderEditable(KEP::TranslationUtility::gettext("Min Bulk Stat for Males"), category, true, -2000.0f, 2000.0f, &this->_bulkStatMinMale);
+	slider->setToolTip(KEP::TranslationUtility::gettext("Sets the min value for stats affecting bulk. Setting both to 20 will lock them at the standard size."), tooltip);
+	slider->setPrecision(0);
 
-	panel->setLineCheckbox(KEP::TranslationUtility::gettext("Extension: Animation"), &this->_animationEx, category)
-		->setToolTip(KEP::TranslationUtility::gettext("Enable extension function for Animation."), tooltip);
+	slider = panel->setLineSliderEditable(KEP::TranslationUtility::gettext("Max Bulk Stat for Females"), category, true, -2000.0f, 2000.0f, &this->_bulkStatMaxFemale);
+	slider->setToolTip(KEP::TranslationUtility::gettext("Sets the max value for stats affecting bulk. Setting both to 20 will lock them at the standard size."), tooltip);
+	slider->setPrecision(0);
 
-	panel->setLineCheckbox(KEP::TranslationUtility::gettext("Extension: Animal Armor"), &this->_animalArmor, category)
-		->setToolTip(KEP::TranslationUtility::gettext("Enable extension function for Animal Armor. (REQURIES RESTART)"), tooltip);
+	slider = panel->setLineSliderEditable(KEP::TranslationUtility::gettext("Min Bulk Stat for Females"), category, true, -2000.0f, 2000.0f, &this->_bulkStatMinFemale);
+	slider->setToolTip(KEP::TranslationUtility::gettext("Sets the min value for stats affecting bulk. Setting both to 20 will lock them at the standard size."), tooltip);
+	slider->setPrecision(0);
 
-	panel->setLineCheckbox(KEP::TranslationUtility::gettext("Extension: Crafting item"), &this->_craftingItemExtension, category)
-		->setToolTip(KEP::TranslationUtility::gettext("Enable extension function for Crafting item. (REQURIES RESTART)"), tooltip);
+	panel->addSpace(category, 0.25f);
 
-	panel->setLineCheckbox(KEP::TranslationUtility::gettext("Extension: Item"), &this->_weaponExtension, category)
-		->setToolTip(KEP::TranslationUtility::gettext("Enable extension function for Item."), tooltip);
+	panel->setLineCheckbox(KEP::TranslationUtility::gettext("Animal Armor Slots"), &this->_animalArmor, category)
+		->setToolTip(KEP::TranslationUtility::gettext("Adds armor slots to animals. (REQURIES RESTART)"), tooltip);
 
-	panel->setLineCheckbox(KEP::TranslationUtility::gettext("Extension: Dialogue"), &this->_dialogueExtension, category)
-		->setToolTip(KEP::TranslationUtility::gettext("Enable extension function for Dialogue."), tooltip);
+	panel->setLineCheckbox(KEP::TranslationUtility::gettext("Show crossbow and prosthetics crafters"), &this->_showCrafter, category)
+		->setToolTip(KEP::TranslationUtility::gettext("Displays the crafter's information in the tooltips for crossbows and prosthetics."), tooltip);
 
-	panel->setLineCheckbox(KEP::TranslationUtility::gettext("Extension: Character"), &this->_characterExtension, category)
-		->setToolTip(KEP::TranslationUtility::gettext("Enable extension function for Character."), tooltip);
+	panel->setLineCheckbox(KEP::TranslationUtility::gettext("Sort Armor Coverage"), &this->_sortArmorCoverage, category)
+		->setToolTip(KEP::TranslationUtility::gettext("Sort armor coverage by body part type. (REQURIES RESTART)"), tooltip);
+
+	panel->setLineCheckbox(KEP::TranslationUtility::gettext("Weapon Model Expansion"), &this->_weaponExtension, category)
+		->setToolTip(KEP::TranslationUtility::gettext("Provides features to add settings related to stat modifiers to weapon models."), tooltip);
+
+	panel->setLineCheckbox(KEP::TranslationUtility::gettext("Armor Expansion"), &this->_armorEx, category)
+		->setToolTip(KEP::TranslationUtility::gettext("Provides features to add settings such as crafting time multipliers to armor."), tooltip);
+
+	panel->setLineCheckbox(KEP::TranslationUtility::gettext("Race Limiter Expansion"), &this->_raceEquipmentLimitsExtension, category)
+		->setToolTip(KEP::TranslationUtility::gettext("Race limits for weapons and prosthetics actually work. It also provides features to set limits for each race group. (REQURIES RESTART)"), tooltip);
+
+	panel->addSpace(category, 0.25f);
+
+	panel->setLineCheckbox(KEP::TranslationUtility::gettext("Item Furnace Expansion"), &this->_furnaceExtension, category)
+		->setToolTip(KEP::TranslationUtility::gettext("Provides features to change the inventory size of the item furnace and to change the item used as the basis for determining the amount generated. (REQURIES RESTART)"), tooltip);
+
+	panel->setLineCheckbox(KEP::TranslationUtility::gettext("Item Crafting Expansion"), &this->_craftingItemExtension, category)
+		->setToolTip(KEP::TranslationUtility::gettext("Provides features to limit the list of weapons that can be crafted. Additionally, the crafting list is sorted by name. (REQURIES RESTART)"), tooltip);
+
+	panel->addSpace(category, 0.25f);
+
+	panel->setLineCheckbox(KEP::TranslationUtility::gettext("Sort idle stances"), &this->_sortedIdleStances, category)
+		->setToolTip(KEP::TranslationUtility::gettext("Sort idle stances by Mod load order and dictionary order of names. (REQURIES RESTART)"), tooltip);
+
+	panel->setLineCheckbox(KEP::TranslationUtility::gettext("Idle stances of Races and Factions"), &this->_idleStanceExtension, category)
+		->setToolTip(KEP::TranslationUtility::gettext("Provides features to set idle stance animations for each race and faction."), tooltip);
+
+	panel->setLineCheckbox(KEP::TranslationUtility::gettext("Animation Expansion"), &this->_animationEx, category)
+		->setToolTip(KEP::TranslationUtility::gettext("Provides features to change the aiming animation. Additionally, turrets in the weapon category will now work."), tooltip);
+
+	panel->addSpace(category, 0.25f);
+
+	panel->setLineCheckbox(KEP::TranslationUtility::gettext("Word Swap Expansion"), &this->_dialogueExtension, category)
+		->setToolTip(KEP::TranslationUtility::gettext("Provides features to add color codes used by the UI to Word Swap. It also fixes a bug where, in certain dialog structures, the conditions assigned to Word Swap could not correctly reference the intended targets."), tooltip);
+
+	panel->addSpace(category, 0.25f);
+	panel->setLine(KEP::GUIColor::getMain() + KEP::TranslationUtility::gettext("[KEP Beta]"), "", category, false, true);
+
+	panel->setLineCheckbox(KEP::TranslationUtility::gettext("Research Expansion"), &this->_researchEx, category)
+		->setToolTip(KEP::TranslationUtility::gettext("Provides features to customize equipment blueprints. It also provides features to set equipment blueprints as research requirements and as research to be learned at the start."), tooltip);
+
+	panel->setLineCheckbox(KEP::TranslationUtility::gettext("Special Combat Techniques"), &this->_combatTechniquesEx, category)
+		->setToolTip(KEP::TranslationUtility::gettext("Provides features to set specific combat techniques for each weapon, character, race, and faction."), tooltip);
+
+	panel->setLineCheckbox(KEP::TranslationUtility::gettext("Ranged Weapon Expansion"), &this->_rangedWeaponsEx, category)
+		->setToolTip(KEP::TranslationUtility::gettext("Skill requirements and racial damage will now actually work."), tooltip);
+
+	panel->setLineCheckbox(KEP::TranslationUtility::gettext("Shopping Expansion"), &this->_shoppingEx, category)
+		->setToolTip(KEP::TranslationUtility::gettext("The daily wages for non-merchant units will now actually work. Additionally, allows you to set the money for merchants who do not have a residence."), tooltip);
+
+	panel->setLineCheckbox(KEP::TranslationUtility::gettext("Combat Expansion"), &this->_combatEx, category)
+		->setToolTip(KEP::TranslationUtility::gettext("Characters (excluding animals) will try to dodge area-of-effect and ranged attacks."), tooltip);
+
+	panel->setLineCheckbox(KEP::TranslationUtility::gettext("Change the block chance"), &this->_fixUnarmedBlockChance, category)
+		->setToolTip(KEP::TranslationUtility::gettext("Changing the formula for the block chance modifier for martial arts attacks.\nNote: If your martial arts skill is low, it will be difficult to block martial arts attacks."), tooltip);
+
+	dropbox = panel->setLineDropBox(KEP::TranslationUtility::gettext("Fix Damage Calculation"), category, &this->_fixDamageCalculation, false, 0.4f);
+	dropbox->setToolTip(KEP::TranslationUtility::gettext("Adjusts the effect of armor penetration on damage calculations. Additionally, fixes the game's UI."), tooltip);
+	dropbox->addAValue(KEP::TranslationUtility::gettext("Disable"), 0);
+	dropbox->addAValue(KEP::TranslationUtility::gettext("UI fixes only"), 1);
+	dropbox->addAValue(KEP::TranslationUtility::gettext("Enable"), 2);
+	dropbox->refresh();
+
+	dropbox = panel->setLineDropBox(KEP::TranslationUtility::gettext("Fix Inventory::getEquippedArmour"), category, &this->_getEquippedArmour, false, 0.4f);
+	dropbox->setToolTip(KEP::TranslationUtility::gettext("Belt slot armor will now be included in actions such as \"removing uniform tags upon hiring\", \"confiscating equipment\" and \"destroying armor with a peeler machine\"."), tooltip);
+	dropbox->addAValue(KEP::TranslationUtility::gettext("Disable"), 0);
+	dropbox->addAValue(KEP::TranslationUtility::gettext("Belt only"), 1);
+	dropbox->addAValue(KEP::TranslationUtility::gettext("Compatible with Extra Inventory Sections"), 2);
+	dropbox->refresh();
 }

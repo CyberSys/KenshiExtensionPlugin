@@ -45,7 +45,7 @@ KEP::IPluginOption::~IPluginOption()
 {
 }
 
-void KEP::ConfigManager::init(unsigned int platform, const std::string& version, uintptr_t baseAddr)
+void KEP::ConfigManager::initHook()
 {
 	if (KenshiLib::SUCCESS != KenshiLib::AddHook(KenshiLib::GetRealAddress(&OptionsWindow::create), OptionsWindow_create_hook, &OptionsWindow_create_orig))
 		ErrorLog("[OptionsWindow::create] Could not add hook!");

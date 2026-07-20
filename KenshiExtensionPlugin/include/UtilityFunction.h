@@ -13,6 +13,15 @@ namespace KEP
 		return (t - zero) / (one - zero);
 	}
 
+	inline float clamp(float a, float min, float max)
+	{
+		if (max <= a)
+			a = max;
+		if (a <= min)
+			a = min;
+		return a;
+	}
+
 	inline std::string getHexString(size_t number, int width)
 	{
 		std::stringstream ss;
@@ -27,23 +36,6 @@ namespace KEP
 	inline std::string getHexString(void* ptr)
 	{
 		return getHexString(reinterpret_cast<uintptr_t>(ptr), 0x10);
-	}
-
-	inline int getLevel(int rarity)
-	{
-		switch (rarity) {
-		case 0:
-			return 5;
-		case 2:
-			return 40;
-		case 3:
-			return 60;
-		case 4:
-			return 80;
-		case 5:
-			return 95;
-		}
-		return 20;
 	}
 }
 

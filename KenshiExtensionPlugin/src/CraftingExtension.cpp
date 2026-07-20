@@ -14,9 +14,9 @@
 #include <kenshi/PlayerInterface.h>
 #include <kenshi/CharStats.h>
 #include <kenshi/Character.h>
-
 #include <extern/ProductionBuilding.h>
 #include <kenshi/Building/CraftingBuilding.h>
+
 #include <extern/Research.h>
 
 #include <kep/translation.h>
@@ -24,7 +24,6 @@
 #include <ExternalFunctions.h>
 #include <Settings.h>
 #include <CraftingExtension.h>
-
 
 namespace
 {
@@ -131,7 +130,7 @@ namespace
 			enableWeaponList.clear();
 
 			auto refList = self->functionalityData->getReferenceListIfExists("weapon types");
-			if (refList != nullptr && refList->size() != 0)
+			if (refList != nullptr)
 			{
 				KEP::externalFunctions->FUN_002CA350(refList, WEAPON, enableWeaponList);
 

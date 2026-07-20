@@ -1,4 +1,6 @@
-﻿#include <ogre/OgrePrerequisites.h>
+﻿#include <boost/math/special_functions/round.hpp>
+
+#include <ogre/OgrePrerequisites.h>
 
 #include <kenshi/Kenshi.h>
 #include <core/Functions.h>
@@ -105,7 +107,7 @@ namespace
 	{
 		int money = 0;
 		bool initialization = false;
-		if (KEP::settings._characterExtension && state == nullptr && self->getFaction()->isPlayer == nullptr)
+		if (KEP::settings._fixNpcMoney && state == nullptr && self->getFaction()->isPlayer == nullptr)
 		{
 			if (tempplatoonptr != nullptr && tempplatoonptr->me != nullptr)
 			{
@@ -123,7 +125,7 @@ namespace
 				ownerShips->money = money;
 		}
 
-		if (KEP::settings._dialogueExtension && success && self->isAnimal() != nullptr && !self->platoon->me->squadTemplate->listExistsAndNotEmpty("dialog animal"))
+		if (KEP::settings._animalDialoguePackage && success && self->isAnimal() != nullptr && !self->platoon->me->squadTemplate->listExistsAndNotEmpty("dialog animal"))
 		{
 			lektor<std::string> dialogList;
 			if (_faction->isPlayer != nullptr)
@@ -144,7 +146,7 @@ namespace
 	bool PlayerInterface_recruit_hook(PlayerInterface* self, const lektor<Character*>& characters, bool editor)
 	{
 		bool success = PlayerInterface_recruit_orig(self, characters, editor);
-		if ((KEP::settings._dialogueExtension) && success)
+		if ((KEP::settings._animalDialoguePackage) && success)
 		{
 			for (auto iter = characters.begin(); iter != characters.end(); ++iter)
 			{
@@ -172,6 +174,8 @@ namespace
 	Item* (*Character_generateWeapon_orig)(Character*, GameData*, GameData*);
 	Item* Character_generateWeapon_hook(Character* self, GameData* weapon, GameData* manufacturer)
 	{
+		if (KEP::settings._extendInitInventory)
+		{
 		auto models = self->data->getReferenceListIfExists("weapon models");
 
 		if (manufacturer != nullptr && models != nullptr)
@@ -194,6 +198,7 @@ namespace
 			if (materialData != nullptr)
 				return ou->theFactory->createItem(manufacturer, hand(), weapon, materialData, 0, nullptr);
 		}
+		}
 
 		return Character_generateWeapon_orig(self, weapon, manufacturer);
 	}
@@ -201,6 +206,12 @@ namespace
 	void (*Character_reCalculateNaturalWeapon_orig)(Character*);
 	void Character_reCalculateNaturalWeapon_hook(Character* self)
 	{
+		if (!KEP::settings._extendInitInventory)
+		{
+			Character_reCalculateNaturalWeapon_orig(self);
+			return;
+		}
+
 		auto weaponMesh = self->data->getFromListAsData("weapon", 0, &ou->gamedata, WEAPON);
 		auto gamedata = self->data->getFromListAsData("weapon level", 0, &ou->gamedata, WEAPON_MANUFACTURER);
 		auto models = self->data->getReferenceListIfExists("weapon models");
@@ -247,13 +258,10 @@ void KEP::CharacterExtension::init()
 	if (KenshiLib::SUCCESS != KenshiLib::AddHook(KenshiLib::GetRealAddress((bool (PlayerInterface::*)(const lektor<Character*>&, bool))&PlayerInterface::recruit), &PlayerInterface_recruit_hook, &PlayerInterface_recruit_orig))
 		ErrorLog("[PlayerInterface::recruit] could not install hook!");
 
-	if (settings._characterExtension)
-	{
 		if (KenshiLib::SUCCESS != KenshiLib::AddHook(KenshiLib::GetRealAddress(&Character::generateWeapon), &Character_generateWeapon_hook, &Character_generateWeapon_orig))
 			ErrorLog("[Character::generateWeapon] could not install hook!");
 
 		if (KenshiLib::SUCCESS != KenshiLib::AddHook(KenshiLib::GetRealAddress(&Character::_NV_reCalculateNaturalWeapon), &Character_reCalculateNaturalWeapon_hook, &Character_reCalculateNaturalWeapon_orig))
 			ErrorLog("[Character::reCalculateNaturalWeapon] could not install hook!");
-	}
 
 }

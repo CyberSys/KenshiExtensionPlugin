@@ -148,13 +148,16 @@
     <ClInclude Include="include\extern\Blackboard.h" />
     <ClInclude Include="include\extern\BuildingInterior.h" />
     <ClInclude Include="include\extern\CharacterMemory.h" />
+    <ClInclude Include="include\extern\ConstantTracerT.h" />
     <ClInclude Include="include\extern\FactionWarMgr.h" />
     <ClInclude Include="include\extern\InventoryManager.h" />
+    <ClInclude Include="include\extern\NodeList.h" />
     <ClInclude Include="include\extern\ProductionBuilding.h" />
     <ClInclude Include="include\extern\Renderer.h" />
     <ClInclude Include="include\extern\Research.h" />
     <ClInclude Include="include\extern\TemporaryLimbInterface.h" />
     <ClInclude Include="include\extern\TownBase.h" />
+    <ClInclude Include="include\extern\TradingInfo.h" />
     <ClInclude Include="include\extern\UniqueNPCManager.h" />
     <ClInclude Include="include\extern\UseableStuff.h" />
     <ClInclude Include="include\framework.h" />

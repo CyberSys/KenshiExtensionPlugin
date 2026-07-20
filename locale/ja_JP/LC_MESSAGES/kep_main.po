@@ -1,8 +1,8 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: KEP\n"
-"POT-Creation-Date: 2026-06-19 22:00+0900\n"
-"PO-Revision-Date: 2026-06-19 22:00+0900\n"
+"POT-Creation-Date: 2026-07-20 12:00+0900\n"
+"PO-Revision-Date: 2026-07-20 12:00+0900\n"
 "Last-Translator: \n"
 "Language-Team: \n"
 "Language: ja_JP\n"
@@ -25,41 +25,41 @@ msgstr "武術クラス"
 msgid "Turret class"
 msgstr "砲台クラス"
 
-#: KenshiExtensionPlugin/src/ItemExtension.cpp:120
-#: kep-mod-tool/DevToolsPanel.cpp:196
+#: KenshiExtensionPlugin/src/ItemExtension.cpp:129
+#: kep-mod-tool/DevToolsPanel.cpp:195
 msgid "Harpoon damage"
 msgstr "ハープーンダメージ"
 
-#: KenshiExtensionPlugin/src/ItemExtension.cpp:150
+#: KenshiExtensionPlugin/src/ItemExtension.cpp:159
 #, c++-format
 msgid "Damage vs {1} race"
 msgstr "対{1}種族ダメージ"
 
-#: KenshiExtensionPlugin/src/ItemExtension.cpp:178
+#: KenshiExtensionPlugin/src/ItemExtension.cpp:196
 msgid "Required Strength"
 msgstr "必要筋力"
 
-#: KenshiExtensionPlugin/src/ItemExtension.cpp:193
+#: KenshiExtensionPlugin/src/ItemExtension.cpp:211
 msgid "Length"
 msgstr "長さ"
 
-#: KenshiExtensionPlugin/src/Settings.cpp:308
+#: KenshiExtensionPlugin/src/Settings.cpp:374
 msgid "[KEP Bug fixes]"
 msgstr "[KEP バグ修正]"
 
-#: KenshiExtensionPlugin/src/Settings.cpp:310
+#: KenshiExtensionPlugin/src/Settings.cpp:376
 msgid "Fix NPC faces"
 msgstr "NPCの顔を修正"
 
-#: KenshiExtensionPlugin/src/Settings.cpp:311
+#: KenshiExtensionPlugin/src/Settings.cpp:377
 msgid "NPC shape keys are applied correctly."
 msgstr "NPCのシェイプキーが正しく適用されます。"
 
-#: KenshiExtensionPlugin/src/Settings.cpp:313
+#: KenshiExtensionPlugin/src/Settings.cpp:379
 msgid "Fix character editor"
 msgstr "キャラクターエディターを修正"
 
-#: KenshiExtensionPlugin/src/Settings.cpp:314
+#: KenshiExtensionPlugin/src/Settings.cpp:380
 msgid ""
 "Characters equipped with bandanas and similar items will now display "
 "correctly in the Character Editor window. Additionally, face textures will "
@@ -68,11 +68,11 @@ msgstr ""
 "バンダナ等を装備したキャラクターの髪がキャラクターエディターウィンドウでも正"
 "常に表示されます。また、顔テスクチャもインポートされるようになります。"
 
-#: KenshiExtensionPlugin/src/Settings.cpp:316
+#: KenshiExtensionPlugin/src/Settings.cpp:382
 msgid "Fix portrait"
 msgstr "ポートレートを修正"
 
-#: KenshiExtensionPlugin/src/Settings.cpp:317
+#: KenshiExtensionPlugin/src/Settings.cpp:383
 msgid ""
 "The idle animations added or overwritten by Mods will be reflected in the "
 "portrait. Additionally, the positions of the shoulders and neck will be "
@@ -81,38 +81,38 @@ msgstr ""
 "MODで追加・上書きした待機アニメーションがポートレートに反映されます。また、肩"
 "と首の位置が正しく表示されます。"
 
-#: KenshiExtensionPlugin/src/Settings.cpp:319
+#: KenshiExtensionPlugin/src/Settings.cpp:385
 msgid "Fix animation override"
 msgstr "アニメーションのオーバーライドを修正"
 
-#: KenshiExtensionPlugin/src/Settings.cpp:320
+#: KenshiExtensionPlugin/src/Settings.cpp:386
 msgid "The animation will be overridden correctly."
 msgstr "アニメーションが正常にオーバーライドされます。"
 
-#: KenshiExtensionPlugin/src/Settings.cpp:322
+#: KenshiExtensionPlugin/src/Settings.cpp:388
 msgid "Fix idle animation"
 msgstr "待機アニメーションを修正"
 
-#: KenshiExtensionPlugin/src/Settings.cpp:323
+#: KenshiExtensionPlugin/src/Settings.cpp:389
 msgid "Reduces the twitching in the idle animation while carrying a character."
 msgstr "キャラクターを運んでいるときの待機アニメーションの痙攣を軽減します。"
 
-#: KenshiExtensionPlugin/src/Settings.cpp:325
+#: KenshiExtensionPlugin/src/Settings.cpp:391
 msgid "Fix spawning of unique characters"
 msgstr "ユニークキャラクターのスポーンを修正"
 
-#: KenshiExtensionPlugin/src/Settings.cpp:326
+#: KenshiExtensionPlugin/src/Settings.cpp:392
 msgid ""
 "Prevents the loss of unique characters due to town overrides or squad "
 "regeneration."
 msgstr ""
 "街のオーバーライドや部隊の再生成によるユニークキャラクターの消失を防ぎます。"
 
-#: KenshiExtensionPlugin/src/Settings.cpp:328
+#: KenshiExtensionPlugin/src/Settings.cpp:394
 msgid "Fix unloading of unique characters"
 msgstr "ユニークキャラクターのアンロードを修正"
 
-#: KenshiExtensionPlugin/src/Settings.cpp:329
+#: KenshiExtensionPlugin/src/Settings.cpp:395
 msgid ""
 "Prevents unique characters participating in town raid events from "
 "teleporting hometown."
@@ -120,21 +120,21 @@ msgstr ""
 "街の襲撃イベントに参加中のユニークキャラクターがホームタウンへテレポートする"
 "のを防ぎます。"
 
-#: KenshiExtensionPlugin/src/Settings.cpp:331
+#: KenshiExtensionPlugin/src/Settings.cpp:397
 msgid "Fix importing of unique prisoners"
 msgstr "ユニーク囚人のインポートを修正"
 
-#: KenshiExtensionPlugin/src/Settings.cpp:332
+#: KenshiExtensionPlugin/src/Settings.cpp:398
 msgid ""
 "Prevents unique prisoners that have already appeared from disappearing after "
 "import."
 msgstr "出現済みのユニーク囚人がインポート後に消失するのを防ぎます。"
 
-#: KenshiExtensionPlugin/src/Settings.cpp:334
+#: KenshiExtensionPlugin/src/Settings.cpp:400
 msgid "Fix the unique leader for the Town Raid event"
 msgstr "街の襲撃イベントのユニークリーダーを修正"
 
-#: KenshiExtensionPlugin/src/Settings.cpp:335
+#: KenshiExtensionPlugin/src/Settings.cpp:401
 msgid ""
 "Prevents imprisoned unique characters from becoming leaders of town raid "
 "events."
@@ -142,11 +142,11 @@ msgstr ""
 "収監されたユニークキャラクターが街の襲撃イベントのリーダーになるのを防ぎま"
 "す。"
 
-#: KenshiExtensionPlugin/src/Settings.cpp:337
+#: KenshiExtensionPlugin/src/Settings.cpp:403
 msgid "Fix melee combat XP"
 msgstr "近接戦闘の経験値を修正"
 
-#: KenshiExtensionPlugin/src/Settings.cpp:338
+#: KenshiExtensionPlugin/src/Settings.cpp:404
 msgid ""
 "Race bonuses for martial arts and weapon skills apply to melee combat XP. "
 "Additionally, SOL for weapon skills etc. functions correctly."
@@ -154,72 +154,72 @@ msgstr ""
 "武術と武器スキルの種族ボーナスが近接戦闘の経験値に適用されます。また、武器ス"
 "キル等のSOLが正しく動作します。"
 
-#: KenshiExtensionPlugin/src/Settings.cpp:340
+#: KenshiExtensionPlugin/src/Settings.cpp:406
 msgid "Fix lockpicking XP"
 msgstr "ピッキングの経験値を修正"
 
-#: KenshiExtensionPlugin/src/Settings.cpp:341
+#: KenshiExtensionPlugin/src/Settings.cpp:407
 msgid "The \"exp gain multiplier\" is applied to lockpicking XP."
 msgstr "「exp gain multiplier」がピッキングの経験値に適用されます。"
 
-#: KenshiExtensionPlugin/src/Settings.cpp:343
+#: KenshiExtensionPlugin/src/Settings.cpp:409
 msgid "Fix unarmed damage bonus"
 msgstr "非武装ダメージボーナスを修正"
 
-#: KenshiExtensionPlugin/src/Settings.cpp:344
+#: KenshiExtensionPlugin/src/Settings.cpp:410
 msgid "The \"Unarmed Damage Bonus\" affects martial arts damage."
 msgstr "「非武装ダメージボーナス」が武術ダメージに影響します。"
 
-#: KenshiExtensionPlugin/src/Settings.cpp:346
+#: KenshiExtensionPlugin/src/Settings.cpp:412
 msgid "Fix calculation of athletics effect"
 msgstr "運動能力効果の計算を修正"
 
-#: KenshiExtensionPlugin/src/Settings.cpp:347
+#: KenshiExtensionPlugin/src/Settings.cpp:413
 msgid ""
 "The bonus to movement ability from backpacks applies even when wearing armor."
 msgstr ""
 "バックパックによる運動効果へのボーナスは、防具を装備しているときにも適用され"
 "ます。"
 
-#: KenshiExtensionPlugin/src/Settings.cpp:349
+#: KenshiExtensionPlugin/src/Settings.cpp:415
 msgid "Fix stat name display"
 msgstr "ステータス名の表示を修正"
 
-#: KenshiExtensionPlugin/src/Settings.cpp:350
+#: KenshiExtensionPlugin/src/Settings.cpp:416
 msgid "Prevents Polearm from failing to display in certain GUIs."
 msgstr "特定の GUI で長柄武器が表示されないのを防ぎます。"
 
-#: KenshiExtensionPlugin/src/Settings.cpp:352
+#: KenshiExtensionPlugin/src/Settings.cpp:418
 msgid "Fix the prosthetic leg movement animation"
 msgstr "義足の移動アニメーションを修正"
 
-#: KenshiExtensionPlugin/src/Settings.cpp:353
+#: KenshiExtensionPlugin/src/Settings.cpp:419
 msgid ""
 "Prevents limping when the maximum HP of the left and right legs differs "
 "significantly."
 msgstr "左右の足の最大HPが大きく異なる場合に足を引きずるのを防ぎます。"
 
-#: KenshiExtensionPlugin/src/Settings.cpp:355
+#: KenshiExtensionPlugin/src/Settings.cpp:421
 msgid "Fix pet recovery speed"
 msgstr "ペットの回復速度を修正"
 
-#: KenshiExtensionPlugin/src/Settings.cpp:356
+#: KenshiExtensionPlugin/src/Settings.cpp:422
 msgid "Pet recovery speed prioritizes the bed's effect over the stun effect."
 msgstr "ペットの回復速度が気絶の効果よりもベッドの効果が優先されます。"
 
-#: KenshiExtensionPlugin/src/Settings.cpp:358
+#: KenshiExtensionPlugin/src/Settings.cpp:424
 msgid "Fix order of HP bar"
 msgstr "HPバーの順序を修正"
 
-#: KenshiExtensionPlugin/src/Settings.cpp:359
+#: KenshiExtensionPlugin/src/Settings.cpp:425
 msgid "Prevents the HP bars for the chest and stomach from being reversed."
 msgstr "胸部と下腹部のHPバーが反転するのを防ぎます。"
 
-#: KenshiExtensionPlugin/src/Settings.cpp:361
+#: KenshiExtensionPlugin/src/Settings.cpp:427
 msgid "Fix the injury calculation"
 msgstr "負傷具合の計算を修正"
 
-#: KenshiExtensionPlugin/src/Settings.cpp:362
+#: KenshiExtensionPlugin/src/Settings.cpp:428
 msgid ""
 "Prevents Hive from becoming bedridden at the base when it takes a very small "
 "cut damage."
@@ -227,37 +227,37 @@ msgstr ""
 "ごくわずかな切断ダメージを受けたときに、ハイブが拠点で寝たきりになるのを防ぎ"
 "ます。"
 
-#: KenshiExtensionPlugin/src/Settings.cpp:364
+#: KenshiExtensionPlugin/src/Settings.cpp:430
 msgid "Fix the blood when spawning"
 msgstr "スポーン時の血液の値を修正"
 
-#: KenshiExtensionPlugin/src/Settings.cpp:365
+#: KenshiExtensionPlugin/src/Settings.cpp:431
 msgid "Prevents characters from spawning with low blood."
 msgstr "キャラクターが血液量が少ない状態でスポーンするのを防ぎます。"
 
-#: KenshiExtensionPlugin/src/Settings.cpp:367
+#: KenshiExtensionPlugin/src/Settings.cpp:433
 msgid "Fix Animal age"
 msgstr "動物の年齢を修正"
 
-#: KenshiExtensionPlugin/src/Settings.cpp:368
+#: KenshiExtensionPlugin/src/Settings.cpp:434
 msgid ""
 "Prevents rare cases where an animal's age is not displayed as \"Elder\"."
 msgstr "まれに動物の年齢が「老齢」表示にならないのを防ぎます。"
 
-#: KenshiExtensionPlugin/src/Settings.cpp:370
+#: KenshiExtensionPlugin/src/Settings.cpp:436
 msgid "Fix global damage multiplier for Crossbow"
 msgstr "クロスボウの全体ダメージ乗数を修正"
 
-#: KenshiExtensionPlugin/src/Settings.cpp:371
+#: KenshiExtensionPlugin/src/Settings.cpp:437
 msgid ""
 "The global damage multiplier will no longer significantly affect crossbows."
 msgstr "全体ダメージ乗数がクロスボウに大きく影響しないようになります。"
 
-#: KenshiExtensionPlugin/src/Settings.cpp:373
+#: KenshiExtensionPlugin/src/Settings.cpp:439
 msgid "Fix item becoming stolen goods from player bug"
 msgstr "アイテムがプレイヤーからの盗品になるバグを修正"
 
-#: KenshiExtensionPlugin/src/Settings.cpp:374
+#: KenshiExtensionPlugin/src/Settings.cpp:440
 msgid ""
 "Prevents an issue where taking items out of a backpack placed on the ground "
 "halves their selling price."
@@ -265,37 +265,37 @@ msgstr ""
 "地面に置いたバックパックからアイテムを取り出すと売値が半額になる不具合を回避"
 "します。"
 
-#: KenshiExtensionPlugin/src/Settings.cpp:376
+#: KenshiExtensionPlugin/src/Settings.cpp:442
 msgid "Fix housemates inventory refresh"
 msgstr "ハウスメイトのインベントリ更新を修正"
 
-#: KenshiExtensionPlugin/src/Settings.cpp:377
+#: KenshiExtensionPlugin/src/Settings.cpp:443
 msgid ""
 "Prevents an issue where Waystation bars, etc., do not refresh their "
 "inventory."
 msgstr "ウェイステーションのバーなどの品揃えが更新されない不具合を防ぎます。"
 
-#: KenshiExtensionPlugin/src/Settings.cpp:379
+#: KenshiExtensionPlugin/src/Settings.cpp:445
 msgid "Fix blueprint texture"
 msgstr "ブループリントのテクスチャを修正"
 
-#: KenshiExtensionPlugin/src/Settings.cpp:380
+#: KenshiExtensionPlugin/src/Settings.cpp:446
 msgid "Materials can be applied to blueprints."
 msgstr "マテリアルをブループリントに設定できます。"
 
-#: KenshiExtensionPlugin/src/Settings.cpp:382
+#: KenshiExtensionPlugin/src/Settings.cpp:448
 msgid "Enable player involvement"
 msgstr "プレイヤーの関与を有効化"
 
-#: KenshiExtensionPlugin/src/Settings.cpp:383
+#: KenshiExtensionPlugin/src/Settings.cpp:449
 msgid "World State player involvement functions correctly."
 msgstr "ワールドステートのプレイヤーの関与が正常に動作します。"
 
-#: KenshiExtensionPlugin/src/Settings.cpp:385
+#: KenshiExtensionPlugin/src/Settings.cpp:451
 msgid "Enable Navigation Mesh cache"
 msgstr "ナビゲーションメッシュのキャッシュを有効化"
 
-#: KenshiExtensionPlugin/src/Settings.cpp:386
+#: KenshiExtensionPlugin/src/Settings.cpp:452
 msgid ""
 "Accelerates zone loading and prevents falling through walls. Kenshi CTD fix "
 "patch takes precedence, so option changes will be disabled while it is in "
@@ -304,20 +304,20 @@ msgstr ""
 "ゾーンの読み込みを高速化し、壁からの落下を防ぎます。Kenshi CTD fix patchが優"
 "先されるため、使用中はオプションの変更が無効になります。"
 
-#: KenshiExtensionPlugin/src/Settings.cpp:388
+#: KenshiExtensionPlugin/src/Settings.cpp:454
 msgid "Fix town override"
 msgstr "街のオーバーライドを修正"
 
-#: KenshiExtensionPlugin/src/Settings.cpp:389
+#: KenshiExtensionPlugin/src/Settings.cpp:455
 msgid ""
 "Prevents overridden town settings from reverting to their original values."
 msgstr "オーバーライドされた街の設定値が元に戻るのを防ぎます。"
 
-#: KenshiExtensionPlugin/src/Settings.cpp:391
+#: KenshiExtensionPlugin/src/Settings.cpp:457
 msgid "Fix display for distant towns"
 msgstr "遠方の街の表示を修正"
 
-#: KenshiExtensionPlugin/src/Settings.cpp:392
+#: KenshiExtensionPlugin/src/Settings.cpp:458
 msgid ""
 "Prevents the town loaded during loading from occasionally failing to switch "
 "to the distant mesh."
@@ -325,11 +325,11 @@ msgstr ""
 "ロード中に読み込まれた町が遠方メッシュへの切り替えに失敗することがあるのを防"
 "ぎます。"
 
-#: KenshiExtensionPlugin/src/Settings.cpp:394
+#: KenshiExtensionPlugin/src/Settings.cpp:460
 msgid "Fix research and crafting queue sizes"
 msgstr "研究とクラフトのキューのサイズを修正"
 
-#: KenshiExtensionPlugin/src/Settings.cpp:395
+#: KenshiExtensionPlugin/src/Settings.cpp:461
 msgid ""
 "Revert queue height to version 1.0.59 or earlier. Additionally, it will now "
 "scale according to window size instead of font size. (REQURIES RESTART)"
@@ -337,21 +337,21 @@ msgstr ""
 "キューの高さをバージョン1.0.59以前に戻します。また、フォントサイズの代わりに"
 "ウィンドウズサイズに応じてスケーリングします。 (再起動が必要)"
 
-#: KenshiExtensionPlugin/src/Settings.cpp:397
+#: KenshiExtensionPlugin/src/Settings.cpp:463
 msgid "Enable duplicate research on building improvements"
 msgstr "建物改善の研究を重複可能にする"
 
-#: KenshiExtensionPlugin/src/Settings.cpp:398
+#: KenshiExtensionPlugin/src/Settings.cpp:464
 msgid ""
 "The effects of research to increase building output can be applied multiple "
 "times."
 msgstr "建物の出力を高める研究の効果は、複数回適用できます。"
 
-#: KenshiExtensionPlugin/src/Settings.cpp:400
+#: KenshiExtensionPlugin/src/Settings.cpp:466
 msgid "Change the order of armor damage reduction"
 msgstr "防具のダメージ軽減の順序を変更"
 
-#: KenshiExtensionPlugin/src/Settings.cpp:401
+#: KenshiExtensionPlugin/src/Settings.cpp:467
 msgid ""
 "Damage is reduced in order of armor with the highest slash resistance "
 "efficiency. Changing settings during play requires saving and reloading."
@@ -359,30 +359,30 @@ msgstr ""
 "ダメージが斬耐性効率の高い防具から順に軽減されます。プレイ中に設定を変更する"
 "場合はセーブとリロードが必要です。"
 
-#: KenshiExtensionPlugin/src/Settings.cpp:403
+#: KenshiExtensionPlugin/src/Settings.cpp:469
 msgid "Fix peeler machine"
 msgstr "ピーラーマシンを修正"
 
-#: KenshiExtensionPlugin/src/Settings.cpp:404
+#: KenshiExtensionPlugin/src/Settings.cpp:470
 msgid ""
 "Prevents an issue where characters become unable to be released from the "
 "peeler machine. (REQURIES RESTART)"
 msgstr ""
 "キャラクターがピーラーマシンから解放されない不具合を防ぎます。 (再起動が必要)"
 
-#: KenshiExtensionPlugin/src/Settings.cpp:406
+#: KenshiExtensionPlugin/src/Settings.cpp:472
 msgid "Fix crossbow locker"
 msgstr "クロスボウロッカーを修正"
 
-#: KenshiExtensionPlugin/src/Settings.cpp:407
+#: KenshiExtensionPlugin/src/Settings.cpp:473
 msgid "Item type limits will be enforced."
 msgstr "アイテムタイプの制限が適用されます。"
 
-#: KenshiExtensionPlugin/src/Settings.cpp:409
+#: KenshiExtensionPlugin/src/Settings.cpp:475
 msgid "Fix UtilityT::getResourceFilePath"
 msgstr "UtilityT::getResourceFilePathを修正"
 
-#: KenshiExtensionPlugin/src/Settings.cpp:410
+#: KenshiExtensionPlugin/src/Settings.cpp:476
 msgid ""
 "Change the search path priority for `UtilityT::getResourceFilePath` to match "
 "that of the OGRE resource manager."
@@ -390,40 +390,40 @@ msgstr ""
 "「UtilityT::getResourceFilePath」の検索パスの優先順位を、OGRE リソースマネー"
 "ジャーの優先順位と一致するように変更します。"
 
-#: KenshiExtensionPlugin/src/Settings.cpp:412
+#: KenshiExtensionPlugin/src/Settings.cpp:478
+msgid "Fix item stealing checks in tasks"
+msgstr "タスクにおけるアイテム盗難チェックを修正"
+
+#: KenshiExtensionPlugin/src/Settings.cpp:479
+msgid ""
+"Prevents characters assigned tasks such as crafting armor in town from "
+"stealing items that have been dropped."
+msgstr ""
+"町で防具製作などの作業を割り当てられたキャラクターが、落ちているアイテムを盗"
+"むことを防ぎます。"
+
+#: KenshiExtensionPlugin/src/Settings.cpp:481
 msgid "Enable crash prevention"
 msgstr "クラッシュ防止を有効化"
 
-#: KenshiExtensionPlugin/src/Settings.cpp:413
+#: KenshiExtensionPlugin/src/Settings.cpp:482
 msgid ""
-"Fixes two causes of random crashes. See the documentation for details. "
-"(REQURIES RESTART)\n"
+"Fixes some causes of random crashes. See the documentation for details.\n"
 "Note: This doesn't prevent all crashes."
 msgstr ""
-"ランダムなクラッシュの原因を2つ修正します。修正内容はドキュメントを参照してく"
-"ださい。 (再起動が必要)\n"
+"ランダムなクラッシュの原因をいくつか修正します。修正内容はドキュメントを参照"
+"してください。\n"
 "注意：全てのクラッシュを防止するものではありません。"
 
-#: KenshiExtensionPlugin/src/Settings.cpp:417
+#: KenshiExtensionPlugin/src/Settings.cpp:486
 msgid "[KEP Features]"
 msgstr "[KEP 機能]"
 
-#: KenshiExtensionPlugin/src/Settings.cpp:419
-msgid "Sort idle stances"
-msgstr "待機ポーズをソート"
-
-#: KenshiExtensionPlugin/src/Settings.cpp:420
-msgid ""
-"Sort idle stances by Mod load order and dictionary order of names. (REQURIES "
-"RESTART)"
-msgstr ""
-"待機ポーズをMODの読み込み順、名前の辞書順にソートします。 (再起動が必要)"
-
-#: KenshiExtensionPlugin/src/Settings.cpp:422
+#: KenshiExtensionPlugin/src/Settings.cpp:488
 msgid "Sort New Game Starts"
 msgstr "ニューゲーム選択をソート"
 
-#: KenshiExtensionPlugin/src/Settings.cpp:423
+#: KenshiExtensionPlugin/src/Settings.cpp:489
 msgid ""
 "Sort New Game Starts by Mod load order and dictionary order of stringID. "
 "(REQURIES RESTART)"
@@ -431,11 +431,11 @@ msgstr ""
 "ニューゲーム選択をMODの読み込み順、StringIDの辞書順にソートします。 (再起動が"
 "必要)"
 
-#: KenshiExtensionPlugin/src/Settings.cpp:425
+#: KenshiExtensionPlugin/src/Settings.cpp:491
 msgid "Enable raid events from factions not displayed in the list"
 msgstr "リストに表示されていない勢力からの襲撃イベントを有効化"
 
-#: KenshiExtensionPlugin/src/Settings.cpp:426
+#: KenshiExtensionPlugin/src/Settings.cpp:492
 msgid ""
 "Raid events will occur from factions such as Fogmen and Fishmen. Changing "
 "settings during play requires saving and reloading."
@@ -443,19 +443,35 @@ msgstr ""
 "フォグマンやフィッシュマン等の勢力からの襲撃イベントが発生します。プレイ中に"
 "設定を変更する場合はセーブとリロードが必要です。"
 
-#: KenshiExtensionPlugin/src/Settings.cpp:428
+#: KenshiExtensionPlugin/src/Settings.cpp:494
 msgid "Save reputation points"
 msgstr "名声値を保存"
 
-#: KenshiExtensionPlugin/src/Settings.cpp:429
+#: KenshiExtensionPlugin/src/Settings.cpp:495
 msgid "Saving reputation points."
 msgstr "名声値を保存します。"
 
-#: KenshiExtensionPlugin/src/Settings.cpp:431
+#: KenshiExtensionPlugin/src/Settings.cpp:497
+msgid "Importing negative money"
+msgstr "マイナスの金額をインポートする"
+
+#: KenshiExtensionPlugin/src/Settings.cpp:498
+msgid "Enables the import of negative money."
+msgstr "マイナスの金額のインポートを可能にします。"
+
+#: KenshiExtensionPlugin/src/Settings.cpp:500
+msgid "Fix the Scythe path"
+msgstr "Scytheパスを修正"
+
+#: KenshiExtensionPlugin/src/Settings.cpp:501
+msgid "Get .phs files from the OGRE resource manager."
+msgstr "OGREリソースマネージャーから.phsファイルを取得します。"
+
+#: KenshiExtensionPlugin/src/Settings.cpp:503
 msgid "Player portrait capacity cap"
 msgstr "ポートレートの上限人数"
 
-#: KenshiExtensionPlugin/src/Settings.cpp:432
+#: KenshiExtensionPlugin/src/Settings.cpp:504
 msgid ""
 "Select player portrait capacity caps. Default is 256 people. (REQURIES "
 "RESTART)"
@@ -463,137 +479,344 @@ msgstr ""
 "プレイヤーのポートレートの上限人数を選択します。デフォルトは256人です。 (再起"
 "動が必要)"
 
-#: KenshiExtensionPlugin/src/Settings.cpp:437
-msgid "Extension: Character Dismissal"
-msgstr "拡張機能: キャラクター解雇"
+#: KenshiExtensionPlugin/src/Settings.cpp:511
+msgid "Fix NPC money"
+msgstr "NPCのお金を修正"
 
-#: KenshiExtensionPlugin/src/Settings.cpp:438
-msgid "Enable extension function for Character Dismissal."
-msgstr "キャラクター解雇の拡張機能を有効化します。"
+#: KenshiExtensionPlugin/src/Settings.cpp:512
+msgid ""
+"Prevents non-merchant units that include animals from spawning with 0 cats."
+msgstr "動物を含む非商人部隊が、0catの状態でスポーンするのを防ぎます。"
 
-#: KenshiExtensionPlugin/src/Settings.cpp:440
-msgid "Extension: Item Furnace"
-msgstr "拡張機能: アイテム炉"
+#: KenshiExtensionPlugin/src/Settings.cpp:514
+msgid "Inventory Item Expansion"
+msgstr "インベントリアイテムの拡張"
 
-#: KenshiExtensionPlugin/src/Settings.cpp:441
-msgid "Enable extension function for Item Furnaces. (REQURIES RESTART)"
-msgstr "アイテム炉の拡張機能を有効化します。 (再起動が必要)"
+#: KenshiExtensionPlugin/src/Settings.cpp:515
+msgid "Provides features to add settings related to character inventory items."
+msgstr ""
+"キャラクターのインベントリ内のアイテムに関する設定を追加する機能を提供しま"
+"す。"
 
-#: KenshiExtensionPlugin/src/Settings.cpp:443
-msgid "Extension: Race Equipment Limits"
-msgstr "拡張機能: 種族の装備制限"
+#: KenshiExtensionPlugin/src/Settings.cpp:517
+msgid "Change the faction of a dismissed character"
+msgstr "解雇したキャラクターの派閥を変更"
 
-#: KenshiExtensionPlugin/src/Settings.cpp:444
-msgid "Enable extension function for Race Equipment Limits. (REQURIES RESTART)"
-msgstr "種族の装備制限の拡張機能を有効化します。 (再起動が必要)"
+#: KenshiExtensionPlugin/src/Settings.cpp:518
+msgid "Provides features to change the faction of dismissed characters."
+msgstr "解雇したキャラクターの派閥を変更する機能を提供します。"
 
-#: KenshiExtensionPlugin/src/Settings.cpp:446
-msgid "Extension: Scythe Path"
-msgstr "拡張機能: Scytheパス"
+#: KenshiExtensionPlugin/src/Settings.cpp:520
+msgid "Animal Dialogue Package"
+msgstr "動物のダイアログパッケージ"
 
-#: KenshiExtensionPlugin/src/Settings.cpp:447
-msgid "Enable extension function for Scythe Path."
-msgstr "Scytheパスの拡張機能を有効化します。"
+#: KenshiExtensionPlugin/src/Settings.cpp:521
+msgid "Provides features to set individual dialog packages for each animal."
+msgstr "動物ごとに個別のダイアログパッケージを設定する機能を提供します。"
 
-#: KenshiExtensionPlugin/src/Settings.cpp:449
-msgid "Extension: Bulk Limits"
-msgstr "拡張機能: 体格制限"
+#: KenshiExtensionPlugin/src/Settings.cpp:523
+msgid "Keep the character type"
+msgstr "キャラクタータイプを維持"
 
-#: KenshiExtensionPlugin/src/Settings.cpp:450
-msgid "Enable extension function for Bulk Limits."
-msgstr "体格制限の拡張機能を有効化します。"
+#: KenshiExtensionPlugin/src/Settings.cpp:524
+msgid "The NPC will keep its character type even after being hired."
+msgstr "NPCは、雇用された後も自身のキャラクタータイプを維持します。"
 
-#: KenshiExtensionPlugin/src/Settings.cpp:452
+#: KenshiExtensionPlugin/src/Settings.cpp:526
+msgid "Limit bulk"
+msgstr "体格を制限"
+
+#: KenshiExtensionPlugin/src/Settings.cpp:527
+msgid ""
+"This feature allows you to set limits on character bulk. Additionally, mods "
+"can change these limits for each race."
+msgstr ""
+"キャラクターの体格に上限を設定できます。また、MODを使用すれば、種族ごとにこれ"
+"らの上限を変更することも可能です。"
+
+#: KenshiExtensionPlugin/src/Settings.cpp:529
 msgid "Max Bulk Stat for Males"
 msgstr "男性の体格の最大ステータス"
 
-#: KenshiExtensionPlugin/src/Settings.cpp:453
-#: KenshiExtensionPlugin/src/Settings.cpp:461
+#: KenshiExtensionPlugin/src/Settings.cpp:530
+#: KenshiExtensionPlugin/src/Settings.cpp:538
 msgid ""
 "Sets the max value for stats affecting bulk. Setting both to 20 will lock "
 "them at the standard size."
 msgstr ""
-"バルクに影響するステータスの最大値を設定します。両方を 20 に設定すると、標準"
-"サイズに固定されます。"
+"体格に影響するステータスの最大値を設定します。両方を 20 に設定すると、標準サ"
+"イズに固定されます。"
 
-#: KenshiExtensionPlugin/src/Settings.cpp:456
+#: KenshiExtensionPlugin/src/Settings.cpp:533
 msgid "Min Bulk Stat for Males"
 msgstr "男性の体格の最小ステータス"
 
-#: KenshiExtensionPlugin/src/Settings.cpp:457
-#: KenshiExtensionPlugin/src/Settings.cpp:465
+#: KenshiExtensionPlugin/src/Settings.cpp:534
+#: KenshiExtensionPlugin/src/Settings.cpp:542
 msgid ""
 "Sets the min value for stats affecting bulk. Setting both to 20 will lock "
 "them at the standard size."
 msgstr ""
-"バルクに影響するステータスの最小値を設定します。両方を 20 に設定すると、標準"
-"サイズに固定されます。"
+"体格に影響するステータスの最小値を設定します。両方を 20 に設定すると、標準サ"
+"イズに固定されます。"
 
-#: KenshiExtensionPlugin/src/Settings.cpp:460
+#: KenshiExtensionPlugin/src/Settings.cpp:537
 msgid "Max Bulk Stat for Females"
 msgstr "女性の体格の最大ステータス"
 
-#: KenshiExtensionPlugin/src/Settings.cpp:464
+#: KenshiExtensionPlugin/src/Settings.cpp:541
 msgid "Min Bulk Stat for Females"
 msgstr "女性の体格の最小ステータス"
 
-#: KenshiExtensionPlugin/src/Settings.cpp:468
-msgid "Extension: Idle Stance"
-msgstr "拡張機能: 待機ポーズ"
+#: KenshiExtensionPlugin/src/Settings.cpp:547
+msgid "Animal Armor Slots"
+msgstr "動物の防具スロット"
 
-#: KenshiExtensionPlugin/src/Settings.cpp:469
-msgid "Enable extension function for Idle Stance."
-msgstr "待機ポーズの拡張機能を有効化します。"
+#: KenshiExtensionPlugin/src/Settings.cpp:548
+msgid "Adds armor slots to animals. (REQURIES RESTART)"
+msgstr "動物に防具スロットを追加します。 (再起動が必要)"
 
-#: KenshiExtensionPlugin/src/Settings.cpp:471
-msgid "Extension: Animation"
-msgstr "拡張機能: アニメーション"
+#: KenshiExtensionPlugin/src/Settings.cpp:550
+msgid "Show crossbow and prosthetics crafters"
+msgstr "クロスボウと義肢の製作者を表示"
 
-#: KenshiExtensionPlugin/src/Settings.cpp:472
-msgid "Enable extension function for Animation."
-msgstr "アニメーションの拡張機能を有効化します。"
+#: KenshiExtensionPlugin/src/Settings.cpp:551
+msgid ""
+"Displays the crafter's information in the tooltips for crossbows and "
+"prosthetics."
+msgstr "クロスボウや義肢のツールチップに、製作者の情報を表示します。"
 
-#: KenshiExtensionPlugin/src/Settings.cpp:474
-msgid "Extension: Animal Armor"
-msgstr "拡張機能: 動物の防具"
+#: KenshiExtensionPlugin/src/Settings.cpp:553
+msgid "Sort Armor Coverage"
+msgstr "防具の保護部位をソート"
 
-#: KenshiExtensionPlugin/src/Settings.cpp:475
-msgid "Enable extension function for Animal Armor. (REQURIES RESTART)"
-msgstr "動物の防具の拡張機能を有効化します。 (再起動が必要)"
+#: KenshiExtensionPlugin/src/Settings.cpp:554
+msgid "Sort armor coverage by body part type. (REQURIES RESTART)"
+msgstr "防具の保護部位を防具の部位でソートします。 (再起動が必要)"
 
-#: KenshiExtensionPlugin/src/Settings.cpp:477
-msgid "Extension: Crafting item"
-msgstr "拡張機能: アイテム製作"
+#: KenshiExtensionPlugin/src/Settings.cpp:556
+msgid "Weapon Model Expansion"
+msgstr "武器モデルの拡張"
 
-#: KenshiExtensionPlugin/src/Settings.cpp:478
-msgid "Enable extension function for Crafting item. (REQURIES RESTART)"
-msgstr "アイテム製作の拡張機能を有効化します。 (再起動が必要)"
+#: KenshiExtensionPlugin/src/Settings.cpp:557
+msgid ""
+"Provides features to add settings related to stat modifiers to weapon models."
+msgstr "武器モデルにステータス補正関連の設定を追加する機能を提供します。"
 
-#: KenshiExtensionPlugin/src/Settings.cpp:480
-msgid "Extension: Item"
-msgstr "拡張機能: アイテム"
+#: KenshiExtensionPlugin/src/Settings.cpp:559
+msgid "Armor Expansion"
+msgstr "防具の拡張"
 
-#: KenshiExtensionPlugin/src/Settings.cpp:481
-msgid "Enable extension function for Item."
-msgstr "アイテムの拡張機能を有効化します。"
+#: KenshiExtensionPlugin/src/Settings.cpp:560
+msgid ""
+"Provides features to add settings such as crafting time multipliers to armor."
+msgstr "防具に製作時間の倍率などの設定を追加する機能を提供します。"
 
-#: KenshiExtensionPlugin/src/Settings.cpp:483
-msgid "Extension: Dialogue"
-msgstr "拡張機能: ダイアログ"
+#: KenshiExtensionPlugin/src/Settings.cpp:562
+msgid "Race Limiter Expansion"
+msgstr "種族制限の拡張"
 
-#: KenshiExtensionPlugin/src/Settings.cpp:484
-msgid "Enable extension function for Dialogue."
-msgstr "ダイアログの拡張機能を有効化します。"
+#: KenshiExtensionPlugin/src/Settings.cpp:563
+msgid ""
+"Race limits for weapons and prosthetics actually work. It also provides "
+"features to set limits for each race group. (REQURIES RESTART)"
+msgstr ""
+"武器と義肢の種族制限が実際に機能します。また、種族グループごとに制限する機能"
+"を提供します。(再起動が必要)"
 
-#: KenshiExtensionPlugin/src/Settings.cpp:486
-msgid "Extension: Character"
-msgstr "拡張機能: キャラクター"
+#: KenshiExtensionPlugin/src/Settings.cpp:567
+msgid "Item Furnace Expansion"
+msgstr "アイテム炉の拡張"
 
-#: KenshiExtensionPlugin/src/Settings.cpp:487
-msgid "Enable extension function for Character."
-msgstr "キャラクターの拡張機能を有効化します。"
+#: KenshiExtensionPlugin/src/Settings.cpp:568
+msgid ""
+"Provides features to change the inventory size of the item furnace and to "
+"change the item used as the basis for determining the amount generated. "
+"(REQURIES RESTART)"
+msgstr ""
+"アイテム炉のインベントリサイズを変更する機能や、生成量を決定する際の基準とな"
+"るアイテムを変更する機能を提供します。"
 
-#: kep-core/src/config_manager.cpp:100
+#: KenshiExtensionPlugin/src/Settings.cpp:570
+msgid "Item Crafting Expansion"
+msgstr "アイテムクラフトの拡張"
+
+#: KenshiExtensionPlugin/src/Settings.cpp:571
+msgid ""
+"Provides features to limit the list of weapons that can be crafted. "
+"Additionally, the crafting list is sorted by name. (REQURIES RESTART)"
+msgstr ""
+"作成可能な武器のリストを制限する機能を提供します。また、作成リストは名前順で"
+"ソートされます。(再起動が必要)"
+
+#: KenshiExtensionPlugin/src/Settings.cpp:575
+msgid "Sort idle stances"
+msgstr "待機ポーズをソート"
+
+#: KenshiExtensionPlugin/src/Settings.cpp:576
+msgid ""
+"Sort idle stances by Mod load order and dictionary order of names. (REQURIES "
+"RESTART)"
+msgstr ""
+"待機ポーズをMODの読み込み順、名前の辞書順にソートします。 (再起動が必要)"
+
+#: KenshiExtensionPlugin/src/Settings.cpp:578
+msgid "Idle stances of Races and Factions"
+msgstr "種族や勢力の待機ポーズ"
+
+#: KenshiExtensionPlugin/src/Settings.cpp:579
+msgid ""
+"Provides features to set idle stance animations for each race and faction."
+msgstr "種族や勢力ごとに待機時のアニメーションを設定する機能を提供します。"
+
+#: KenshiExtensionPlugin/src/Settings.cpp:581
+msgid "Animation Expansion"
+msgstr "アニメーションの拡張"
+
+#: KenshiExtensionPlugin/src/Settings.cpp:582
+msgid ""
+"Provides features to change the aiming animation. Additionally, turrets in "
+"the weapon category will now work."
+msgstr ""
+"照準時のアニメーションを変更する機能を提供します。また、武器カテゴリーのタ"
+"レットが機能するようになります。"
+
+#: KenshiExtensionPlugin/src/Settings.cpp:586
+msgid "Word Swap Expansion"
+msgstr "ワードスワップの拡張"
+
+#: KenshiExtensionPlugin/src/Settings.cpp:587
+msgid ""
+"Provides features to add color codes used by the UI to Word Swap. It also "
+"fixes a bug where, in certain dialog structures, the conditions assigned to "
+"Word Swap could not correctly reference the intended targets."
+msgstr ""
+"Word Swapに、UIで使用されるカラーコードを追加する機能を提供します。また、特定"
+"のダイアログ構造において、Word Swapに割り当てられた条件が意図したターゲットを"
+"正しく参照できない不具合も修正します。"
+
+#: KenshiExtensionPlugin/src/Settings.cpp:590
+msgid "[KEP Beta]"
+msgstr "[KEP ベータ]"
+
+#: KenshiExtensionPlugin/src/Settings.cpp:592
+msgid "Research Expansion"
+msgstr "研究の拡張"
+
+#: KenshiExtensionPlugin/src/Settings.cpp:593
+msgid ""
+"Provides features to customize equipment blueprints. It also provides "
+"features to set equipment blueprints as research requirements and as "
+"research to be learned at the start."
+msgstr ""
+"装備の設計図をカスタマイズする機能を提供します。また、装備の設計図を研究の要"
+"件として設定したり、開始時に習得する研究として設定したりする機能も提供しま"
+"す。"
+
+#: KenshiExtensionPlugin/src/Settings.cpp:595
+msgid "Special Combat Techniques"
+msgstr "専用の戦闘技術"
+
+#: KenshiExtensionPlugin/src/Settings.cpp:596
+msgid ""
+"Provides features to set specific combat techniques for each weapon, "
+"character, race, and faction."
+msgstr ""
+"武器、キャラクター、種族、勢力ごとに専用の戦闘技術を設定する機能を提供しま"
+"す。"
+
+#: KenshiExtensionPlugin/src/Settings.cpp:598
+msgid "Ranged Weapon Expansion"
+msgstr "遠距離武器の拡張"
+
+#: KenshiExtensionPlugin/src/Settings.cpp:599
+msgid "Skill requirements and racial damage will now actually work."
+msgstr "必要スキルと種族に対するダメージが、実際に機能するようになります。"
+
+#: KenshiExtensionPlugin/src/Settings.cpp:601
+msgid "Shopping Expansion"
+msgstr "ショッピングの拡張"
+
+#: KenshiExtensionPlugin/src/Settings.cpp:602
+msgid ""
+"The daily wages for non-merchant units will now actually work. Additionally, "
+"allows you to set the money for merchants who do not have a residence."
+msgstr ""
+"非商人部隊の日給が、実際に機能するようになります。また、住居を持たない商人に"
+"対して所持金を設定することも可能です。"
+
+#: KenshiExtensionPlugin/src/Settings.cpp:604
+msgid "Combat Expansion"
+msgstr "戦闘の拡張"
+
+#: KenshiExtensionPlugin/src/Settings.cpp:605
+msgid ""
+"Characters (excluding animals) will try to dodge area-of-effect and ranged "
+"attacks."
+msgstr "キャラクター(動物を除く)は、範囲攻撃や遠距離攻撃の回避を試みます。"
+
+#: KenshiExtensionPlugin/src/Settings.cpp:607
+msgid "Change the block chance"
+msgstr "防御確率を変更"
+
+#: KenshiExtensionPlugin/src/Settings.cpp:608
+msgid ""
+"Changing the formula for the block chance modifier for martial arts "
+"attacks.\n"
+"Note: If your martial arts skill is low, it will be difficult to block "
+"martial arts attacks."
+msgstr ""
+"武術攻撃に対するブロック率補正の計算式を変更します。\n"
+"注意：武術スキルが低い場合、武術攻撃をブロックするのは困難になります。"
+
+#: KenshiExtensionPlugin/src/Settings.cpp:610
+msgid "Fix Damage Calculation"
+msgstr "ダメージ計算を修正"
+
+#: KenshiExtensionPlugin/src/Settings.cpp:611
+msgid ""
+"Adjusts the effect of armor penetration on damage calculations. "
+"Additionally, fixes the game's UI."
+msgstr ""
+"ダメージ計算における「装甲貫通」の効果を調整します。また、ゲームのUIを修正し"
+"ます。"
+
+#: KenshiExtensionPlugin/src/Settings.cpp:612
+#: KenshiExtensionPlugin/src/Settings.cpp:619
+msgid "Disable"
+msgstr "無効"
+
+#: KenshiExtensionPlugin/src/Settings.cpp:613
+msgid "UI fixes only"
+msgstr "UI修正のみ"
+
+#: KenshiExtensionPlugin/src/Settings.cpp:614
+msgid "Enable"
+msgstr "有効"
+
+#: KenshiExtensionPlugin/src/Settings.cpp:617
+msgid "Fix Inventory::getEquippedArmour"
+msgstr "Inventory::getEquippedArmourを修正"
+
+#: KenshiExtensionPlugin/src/Settings.cpp:618
+msgid ""
+"Belt slot armor will now be included in actions such as \"removing uniform "
+"tags upon hiring\", \"confiscating equipment\" and \"destroying armor with a "
+"peeler machine\"."
+msgstr ""
+"「雇用時の制服タグの取り外し」、「装備の没収」、「ピーラーマシンによる防具の"
+"破壊」といったアクションの対象に、ベルトスロットの防具も含まれるようになりま"
+"す。"
+
+#: KenshiExtensionPlugin/src/Settings.cpp:620
+msgid "Belt only"
+msgstr "ベルトのみ"
+
+#: KenshiExtensionPlugin/src/Settings.cpp:621
+msgid "Compatible with Extra Inventory Sections"
+msgstr "Extra Inventory Sectionsに対応"
+
+#: kep-core/src/config_manager.cpp:112
 msgid "KEP"
 msgstr "KEP"
 
@@ -611,79 +834,79 @@ msgstr ""
 "設定に合わせてModをローカライズしたり、他のアクティブなModとの互換性パッチを"
 "適用したりする機能を提供できます(再起動が必要)"
 
-#: kep-mod-tool/DevToolsPanel.cpp:120 kep-mod-tool/GamePlayOptionsTab.cpp:57
+#: kep-mod-tool/DevToolsPanel.cpp:119 kep-mod-tool/GamePlayOptionsTab.cpp:61
 msgid "Developer tools"
 msgstr "開発者ツール"
 
-#: kep-mod-tool/DevToolsPanel.cpp:151
+#: kep-mod-tool/DevToolsPanel.cpp:150
 msgid "Main"
 msgstr "メイン"
 
-#: kep-mod-tool/DevToolsPanel.cpp:152 kep-mod-tool/SpawnTool.cpp:155
+#: kep-mod-tool/DevToolsPanel.cpp:151 kep-mod-tool/SpawnTool.cpp:155
 msgid "Spawn"
 msgstr "スポーン"
 
-#: kep-mod-tool/DevToolsPanel.cpp:153 kep-mod-tool/StatsTool.cpp:38
+#: kep-mod-tool/DevToolsPanel.cpp:152 kep-mod-tool/StatsTool.cpp:38
 msgid "Stats"
 msgstr "ステータス"
 
-#: kep-mod-tool/DevToolsPanel.cpp:154
+#: kep-mod-tool/DevToolsPanel.cpp:153
 msgid "Task"
 msgstr "タスク"
 
-#: kep-mod-tool/DevToolsPanel.cpp:169
+#: kep-mod-tool/DevToolsPanel.cpp:168
 msgid "Give money"
 msgstr "入金"
 
-#: kep-mod-tool/DevToolsPanel.cpp:170
+#: kep-mod-tool/DevToolsPanel.cpp:169
 msgid "Take money"
 msgstr "出金"
 
-#: kep-mod-tool/DevToolsPanel.cpp:172
+#: kep-mod-tool/DevToolsPanel.cpp:171
 msgid "Complete Reseach"
 msgstr "研究を完了"
 
-#: kep-mod-tool/DevToolsPanel.cpp:173
+#: kep-mod-tool/DevToolsPanel.cpp:172
 msgid "Complete All Reseach"
 msgstr "全ての研究を完了"
 
-#: kep-mod-tool/DevToolsPanel.cpp:175
+#: kep-mod-tool/DevToolsPanel.cpp:174
 msgid "Complete Building"
 msgstr "建築"
 
-#: kep-mod-tool/DevToolsPanel.cpp:176
+#: kep-mod-tool/DevToolsPanel.cpp:175
 msgid "Complete All Building"
 msgstr "全て建築"
 
-#: kep-mod-tool/DevToolsPanel.cpp:178
+#: kep-mod-tool/DevToolsPanel.cpp:177
 msgid "Discover all towns"
 msgstr "全ての町を発見"
 
-#: kep-mod-tool/DevToolsPanel.cpp:180
+#: kep-mod-tool/DevToolsPanel.cpp:179
 msgid "Teleport"
 msgstr "テレポート"
 
-#: kep-mod-tool/DevToolsPanel.cpp:181
+#: kep-mod-tool/DevToolsPanel.cpp:180
 msgid "Unlock cage"
 msgstr "檻を開ける"
 
-#: kep-mod-tool/DevToolsPanel.cpp:182
+#: kep-mod-tool/DevToolsPanel.cpp:181
 msgid "Free selected"
 msgstr "対象を解放"
 
-#: kep-mod-tool/DevToolsPanel.cpp:184
+#: kep-mod-tool/DevToolsPanel.cpp:183
 msgid "Destroy"
 msgstr "デストロイ"
 
-#: kep-mod-tool/DevToolsPanel.cpp:187
+#: kep-mod-tool/DevToolsPanel.cpp:186
 msgid "[Health]"
 msgstr "[健康]"
 
-#: kep-mod-tool/DevToolsPanel.cpp:189
+#: kep-mod-tool/DevToolsPanel.cpp:188
 msgid "Heal selected"
 msgstr "対象を回復"
 
-#: kep-mod-tool/DevToolsPanel.cpp:192
+#: kep-mod-tool/DevToolsPanel.cpp:191
 msgid "Damage"
 msgstr "ダメージ"
 
@@ -727,7 +950,7 @@ msgstr "キャラクターエディターを表示"
 msgid "Show roads on map"
 msgstr "マップに道を表示"
 
-#: kep-mod-tool/DevToolsPanel.cpp:226 kep-mod-tool/InformationPanel.cpp:176
+#: kep-mod-tool/DevToolsPanel.cpp:226 kep-mod-tool/InformationPanel.cpp:236
 msgid "Information Panel"
 msgstr "情報パネル"
 
@@ -751,31 +974,35 @@ msgid ""
 msgstr ""
 "警告：NPCを編集するとゲームがクラッシュする可能性があります。続行しますか？"
 
-#: kep-mod-tool/DevToolsPanel.cpp:822
-msgid "KEP: Developer tools"
-msgstr "KEP：開発者ツール"
-
-#: kep-mod-tool/DevToolsPanel.cpp:823
-msgid "KEP: Information Panel"
-msgstr "KEP：情報パネル"
-
-#: kep-mod-tool/GamePlayOptionsTab.cpp:59
+#: kep-mod-tool/GamePlayOptionsTab.cpp:63
 msgid "Use Level Editor camera"
 msgstr "Level Editorカメラを使用"
 
-#: kep-mod-tool/GamePlayOptionsTab.cpp:60
+#: kep-mod-tool/GamePlayOptionsTab.cpp:64
 msgid "Fast travel mode"
 msgstr "ファストトラベルモード"
 
-#: kep-mod-tool/GamePlayOptionsTab.cpp:61
+#: kep-mod-tool/GamePlayOptionsTab.cpp:65
 msgid "NPC Inventory"
 msgstr "NPCのインベントリ"
 
-#: kep-mod-tool/InformationPanel.cpp:184
+#: kep-mod-tool/GamePlayOptionsTab.cpp:67
+msgid "Show vision range"
+msgstr "視野範囲を表示"
+
+#: kep-mod-tool/GamePlayOptionsTab.cpp:68
+msgid "Show noise range"
+msgstr "ノイズ範囲を表示"
+
+#: kep-mod-tool/GamePlayOptionsTab.cpp:69
+msgid "Destroy log"
+msgstr "デストロイ"
+
+#: kep-mod-tool/InformationPanel.cpp:244
 msgid "Combat"
 msgstr "戦闘"
 
-#: kep-mod-tool/InformationPanel.cpp:185
+#: kep-mod-tool/InformationPanel.cpp:245
 msgid "VIPs"
 msgstr "重要人物"
 
@@ -862,6 +1089,14 @@ msgstr "エラー：意識のあるキャラクターを選択してください
 #: kep-mod-tool/PlatoonTool.cpp:303
 msgid "Error: There are no player characters nearby."
 msgstr "エラー：近くにプレイヤーキャラクターがいません"
+
+#: kep-mod-tool/Re_Dev.cpp:206
+msgid "KEP: Developer tools"
+msgstr "KEP：開発者ツール"
+
+#: kep-mod-tool/Re_Dev.cpp:207
+msgid "KEP: Information Panel"
+msgstr "KEP：情報パネル"
 
 #: kep-mod-tool/SpawnTool.cpp:63
 msgid "Player Faction"

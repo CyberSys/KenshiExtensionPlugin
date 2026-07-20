@@ -1,0 +1,90 @@
+﻿#include <InventoryEx.h>
+
+#include <ogre/OgrePrerequisites.h>
+
+#include <core/Functions.h>
+#include <Debug.h>
+#include <kenshi/Inventory.h>
+
+#include <Settings.h>
+
+namespace
+{
+	void (*Inventory_getEquippedArmour_orig)(Inventory*, lektor<Item*>&);
+	void Inventory_getEquippedArmour_hook(Inventory* self, lektor<Item*>& all)
+	{
+		Inventory_getEquippedArmour_orig(self, all);
+		if (0 < KEP::settings._getEquippedArmour)
+		{
+			auto sectionIt = self->sections.find("belt");
+			if (sectionIt != self->sections.end())
+			{
+				auto& items = sectionIt->second->items;
+				for (auto iter = items.begin(); iter != items.end(); ++iter)
+				{
+					if (iter->item->isArmour() != nullptr)
+						all.push_back(iter->item);
+				}
+			}
+		}
+		if (1 < KEP::settings._getEquippedArmour)
+		{
+			auto sectionIt = self->sections.find("eyes_eyes");
+			if (sectionIt != self->sections.end())
+			{
+				auto& items = sectionIt->second->items;
+				for (auto iter = items.begin(); iter != items.end(); ++iter)
+				{
+					if (iter->item->isArmour() != nullptr)
+						all.push_back(iter->item);
+				}
+			}
+			sectionIt = self->sections.find("eyes_belts");
+			if (sectionIt != self->sections.end())
+			{
+				auto& items = sectionIt->second->items;
+				for (auto iter = items.begin(); iter != items.end(); ++iter)
+				{
+					if (iter->item->isArmour() != nullptr)
+						all.push_back(iter->item);
+				}
+			}
+			sectionIt = self->sections.find("eyes_hats");
+			if (sectionIt != self->sections.end())
+			{
+				auto& items = sectionIt->second->items;
+				for (auto iter = items.begin(); iter != items.end(); ++iter)
+				{
+					if (iter->item->isArmour() != nullptr)
+						all.push_back(iter->item);
+				}
+			}
+			sectionIt = self->sections.find("neck");
+			if (sectionIt != self->sections.end())
+			{
+				auto& items = sectionIt->second->items;
+				for (auto iter = items.begin(); iter != items.end(); ++iter)
+				{
+					if (iter->item->isArmour() != nullptr)
+						all.push_back(iter->item);
+				}
+			}
+			sectionIt = self->sections.find("gloves");
+			if (sectionIt != self->sections.end())
+			{
+				auto& items = sectionIt->second->items;
+				for (auto iter = items.begin(); iter != items.end(); ++iter)
+				{
+					if (iter->item->isArmour() != nullptr)
+						all.push_back(iter->item);
+				}
+			}
+		}
+	}
+}
+
+void KEP::InventoryEx::init()
+{
+	if (KenshiLib::SUCCESS != KenshiLib::AddHook(KenshiLib::GetRealAddress(&Inventory::getEquippedArmour), &Inventory_getEquippedArmour_hook, &Inventory_getEquippedArmour_orig))
+		ErrorLog("[Inventory::getEquippedArmour] could not install hook!");
+}

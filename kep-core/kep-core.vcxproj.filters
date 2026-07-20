@@ -99,6 +99,15 @@
     <ClInclude Include="include\extern\InventoryManager.h">
       <Filter>Header Files\extern</Filter>
     </ClInclude>
+    <ClInclude Include="include\extern\ConstantTracerT.h">
+      <Filter>Header Files\extern</Filter>
+    </ClInclude>
+    <ClInclude Include="include\extern\NodeList.h">
+      <Filter>Header Files\extern</Filter>
+    </ClInclude>
+    <ClInclude Include="include\extern\TradingInfo.h">
+      <Filter>Header Files\extern</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="src\dllmain.cpp">

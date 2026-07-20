@@ -349,7 +349,7 @@ namespace
 	}
 }
 
-void KEP::PatchSystem::init()
+void KEP::PatchSystem::initHook()
 {
 	if (KEP::coreOptions.getEnablePatchSystem())
 	{

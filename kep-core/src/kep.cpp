@@ -2,6 +2,7 @@
 #include <kep.h>
 #include <kep/patch_system.h>
 
+#include <core/Functions.h>
 #include <kenshi/Kenshi.h>
 
 namespace
@@ -89,12 +90,13 @@ void KEP::initialize()
 	auto version = versionInfo.GetVersion();
 	auto baseAddr = reinterpret_cast<uintptr_t>(GetModuleHandleA(nullptr));
 
-	setKenshiLibVersion();
 	functions->init(platform, version, baseAddr);
 	TranslationUtility::init(platform, version, baseAddr);
-	ConfigManager::init(platform, version, baseAddr);
 	KEP::GUIColor::init(platform, version, baseAddr);
-	KEP::PatchSystem::init();
+	
+	TranslationUtility::initHook();
+	ConfigManager::initHook();
+	KEP::PatchSystem::initHook();
 }
 
 namespace

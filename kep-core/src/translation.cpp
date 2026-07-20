@@ -82,12 +82,6 @@ void KEP::TranslationUtility::init(unsigned int platform, const std::string& ver
 		}
 	}
 
-	if (KenshiLib::SUCCESS != KenshiLib::AddHook(KenshiLib::GetRealAddress(&LocaleManager::trySetCurrentLocaleFromMod), &LocaleManager_trySetCurrentLocaleFromMod_hook, &LocaleManager_trySetCurrentLocaleFromMod_orig))
-		ErrorLog("[LocaleManager::trySetCurrentLocaleFromMod] could not install hook!");
-
-	if (KenshiLib::SUCCESS != KenshiLib::AddHook(KenshiLib::GetRealAddress(&GlobalConstants::setup), &GlobalConstants_setup_hook, &GlobalConstants_setup_orig))
-		ErrorLog("[GlobalConstants::setup] could not install hook!");
-
 	auto localeMgr = LocaleManager::getInstance();
 	if (localeMgr != nullptr && localeMgr->currentLocale != nullptr)
 	{
@@ -99,6 +93,15 @@ void KEP::TranslationUtility::init(unsigned int platform, const std::string& ver
 		config.load("settings.cfg");
 		lang = config.getSetting("language");
 	}
+}
+
+void KEP::TranslationUtility::initHook()
+{
+	if (KenshiLib::SUCCESS != KenshiLib::AddHook(KenshiLib::GetRealAddress(&LocaleManager::trySetCurrentLocaleFromMod), &LocaleManager_trySetCurrentLocaleFromMod_hook, &LocaleManager_trySetCurrentLocaleFromMod_orig))
+		ErrorLog("[LocaleManager::trySetCurrentLocaleFromMod] could not install hook!");
+
+	if (KenshiLib::SUCCESS != KenshiLib::AddHook(KenshiLib::GetRealAddress(&GlobalConstants::setup), &GlobalConstants_setup_hook, &GlobalConstants_setup_orig))
+		ErrorLog("[GlobalConstants::setup] could not install hook!");
 }
 
 const std::string& KEP::TranslationUtility::getLanguage()

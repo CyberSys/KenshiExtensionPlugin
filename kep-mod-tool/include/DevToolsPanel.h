@@ -22,6 +22,7 @@ namespace KEP
 		{
 		public:
 			static DevToolsPanel* getSingletonPtr();
+			static bool initialized();
 			DevToolsPanel();
 			~DevToolsPanel();
 
@@ -75,7 +76,5 @@ namespace KEP
 			void setDropBox(const std::string& caption, int cat, float width, int* valPtr, void (DevToolsPanel::* callback)(DataPanelLine*));
 			void setEditBox(const std::string& caption, int cat, float width, const std::string& text, void (DevToolsPanel::* callback)(DataPanelLine*));
 		};
-
-		void initHook();
 	}
 }

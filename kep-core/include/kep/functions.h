@@ -29,8 +29,14 @@ class BuildingInterior;
 class NodeList;
 class DatapanelGUI;
 class CombatTechniqueData;
+class HarpoonManager;
+class Harpoon;
 template<typename T>
 class lektor;
+enum CharacterPerceptionTags_ShortTerm;
+class NxShape;
+template<typename T>
+class FitnessSelector;
 
 namespace KEP
 {
@@ -46,6 +52,8 @@ namespace KEP
 		DECLSPEC GameplayOptions* getGameplayOptions() const;
 		DECLSPEC lektor<CombatTechniqueData*>& getAttacks() const;
 		DECLSPEC lektor<CombatTechniqueData*>& getBlocks() const;
+		DECLSPEC HarpoonManager* getHarpoonManager() const;
+		DECLSPEC NxShape**& getShapeBuffer() const;
 
 		bool (*EscMenu_openedOtherWindows)(EscMenu*);
 		bool (*Research_completed)(Research*, GameData*);
@@ -75,6 +83,14 @@ namespace KEP
 		void (*Research_init)(Research*);
 		void (*setTotalCoverage)(GameData*);
 		void (*loadPartmap)(Ogre::SharedPtr<Ogre::Mesh>, GameData*, bool, bool);
+		void (*Harpoon_destroy)(Harpoon*);
+		Harpoon* (*HarpoonManager_create)(HarpoonManager*, const std::string&, const std::string&);
+		bool (*CharacterMemory_getCharacterMemoryTag)(CharacterMemory*, Character*, CharacterPerceptionTags_ShortTerm);
+		void (*Harpoon_trace)(Harpoon*, const Ogre::Vector3&, const Ogre::Vector3&);
+		int (*convertRarityToLevel)(uint32_t);
+		void (*crossbowLevelSelector)(FitnessSelector<uint32_t>&, GameData*);
+		float (*calculateStatsMult)(int, float, float);
+		void (*InventoryManager_refreshSquadInventory)(InventoryManager*, ActivePlatoon*);
 
 	private:
 		float* timer;
@@ -84,6 +100,8 @@ namespace KEP
 		GameplayOptions* _GameplayOptions;
 		lektor<CombatTechniqueData*>* _attacks;
 		lektor<CombatTechniqueData*>* _blocks;
+		HarpoonManager* _harpoon;
+		NxShape*** _shapeBuffer;
 	};
 
 	extern DECLSPEC boost::scoped_ptr<FunctionPointers> functions;

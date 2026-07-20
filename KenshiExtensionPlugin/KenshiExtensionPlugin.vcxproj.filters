@@ -84,6 +84,18 @@
     <ClInclude Include="include\bugfix\AnimationFix.h">
       <Filter>Header Files\bugfix</Filter>
     </ClInclude>
+    <ClInclude Include="include\InventoryEx.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="include\PlatoonEx.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="include\CrossbowEx.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="include\ResearchEx.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="src\ExternalFunctions.cpp">
@@ -151,6 +163,18 @@
     </ClCompile>
     <ClCompile Include="src\bugfix\AnimationFix.cpp">
       <Filter>Source Files\bugfix</Filter>
+    </ClCompile>
+    <ClCompile Include="src\InventoryEx.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="src\PlatoonEx.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="src\CrossbowEx.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="src\ResearchEx.cpp">
+      <Filter>Source Files</Filter>
     </ClCompile>
   </ItemGroup>
 </Project>

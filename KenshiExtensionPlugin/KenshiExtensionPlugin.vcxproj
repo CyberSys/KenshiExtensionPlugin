@@ -145,12 +145,16 @@
     <ClInclude Include="include\bugfix\UniqueCharacterFix.h" />
     <ClInclude Include="include\AnimationExtension.h" />
     <ClInclude Include="include\CraftingExtension.h" />
+    <ClInclude Include="include\CrossbowEx.h" />
     <ClInclude Include="include\DialogueExtension.h" />
     <ClInclude Include="include\CharacterExtension.h" />
     <ClInclude Include="include\ExternalFunctions.h" />
+    <ClInclude Include="include\InventoryEx.h" />
     <ClInclude Include="include\ItemExtension.h" />
     <ClInclude Include="include\ItemFurnaceExtension.h" />
+    <ClInclude Include="include\PlatoonEx.h" />
     <ClInclude Include="include\RaceLimiterExtension.h" />
+    <ClInclude Include="include\ResearchEx.h" />
     <ClInclude Include="include\ScytheFileExtension.h" />
     <ClInclude Include="include\Settings.h" />
     <ClInclude Include="include\UtilityFunction.h" />
@@ -158,6 +162,7 @@
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="src\bugfix\AnimationFix.cpp" />
+    <ClCompile Include="src\CrossbowEx.cpp" />
     <ClCompile Include="src\AnimalExtension.cpp" />
     <ClCompile Include="src\AnimationExtension.cpp" />
     <ClCompile Include="src\AppearanceExtension.cpp" />
@@ -172,9 +177,12 @@
     <ClCompile Include="src\CharacterExtension.cpp" />
     <ClCompile Include="src\dllmain.cpp" />
     <ClCompile Include="src\ExternalFunctions.cpp" />
+    <ClCompile Include="src\InventoryEx.cpp" />
     <ClCompile Include="src\ItemExtension.cpp" />
     <ClCompile Include="src\ItemFurnaceExtension.cpp" />
+    <ClCompile Include="src\PlatoonEx.cpp" />
     <ClCompile Include="src\RaceLimiterExtension.cpp" />
+    <ClCompile Include="src\ResearchEx.cpp" />
     <ClCompile Include="src\ScytheFileExtension.cpp" />
     <ClCompile Include="src\Settings.cpp" />
     <ClCompile Include="src\UtilityFunction.cpp" />

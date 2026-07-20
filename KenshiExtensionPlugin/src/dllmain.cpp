@@ -31,6 +31,10 @@
 #include <AnimalExtension.h>
 #include <CraftingExtension.h>
 #include <ItemExtension.h>
+#include <CrossbowEx.h>
+#include <ResearchEx.h>
+#include <InventoryEx.h>
+#include <PlatoonEx.h>
 #include <kep.h>
 
 namespace fs = boost::filesystem;
@@ -42,7 +46,7 @@ namespace
 
 __declspec(dllexport) void startPlugin()
 {
-	DebugLog("kep 0.16.1");
+	DebugLog("kep 0.17.0");
 
 	auto versionInfo = KenshiLib::GetKenshiVersion();
 	auto platform = versionInfo.GetPlatform();
@@ -90,6 +94,10 @@ __declspec(dllexport) void startPlugin()
 	KEP::AnimalExtension::init();
 	KEP::CraftingExtension::init();
 	KEP::ItemExtension::init();
+	KEP::CrossbowEx::init();
+	KEP::ResearchEx::init();
+	KEP::InventoryEx::init();
+	KEP::PlatoonEx::init();
 	DebugLog("Installed");
 }
 

@@ -108,19 +108,16 @@ namespace
 
 		float bulkMin;
 		float bulkMax;
+		bool bulkOverride = self->raceData->bdata["bulk override"];
 		if (self->female)
 		{
-			auto bulkMinIter = self->raceData->fdata.find("bulk min female");
-			auto bulkMaxIter = self->raceData->fdata.find("bulk max female");
-			bulkMin = bulkMinIter != self->raceData->fdata.end() ? bulkMinIter->second : KEP::settings._bulkStatMinFemale;
-			bulkMax = bulkMaxIter != self->raceData->fdata.end() ? bulkMaxIter->second : KEP::settings._bulkStatMaxFemale;
+			bulkMin = bulkOverride ? self->raceData->fdata["bulk min female"] : KEP::settings._bulkStatMinFemale;
+			bulkMax = bulkOverride ? self->raceData->fdata["bulk max female"] : KEP::settings._bulkStatMaxFemale;
 		}
 		else
 		{
-			auto bulkMinIter = self->raceData->fdata.find("bulk min male");
-			auto bulkMaxIter = self->raceData->fdata.find("bulk max male");
-			bulkMin = bulkMinIter != self->raceData->fdata.end() ? bulkMinIter->second : KEP::settings._bulkStatMinMale;
-			bulkMax = bulkMaxIter != self->raceData->fdata.end() ? bulkMaxIter->second : KEP::settings._bulkStatMaxMale;
+			bulkMin = bulkOverride ? self->raceData->fdata["bulk min male"] : KEP::settings._bulkStatMinMale;
+			bulkMax = bulkOverride ? self->raceData->fdata["bulk max male"] : KEP::settings._bulkStatMaxMale;
 		}
 		float bulkStat = std::max(std::max(self->me->stats->strengthBase(), self->me->stats->armourSmith), self->me->stats->weaponSmith);
 		bulkStat = std::min(std::max(bulkStat, bulkMin), bulkMax);

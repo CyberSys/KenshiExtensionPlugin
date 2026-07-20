@@ -23,10 +23,16 @@
 #include <kenshi/Inventory.h>
 #include <kenshi/Building/DoorStuff.h>
 #include <kenshi/combat/CombatClass.h>
+#include <kenshi/combat/CombatTechniqueData.h>
+#include <kenshi/Animation/AnimationClass.h>
+#include <kenshi/AI/AI.h>
+#include <kenshi/StateBroadcastData.h>
+#include <kenshi/Town.h>
+#include <kenshi/CharStats.h>
 
 #include <extern/InventoryManager.h>
 #include <extern/UniqueNPCManager.h>
-#include <kenshi/StateBroadcastData.h>
+#include <extern/TradingInfo.h>
 
 #include <kep/translation.h>
 #include <kep/functions.h>
@@ -143,6 +149,60 @@ namespace
 		}
 	}
 
+	std::string getWeaponCategoryName(WeaponCategory what)
+	{
+		switch (what)
+		{
+		case SKILL_KATANAS:
+			return "Katana";
+		case SKILL_SABRES:
+			return "Sabre";
+		case SKILL_BLUNT:
+			return "Blunt weapon";
+		case SKILL_HEAVY:
+			return "Heavy weapons";
+		case SKILL_HACKERS:
+			return "Hacker";
+		case SKILL_UNARMED:
+			return "Martial arts";
+		case SKILL_BOW:
+			return "Crossbow";
+		case SKILL_TURRET:
+			return "Turret";
+		case ATTACK_POLEARMS:
+			return "Polearm";
+		case ATTACK_ELEPHANT:
+			return "Elephant creatures";
+		case ATTACK_DOG:
+			return "Dog creatures";
+		case ATTACK_BULL:
+			return "Bull creatures";
+		case ATTACK_ROBOTSPIDER:
+			return "Robot spider creatures";
+		case ATTACK_SPIDER:
+			return "Spider creatures";
+		case ATTACK_CAGEBEAST:
+			return "Cagebeast creatures";
+		case ATTACK_DUCK:
+			return "Duck creatures";
+		case ATTACK_GORILLA:
+			return "Gorilla creatures";
+		case ATTACK_GAR:
+			return "Gar creatures";
+		case ATTACK_FROG:
+			return "Frog creatures";
+		case ATTACK_GOAT:
+			return "Goat creatures";
+		case ATTACK_GIRAFFE:
+			return "Giraffe creatures";
+		case ATTACK_NULL:
+			return "Type21 creatures";
+		case NUM_SKILL_TYPES:
+			return "Type22 creatures";
+		default:
+			return "none";
+		}
+	}
 }
 
 KEP::tools::InformationPanel* KEP::tools::InformationPanel::getSingletonPtr()
@@ -282,6 +342,13 @@ void KEP::tools::InformationPanel::_displayBuildingInformation()
 			}
 		}
 	}
+
+	auto parentBuilding = building->isIndoors().getBuilding();
+	if (parentBuilding != nullptr)
+		this->_panel->setLine(KEP::GUIColor::getMain() + "Parent:", KEP::GUIColor::getMain() + parentBuilding->displayName, cat_building, false, true);
+	else
+		this->_panel->setLine(KEP::GUIColor::getMain() + "Parent:", KEP::GUIColor::getMain() + "nothing", cat_building, false, true);
+
 	this->_panel->addSpace(cat_building, 0.5f);
 
 	if (!building->hasInterior())
@@ -398,6 +465,22 @@ void KEP::tools::InformationPanel::_displayCharacterInformation()
 
 	this->_panel->setLine(KEP::GUIColor::getMain() + "Portrait serial:", KEP::GUIColor::getMain() + Ogre::StringConverter::toString(obj->portraitSerial), cat_character, false, true);
 
+	if (obj->ai->tradingInfo != nullptr)
+	{
+		this->_panel->setLine(KEP::GUIColor::getMain() + "TradingInfo:", "", cat_character, false, true);
+
+		if (obj->ai->tradingInfo->town != nullptr)
+			this->_panel->setLine(KEP::GUIColor::getMain() + "Town:", obj->ai->tradingInfo->town->displayName, cat_character, false, true);
+
+		auto& tradeItems = obj->ai->tradingInfo->tradeItems;
+		for (size_t i = 0; i < tradeItems.size(); ++i)
+		{
+			this->_panel->setLine(KEP::GUIColor::getMain() + "item function " + Ogre::StringConverter::toString(i) + ":", KEP::GUIColor::getMain() + Ogre::StringConverter::toString(tradeItems[i].itemFunction), cat_character, false, true);
+			this->_panel->setLine(KEP::GUIColor::getMain() + "quantity " + Ogre::StringConverter::toString(i) + ":", KEP::GUIColor::getMain() + Ogre::StringConverter::toString(tradeItems[i].quantity), cat_character, false, true);
+			this->_panel->setLine(KEP::GUIColor::getMain() + "count " + Ogre::StringConverter::toString(i) + ":", KEP::GUIColor::getMain() + Ogre::StringConverter::toString(tradeItems[i].count), cat_character, false, true);
+		}
+	}
+
 	obj->getSensoryData()->getGUIData(this->_panel, cat_character);
 
 	this->_panel->addSpace(cat_character, 0.5f);
@@ -420,6 +503,8 @@ void KEP::tools::InformationPanel::_displayCombatInformation()
 
 	this->_panel->setLine(KEP::GUIColor::getMain() + "combat mode:", KEP::GUIColor::getMain() + Ogre::StringConverter::toString(combat->combatModeActive), cat_combat, false, true);
 
+	this->_panel->setLine(KEP::GUIColor::getMain() + "weapon type:", KEP::GUIColor::getMain() + getWeaponCategoryName(combat->stats->currentWeaponType), cat_combat, false, true);
+
 	this->_panel->setLine(KEP::GUIColor::getMain() + "Num Slots:", KEP::GUIColor::getMain() + Ogre::StringConverter::toString(combat->attackSlots.getNumAttackSlots()), cat_combat, false, true);
 	
 	if (combat->combatModeActive)
@@ -427,11 +512,20 @@ void KEP::tools::InformationPanel::_displayCombatInformation()
 	else
 		this->_panel->setLine(KEP::GUIColor::getMain() + "State:", KEP::GUIColor::getMain() + "peace", cat_combat, false, true);
 
+	if (combat->combatModeActive)
+		this->_panel->setLine(KEP::GUIColor::getMain() + "Next:", KEP::GUIColor::getMain() + getSwordStateEnumName(combat->nextMove), cat_combat, false, true);
+	else
+		this->_panel->setLine(KEP::GUIColor::getMain() + "Next:", KEP::GUIColor::getMain() + "peace", cat_combat, false, true);
+
 	this->_panel->setLine(KEP::GUIColor::getMain() + "Dead Time:", KEP::GUIColor::getMain() + Ogre::StringConverter::toString(combat->inDeadTime), cat_combat, false, true);
 
 	auto targetCharacter = combat->currentTargetHandle.getCharacter();
 	std::string targetName = targetCharacter != nullptr ? targetCharacter->displayName : "";
 	this->_panel->setLine(KEP::GUIColor::getMain() + "Target:", KEP::GUIColor::getMain() + targetName, cat_combat, false, true);
+
+	auto blockingTarget = combat->blockingTargetH.getCharacter();
+	std::string blockingTargetName = blockingTarget != nullptr ? blockingTarget->displayName : "";
+	this->_panel->setLine(KEP::GUIColor::getMain() + "Blocking Target:", KEP::GUIColor::getMain() + blockingTargetName, cat_combat, false, true);
 
 	for (size_t i = 0; i < 5; i++)
 	{
@@ -451,6 +545,19 @@ void KEP::tools::InformationPanel::_displayCombatInformation()
 		auto attaker = combat->attackersH[i].getCharacter();
 		std::string attakerName = attaker != nullptr ? attaker->displayName : "";
 		this->_panel->setLine(KEP::GUIColor::getMain() + "attaker" + Ogre::StringConverter::toString(i+1) + ":", KEP::GUIColor::getMain() + attakerName, cat_combat, false, true);
+	}
+
+	this->_panel->addSpace(cat_combat, 0.5f);
+
+	if (combat->currentTechnique != nullptr)
+	{
+		this->_panel->setLine(KEP::GUIColor::getMain() + "current technique:", KEP::GUIColor::getMain() + combat->currentTechnique->animation, cat_combat, false, true);
+		float progress = combat->animation->getAnimationProgress(combat->currentTechnique);
+		this->_panel->setLineProgress("progress:", cat_combat, progress, "", false);
+	}
+	else
+	{
+		this->_panel->setLine(KEP::GUIColor::getMain() + "current technique:", KEP::GUIColor::getMain() + "none", cat_combat, false, true);
 	}
 
 	this->_panel->addSpace(cat_combat, 0.5f);
