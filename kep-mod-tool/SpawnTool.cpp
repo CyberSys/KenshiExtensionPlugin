@@ -141,8 +141,10 @@ void KEP::tools::SpawnTool::refresh()
 	auto textbox = this->_panel->setLineTextEditable("Search for factions", "", this->_category, true, false, MyGUI::Align::Left, 0.7f);
 	textbox->nameText->setCaption(KEP::TranslationUtility::gettext("Search"));
 	textbox->callback = new MyGUI::delegates::CMethodDelegate1<SpawnTool, DataPanelLine*>(MyGUI::delegates::GetDelegateUnlink(this), this, &SpawnTool::_changeFactionSearchText);
+	textbox->nameText->setEnabled(false);
 
-	this->_panel->setLineDropBox(lineBoxFaction, this->_category, &this->_selectedSpawnFaction, false, 0.7f);
+	auto dropbox = this->_panel->setLineDropBox(lineBoxFaction, this->_category, &this->_selectedSpawnFaction, false, 0.7f);
+	dropbox->w1->setEnabled(false);
 	_updateFactionList("");
 
 	this->_panel->addSpace(this->_category, 0.5f);
@@ -150,11 +152,14 @@ void KEP::tools::SpawnTool::refresh()
 	textbox = this->_panel->setLineTextEditable("Search for squads", "", this->_category, true, false, MyGUI::Align::Left, 0.7f);
 	textbox->nameText->setCaption(KEP::TranslationUtility::gettext("Search"));
 	textbox->callback = new MyGUI::delegates::CMethodDelegate1<SpawnTool, DataPanelLine*>(MyGUI::delegates::GetDelegateUnlink(this), this, &SpawnTool::_changeSquadSearchText);
+	textbox->nameText->setEnabled(false);
 
-	this->_panel->setLineDropBox(lineBoxSquads, this->_category, &this->_selectedSpawnSquad, false, 0.7f);
+	dropbox = this->_panel->setLineDropBox(lineBoxSquads, this->_category, &this->_selectedSpawnSquad, false, 0.7f);
+	dropbox->w1->setEnabled(false);
 	_updateSquadList("");
 
-	auto dropbox = this->_panel->setLineDropBox(KEP::TranslationUtility::gettext("Spawn method"), this->_category, &this->_squadSpawnMethodType, false, 0.7f);
+	dropbox = this->_panel->setLineDropBox(KEP::TranslationUtility::gettext("Spawn method"), this->_category, &this->_squadSpawnMethodType, false, 0.7f);
+	dropbox->w1->setEnabled(false);
 	dropbox->addAValue(KEP::TranslationUtility::gettext("Roaming"), 0);
 	dropbox->addAValue(KEP::TranslationUtility::gettext("Bar"), 1);
 	dropbox->addAValue(KEP::TranslationUtility::gettext("Resident"), 2);
@@ -168,12 +173,15 @@ void KEP::tools::SpawnTool::refresh()
 	textbox = this->_panel->setLineTextEditable("Search for characters", "", this->_category, true, false, MyGUI::Align::Left, 0.7f);
 	textbox->nameText->setCaption(KEP::TranslationUtility::gettext("Search"));
 	textbox->callback = new MyGUI::delegates::CMethodDelegate1<SpawnTool, DataPanelLine*>(MyGUI::delegates::GetDelegateUnlink(this), this, &SpawnTool::_changeCharacterSearchText);
+	textbox->nameText->setEnabled(false);
 
-	this->_panel->setLineDropBox(lineBoxCharacter, this->_category, &this->_selectedSpawnCharacter, false, 0.7f);
+	dropbox = this->_panel->setLineDropBox(lineBoxCharacter, this->_category, &this->_selectedSpawnCharacter, false, 0.7f);
+	dropbox->w1->setEnabled(false);
 	_updateCharacterList("");
 
 	this->_panel->addSpace(this->_category, 0.25f);
 	auto slider = this->_panel->setLineSliderEditable(KEP::TranslationUtility::gettext("Age"), this->_category, true, 0.01f, 3.0f, &this->_animalAge);
+	slider->nameText->setEnabled(false);
 	this->_panel->addSpace(this->_category, 0.25f);
 
 	button = this->_panel->setLineTextButton("", KEP::TranslationUtility::gettext("Add character"), this->_category, 0.7f, "Kenshi_Button2");
@@ -185,6 +193,7 @@ void KEP::tools::SpawnTool::refresh()
 
 	dropbox = this->_panel->setLineDropBox(lineBoxItemCategory, this->_category, &this->_searchItemCategory, false, 0.7f);
 	dropbox->callback = new MyGUI::delegates::CMethodDelegate1<SpawnTool, DataPanelLine*>(MyGUI::delegates::GetDelegateUnlink(this), this, &SpawnTool::_selectItemCategoryList);
+	dropbox->w1->setEnabled(false);
 	dropbox->addAValue(KEP::TranslationUtility::gettext("All"), NULL_ITEM);
 	dropbox->addAValue(KEP::TranslationUtility::gettext_main("Items"), ITEM);
 	dropbox->addAValue(KEP::TranslationUtility::gettext_main("Map"), MAP_ITEM);
@@ -199,16 +208,20 @@ void KEP::tools::SpawnTool::refresh()
 
 	dropbox = this->_panel->setLineDropBox(lineBoxtemSubCategory, this->_category, &this->_searchItemSubCategory, false, 0.7f);
 	dropbox->callback = new MyGUI::delegates::CMethodDelegate1<SpawnTool, DataPanelLine*>(MyGUI::delegates::GetDelegateUnlink(this), this, &SpawnTool::_selectItemSubcategoryList);
+	dropbox->w1->setEnabled(false);
 	this->_updateItemSubcategorylList();
 
 	textbox = this->_panel->setLineTextEditable(lineTextItem, "", this->_category, true, false, MyGUI::Align::Left, 0.7f);
 	textbox->nameText->setCaption(KEP::TranslationUtility::gettext("Search"));
 	textbox->callback = new MyGUI::delegates::CMethodDelegate1<SpawnTool, DataPanelLine*>(MyGUI::delegates::GetDelegateUnlink(this), this, &SpawnTool::_changeItemSearchText);
+	textbox->nameText->setEnabled(false);
 
 	dropbox = this->_panel->setLineDropBox(lineBoxItem, this->_category, &this->_selectedItem, false, 0.7f);
 	dropbox->callback = new MyGUI::delegates::CMethodDelegate1<SpawnTool, DataPanelLine*>(MyGUI::delegates::GetDelegateUnlink(this), this, &SpawnTool::_selectItemList);
+	dropbox->w1->setEnabled(false);
 
 	dropbox = this->_panel->setLineDropBox(lineBoxGearLevel, this->_category, &this->_gearLevel, false, 0.7f);
+	dropbox->w1->setEnabled(false);
 	dropbox->addAValue(KEP::TranslationUtility::gettext_main("Prototype"), 0);
 	dropbox->addAValue(KEP::TranslationUtility::gettext_main("Shoddy"), 1);
 	dropbox->addAValue(KEP::TranslationUtility::gettext_main("Standard"), 2);
@@ -219,6 +232,7 @@ void KEP::tools::SpawnTool::refresh()
 
 	dropbox = this->_panel->setLineDropBox(KEP::TranslationUtility::gettext("Weapon category"), this->_category, &this->_searchWeaponCategory, false, 0.7f);
 	dropbox->callback = new MyGUI::delegates::CMethodDelegate1<SpawnTool, DataPanelLine*>(MyGUI::delegates::GetDelegateUnlink(this), this, &SpawnTool::_selectWeaponCategoryList);
+	dropbox->w1->setEnabled(false);
 	dropbox->addAValue(KEP::TranslationUtility::gettext("All"), 0);
 	dropbox->addAValue(KEP::TranslationUtility::gettext_main("Katanas"), 1);
 	dropbox->addAValue(KEP::TranslationUtility::gettext_main("Sabres"), 2);
@@ -234,9 +248,12 @@ void KEP::tools::SpawnTool::refresh()
 	textbox = this->_panel->setLineTextEditable(lineTextWeapon, "", this->_category, true, false, MyGUI::Align::Left, 0.7f);
 	textbox->nameText->setCaption(KEP::TranslationUtility::gettext("Search"));
 	textbox->callback = new MyGUI::delegates::CMethodDelegate1<SpawnTool, DataPanelLine*>(MyGUI::delegates::GetDelegateUnlink(this), this, &SpawnTool::_changeWeaponSearchText);
+	textbox->nameText->setEnabled(false);
 
-	this->_panel->setLineDropBox(lineBoxWeapon, this->_category, &this->_selectedWeapon, false, 0.7f);
-	this->_panel->setLineDropBox(lineBoxModel, this->_category, &this->_selectedModel, false, 0.7f);
+	dropbox = this->_panel->setLineDropBox(lineBoxWeapon, this->_category, &this->_selectedWeapon, false, 0.7f);
+	dropbox->w1->setEnabled(false);
+	dropbox = this->_panel->setLineDropBox(lineBoxModel, this->_category, &this->_selectedModel, false, 0.7f);
+	dropbox->w1->setEnabled(false);
 
 	_updateItemList("");
 	_updateModelList();
@@ -247,8 +264,10 @@ void KEP::tools::SpawnTool::refresh()
 	textbox = this->_panel->setLineTextEditable("Search for color", "", this->_category, true, false, MyGUI::Align::Left, 0.7f);
 	textbox->nameText->setCaption(KEP::TranslationUtility::gettext("Search"));
 	textbox->callback = new MyGUI::delegates::CMethodDelegate1<SpawnTool, DataPanelLine*>(MyGUI::delegates::GetDelegateUnlink(this), this, &SpawnTool::_changeColorSearchText);
+	textbox->nameText->setEnabled(false);
 
-	this->_panel->setLineDropBox(lineBoxItemColor, this->_category, &this->_selectedItemColor, false, 0.7f);
+	dropbox = this->_panel->setLineDropBox(lineBoxItemColor, this->_category, &this->_selectedItemColor, false, 0.7f);
+	dropbox->w1->setEnabled(false);
 	_updateColorList("");
 
 	this->_panel->addSpace(this->_category, 0.25f);
@@ -256,13 +275,16 @@ void KEP::tools::SpawnTool::refresh()
 	textbox = this->_panel->setLineTextEditable("Search for unifroms", "", this->_category, true, false, MyGUI::Align::Left, 0.7f);
 	textbox->nameText->setCaption(KEP::TranslationUtility::gettext("Search"));
 	textbox->callback = new MyGUI::delegates::CMethodDelegate1<SpawnTool, DataPanelLine*>(MyGUI::delegates::GetDelegateUnlink(this), this, &SpawnTool::_changeUniformSearchText);
+	textbox->nameText->setEnabled(false);
 
-	this->_panel->setLineDropBox(lineBoxFactionUniform, this->_category, &this->_selectedFactionUniform, false, 0.7f);
+	dropbox = this->_panel->setLineDropBox(lineBoxFactionUniform, this->_category, &this->_selectedFactionUniform, false, 0.7f);
+	dropbox->w1->setEnabled(false);
 	_updateUniformList("");
 
 	this->_panel->addSpace(this->_category, 0.25f);
 	slider = this->_panel->setLineSliderEditable(KEP::TranslationUtility::gettext("Quantity"), this->_category, true, 1.0f, 50.0f, &this->_quantity);
 	slider->setPrecision(0);
+	slider->nameText->setEnabled(false);
 	this->_panel->addSpace(this->_category, 0.25f);
 
 	button = this->_panel->setLineTextButton("", KEP::TranslationUtility::gettext("Give item"), this->_category, 0.7f, "Kenshi_Button2");
@@ -280,8 +302,10 @@ void KEP::tools::SpawnTool::refresh()
 	textbox = this->_panel->setLineTextEditable("Search for campaigns", "", this->_category, true, false, MyGUI::Align::Left, 0.7f);
 	textbox->nameText->setCaption(KEP::TranslationUtility::gettext("Search"));
 	textbox->callback = new MyGUI::delegates::CMethodDelegate1<SpawnTool, DataPanelLine*>(MyGUI::delegates::GetDelegateUnlink(this), this, &SpawnTool::_changeCampaignSearchText);
+	textbox->nameText->setEnabled(false);
 
-	this->_panel->setLineDropBox(lineBoxCampaign, this->_category, &this->_selectedCampaign, false, 0.7f);
+	dropbox = this->_panel->setLineDropBox(lineBoxCampaign, this->_category, &this->_selectedCampaign, false, 0.7f);
+	dropbox->w1->setEnabled(false);
 	_updateCampaginList("");
 
 	button = this->_panel->setLineTextButton("", KEP::TranslationUtility::gettext("Trigger"), this->_category, 0.7f, "Kenshi_Button2");
@@ -294,9 +318,11 @@ void KEP::tools::SpawnTool::refresh()
 	textbox = this->_panel->setLineTextEditable("search for fromFactions", "", this->_category, true, false, MyGUI::Align::Left, 0.7f);
 	textbox->nameText->setCaption(KEP::TranslationUtility::gettext("Search"));
 	textbox->callback = new MyGUI::delegates::CMethodDelegate1<SpawnTool, DataPanelLine*>(MyGUI::delegates::GetDelegateUnlink(this), this, &SpawnTool::_changeFromFactionSearchText);
+	textbox->nameText->setEnabled(false);
 
 	dropbox = this->_panel->setLineDropBox(lineBoxFromFaction, this->_category, &this->_selectedFromFaction, false, 0.7f);
 	dropbox->w1->setCaption("from");
+	dropbox->w1->setEnabled(false);
 	_updateFromFactionList("");
 
 	this->_panel->addSpace(this->_category, 0.5f);
@@ -304,14 +330,17 @@ void KEP::tools::SpawnTool::refresh()
 	textbox = this->_panel->setLineTextEditable("search for toFactions", "", this->_category, true, false, MyGUI::Align::Left, 0.7f);
 	textbox->nameText->setCaption(KEP::TranslationUtility::gettext("Search"));
 	textbox->callback = new MyGUI::delegates::CMethodDelegate1<SpawnTool, DataPanelLine*>(MyGUI::delegates::GetDelegateUnlink(this), this, &SpawnTool::_changeToFactionSearchText);
+	textbox->nameText->setEnabled(false);
 
 	dropbox = this->_panel->setLineDropBox(lineBoxToFaction, this->_category, &this->_selectedToFaction, false, 0.7f);
 	dropbox->w1->setCaption("to");
+	dropbox->w1->setEnabled(false);
 	_updateToFactionList("");
 
 	this->_panel->addSpace(this->_category, 0.25f);
 	slider = this->_panel->setLineSliderEditable(KEP::TranslationUtility::gettext("Relation"), this->_category, true, -100.0f, 100.0f, &this->_relation);
 	slider->setPrecision(0);
+	slider->nameText->setEnabled(false);
 	this->_panel->addSpace(this->_category, 0.25f);
 
 	button = this->_panel->setLineTextButton("", KEP::TranslationUtility::gettext("Overwrite relation"), this->_category, 0.7f, "Kenshi_Button2");
@@ -324,12 +353,15 @@ void KEP::tools::SpawnTool::refresh()
 	textbox = this->_panel->setLineTextEditable("search for uniqueNpcs", "", this->_category, true, false, MyGUI::Align::Left, 0.7f);
 	textbox->nameText->setCaption(KEP::TranslationUtility::gettext("Search"));
 	textbox->callback = new MyGUI::delegates::CMethodDelegate1<SpawnTool, DataPanelLine*>(MyGUI::delegates::GetDelegateUnlink(this), this, &SpawnTool::_changeUniqueNpcSearchText);
+	textbox->nameText->setEnabled(false);
 
 	dropbox = this->_panel->setLineDropBox(lineBoxUniqueNpc, this->_category, &this->_selectedUniqueCharacter, false, 0.7f);
 	dropbox->w1->setCaption(KEP::TranslationUtility::gettext("Unique characters"));
+	dropbox->w1->setEnabled(false);
 	_updateUniqueNpcList("");
 
 	dropbox = this->_panel->setLineDropBox(KEP::TranslationUtility::gettext("State"), this->_category, &this->_uniqueState, false, 0.7f);
+	dropbox->w1->setEnabled(false);
 	dropbox->addAValue(KEP::TranslationUtility::gettext("Not spawned"), 0);
 	dropbox->addAValue(KEP::TranslationUtility::gettext("Living"), 1);
 	dropbox->addAValue(KEP::TranslationUtility::gettext("Imprisoned"), 2);

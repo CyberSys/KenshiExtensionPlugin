@@ -8,6 +8,7 @@ You should have received a copy of the GNU General Public License along with thi
 --------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------*/
 #include "pch.h"
 #include <InformationPanel.h>
+#include <SquadInfo.h>
 
 #include <boost/scoped_ptr.hpp>
 
@@ -453,7 +454,7 @@ void KEP::tools::InformationPanel::_displayCharacterInformation()
 	auto activePlatoon = obj->getPlatoon();
 	if (activePlatoon != nullptr)
 	{
-		KEP::functions->Blackboard_getGUIData(activePlatoon->me->blackboard, this->_panel, cat_character);
+		displayBlackboardInformation(activePlatoon->me->blackboard, this->_panel, cat_character);
 		KEP::functions->CharacterMemory_getGUIData(activePlatoon->_myMemory, this->_panel, cat_character);
 	}
 
@@ -583,7 +584,27 @@ void KEP::tools::InformationPanel::_displayUniqueNpcInformation()
 	{
 		std::string spawnMsg = iter->second.characterTemplate == nullptr ? " (not spawned)" : "";
 		std::string involved = iter->second.playerInvolvement ? " -player involved" : "";
-		this->_panel->setLine(KEP::GUIColor::getMain() + iter->first->name, KEP::GUIColor::getMain() + getWorldStateEnumName(iter->second.state) + spawnMsg + involved, cat_vips, false, true);
+
+		std::string textColor;
+		auto character = iter->second.handle.getCharacter();
+		if (iter->second.state == DEAD)
+			textColor = KEP::GUIColor::getBad();
+		else if (character != nullptr)
+		{
+			if (iter->second.state == IMPRISONED)
+				textColor = KEP::GUIColor::getGood();
+			else
+				textColor = KEP::GUIColor::getGoodBright();
+		}
+		else
+		{
+			if (iter->second.state == IMPRISONED)
+				textColor = KEP::GUIColor::getSecondary();
+			else
+				textColor = KEP::GUIColor::getMain();
+		}
+
+		this->_panel->setLine(textColor + iter->first->name, textColor + getWorldStateEnumName(iter->second.state) + spawnMsg + involved, cat_vips, false, true);
 	}
 
 	this->_panel->addSpace(cat_vips, 0.5f);

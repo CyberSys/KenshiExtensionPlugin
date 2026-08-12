@@ -147,6 +147,7 @@
     <ClInclude Include="include\InformationPanel.h" />
     <ClInclude Include="include\Re_Dev.h" />
     <ClInclude Include="include\SpawnTool.h" />
+    <ClInclude Include="include\SquadInfo.h" />
     <ClInclude Include="include\StatsTool.h" />
     <ClInclude Include="include\PlatoonTool.h" />
     <ClInclude Include="include\utility.h" />
@@ -165,6 +166,7 @@
     </ClCompile>
     <ClCompile Include="Re_Dev.cpp" />
     <ClCompile Include="SpawnTool.cpp" />
+    <ClCompile Include="SquadInfo.cpp" />
     <ClCompile Include="StatsTool.cpp" />
     <ClCompile Include="PlatoonTool.cpp" />
   </ItemGroup>

@@ -152,11 +152,13 @@ void KEP::tools::StatsTool::refresh()
 
 	this->_panel->setLine(KEP::GUIColor::getMain() + KEP::TranslationUtility::gettext("[Stats]"), "", this->_category, false, true);
 
-	this->_panel->setLineDropBox(lineStats, this->_category, &this->_selectedStatsEnum, false, 0.7f);
+	auto dropbox = this->_panel->setLineDropBox(lineStats, this->_category, &this->_selectedStatsEnum, false, 0.7f);
+	dropbox->w1->setEnabled(false);
 	_updateStatsEnumList();
 
 	this->_panel->addSpace(this->_category, 0.25f);
-	this->_panel->setLineSliderEditable(KEP::TranslationUtility::gettext_main("XP"), this->_category, true, 0.0f, 10000.0f, &this->_xp);
+	auto slider = this->_panel->setLineSliderEditable(KEP::TranslationUtility::gettext_main("XP"), this->_category, true, 0.0f, 10000.0f, &this->_xp);
+	slider->nameText->setEnabled(false);
 	this->_panel->addSpace(this->_category, 0.25f);
 
 	auto button = this->_panel->setLineTextButton("", KEP::TranslationUtility::gettext("Give XP"), this->_category, 0.7f, "Kenshi_Button2");
@@ -164,7 +166,8 @@ void KEP::tools::StatsTool::refresh()
 
 	this->_panel->addSpace(this->_category, 0.5f);
 
-	this->_panel->setLineDropBox(lineStatsData, this->_category, &this->_selectedStatsData, false, 0.7f);
+	dropbox = this->_panel->setLineDropBox(lineStatsData, this->_category, &this->_selectedStatsData, false, 0.7f);
+	dropbox->w1->setEnabled(false);
 	_updateStatsDataList();
 
 	button = this->_panel->setLineTextButton("", KEP::TranslationUtility::gettext("Overwrite stats"), this->_category, 0.7f, "Kenshi_Button2");
@@ -172,7 +175,8 @@ void KEP::tools::StatsTool::refresh()
 
 	this->_panel->addSpace(this->_category, 1.0f);
 
-	this->_panel->setLineDropBox(lineSlave, this->_category, &this->_selectedSlaveState, false, 0.7f);
+	dropbox = this->_panel->setLineDropBox(lineSlave, this->_category, &this->_selectedSlaveState, false, 0.7f);
+	dropbox->w1->setEnabled(false);
 	_updateSlaveSateList();
 
 	button = this->_panel->setLineTextButton("", KEP::TranslationUtility::gettext("Set slave state"), this->_category, 0.7f, "Kenshi_Button2");
@@ -180,7 +184,8 @@ void KEP::tools::StatsTool::refresh()
 
 	this->_panel->addSpace(this->_category, 1.0f);
 
-	this->_panel->setLineDropBox(linePersonality, this->_category, &this->_selectedPersonality, false, 0.7f);
+	dropbox = this->_panel->setLineDropBox(linePersonality, this->_category, &this->_selectedPersonality, false, 0.7f);
+	dropbox->w1->setEnabled(false);
 	_updatePersonalityList();
 
 	button = this->_panel->setLineTextButton("", KEP::TranslationUtility::gettext("Change personality"), this->_category, 0.7f, "Kenshi_Button2");
@@ -188,10 +193,12 @@ void KEP::tools::StatsTool::refresh()
 
 	this->_panel->addSpace(this->_category, 1.0f);
 	
-	auto slider = this->_panel->setLineSliderEditable(KEP::TranslationUtility::gettext("Portrait yaw"), this->_category, true, -45.0f, 44.82f, &this->_portraitYaw);
+	slider = this->_panel->setLineSliderEditable(KEP::TranslationUtility::gettext("Portrait yaw"), this->_category, true, -45.0f, 44.82f, &this->_portraitYaw);
+	slider->nameText->setEnabled(false);
 	this->_panel->addSpace(this->_category, 0.25f);
 	
 	slider = this->_panel->setLineSliderEditable(KEP::TranslationUtility::gettext("Portrait pitch"), this->_category, true, -14.94f, 30.24f, &this->_portraitPitch);
+	slider->nameText->setEnabled(false);
 	this->_panel->addSpace(this->_category, 0.25f);
 
 	button = this->_panel->setLineTextButton("", KEP::TranslationUtility::gettext("Change portrait serial number"), this->_category, 0.7f, "Kenshi_Button2");

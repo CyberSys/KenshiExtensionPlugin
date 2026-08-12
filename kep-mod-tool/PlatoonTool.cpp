@@ -72,8 +72,10 @@ void KEP::tools::PlatoonTool::refresh()
 	auto textbox = this->_panel->setLineTextEditable("Search for ai package", "", this->_category, true, false, MyGUI::Align::Left, 0.7f);
 	textbox->nameText->setCaption(KEP::TranslationUtility::gettext("Search"));
 	textbox->callback = new MyGUI::delegates::CMethodDelegate1<PlatoonTool, DataPanelLine*>(MyGUI::delegates::GetDelegateUnlink(this), this, &PlatoonTool::_changeAIPackageSearchText);
+	textbox->nameText->setEnabled(false);
 
-	this->_panel->setLineDropBox(lineBoxAIPackage, this->_category, &this->_selectedAIPackage, false, 0.7f);
+	auto dropbox = this->_panel->setLineDropBox(lineBoxAIPackage, this->_category, &this->_selectedAIPackage, false, 0.7f);
+	dropbox->w1->setEnabled(false);
 	_updateAIPackageList("");
 
 	auto button = this->_panel->setLineTextButton("", KEP::TranslationUtility::gettext("Change AI"), this->_category, 0.7f, "Kenshi_Button2");
@@ -89,8 +91,10 @@ void KEP::tools::PlatoonTool::refresh()
 	textbox = this->_panel->setLineTextEditable("Search for dialog", "", this->_category, true, false, MyGUI::Align::Left, 0.7f);
 	textbox->nameText->setCaption(KEP::TranslationUtility::gettext("Search"));
 	textbox->callback = new MyGUI::delegates::CMethodDelegate1<PlatoonTool, DataPanelLine*>(MyGUI::delegates::GetDelegateUnlink(this), this, &PlatoonTool::_changeDialogSearchText);
+	textbox->nameText->setEnabled(false);
 
-	this->_panel->setLineDropBox(lineBoxDialogue, this->_category, &this->_selectedDialog, false, 0.7f);
+	dropbox = this->_panel->setLineDropBox(lineBoxDialogue, this->_category, &this->_selectedDialog, false, 0.7f);
+	dropbox->w1->setEnabled(false);
 	_updateDialogList("");
 
 	button = this->_panel->setLineTextButton("", KEP::TranslationUtility::gettext("Trigger dialog"), this->_category, 0.7f, "Kenshi_Button2");

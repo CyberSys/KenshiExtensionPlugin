@@ -170,6 +170,7 @@ void KEP::tools::DevToolsPanel::refresh()
 	this->_panel->clearPage(this->_category);
 
 	auto slider = this->_panel->setLineSliderEditable(KEP::TranslationUtility::gettext_main("Money"), this->_category, true, 0.0f, 100000.0f, &this->_cats);
+	slider->nameText->setEnabled(false);
 	this->_panel->addSpace(this->_category, 0.25f);
 
 	slider->setPrecision(0);
@@ -198,12 +199,17 @@ void KEP::tools::DevToolsPanel::refresh()
 
 	this->_panel->setLine(KEP::GUIColor::getMain() + KEP::TranslationUtility::gettext("Damage"), "", this->_category, false, true);
 
-	this->_panel->setLineSliderEditable(KEP::TranslationUtility::gettext_main("Cutting damage"), this->_category, true, 0.0f, 200.0f, &this->_damageCut);
-	this->_panel->setLineSliderEditable(KEP::TranslationUtility::gettext_main("Blunt damage"), this->_category, true, 0.0f, 200.0f, &this->_damageBlunt);
-	this->_panel->setLineSliderEditable(KEP::TranslationUtility::gettext("Harpoon damage"), this->_category, true, 0.0f, 200.0f, &this->_damagePierce);
-	this->_panel->setLineSliderEditable(KEP::TranslationUtility::gettext_main("Blood loss"), this->_category, true, 0.0f, 10.0f, &this->_damageBleedMult);
+	slider = this->_panel->setLineSliderEditable(KEP::TranslationUtility::gettext_main("Cutting damage"), this->_category, true, 0.0f, 200.0f, &this->_damageCut);
+	slider->nameText->setEnabled(false);
+	slider = this->_panel->setLineSliderEditable(KEP::TranslationUtility::gettext_main("Blunt damage"), this->_category, true, 0.0f, 200.0f, &this->_damageBlunt);
+	slider->nameText->setEnabled(false);
+	slider = this->_panel->setLineSliderEditable(KEP::TranslationUtility::gettext("Harpoon damage"), this->_category, true, 0.0f, 200.0f, &this->_damagePierce);
+	slider->nameText->setEnabled(false);
+	slider = this->_panel->setLineSliderEditable(KEP::TranslationUtility::gettext_main("Blood loss"), this->_category, true, 0.0f, 10.0f, &this->_damageBleedMult);
+	slider->nameText->setEnabled(false);
 	slider = this->_panel->setLineSliderEditable(KEP::TranslationUtility::gettext_main("Armour penetration") + " (%)", this->_category, true, -100.0f, 100.0f, &this->_damageArmourPenetration);
 	slider->setPrecision(0);
+	slider->nameText->setEnabled(false);
 	this->_panel->addSpace(this->_category, 0.25f);
 
 	setButton(KEP::TranslationUtility::gettext("Squish"), this->_category, 0.7f, &DevToolsPanel::_squishTheSelected);
@@ -215,6 +221,7 @@ void KEP::tools::DevToolsPanel::refresh()
 	dropbox->addAValue(KEP::TranslationUtility::gettext("Left Leg"), 2);
 	dropbox->addAValue(KEP::TranslationUtility::gettext("Right Leg"), 3);
 	dropbox->setSelectedValue(0);
+	dropbox->w1->setEnabled(false);
 
 	setButton(KEP::TranslationUtility::gettext("Amputate"), this->_category, 0.7f, &DevToolsPanel::_amputate);
 	setButton(KEP::TranslationUtility::gettext("Join limb"), this->_category, 0.7f, &DevToolsPanel::_joinLimb);
@@ -228,6 +235,7 @@ void KEP::tools::DevToolsPanel::refresh()
 	auto checkBox = this->_panel->setLineCheckbox(KEP::TranslationUtility::gettext("Show roads on map"), nullptr, this->_category);
 	checkBox->getCheckBox()->setStateSelected(false);
 	checkBox->callback = new MyGUI::delegates::CMethodDelegate1<DevToolsPanel, DataPanelLine*>(MyGUI::delegates::GetDelegateUnlink(this), this, &DevToolsPanel::_showRoadsOnMap);
+	checkBox->text->setEnabled(false);
 
 	this->_panel->addSpace(this->_category, 0.25f);
 

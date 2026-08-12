@@ -64,9 +64,12 @@ void KEP::tools::GamePlayOptionsTab::refresh()
 
 	this->_panel->setLine(KEP::GUIColor::getMain() + KEP::TranslationUtility::gettext("Developer tools"), "", this->_category, false, true);
 
-	this->_panel->setLineCheckbox(KEP::TranslationUtility::gettext("Use Level Editor camera"), &this->_useLevelEditorCamera, this->_category);
-	this->_panel->setLineCheckbox(KEP::TranslationUtility::gettext("Fast travel mode"), &this->_enableFastTravelMap, this->_category);
-	this->_panel->setLineCheckbox(KEP::TranslationUtility::gettext("NPC Inventory"), &this->_enableNpcInventory, this->_category);
+	auto checkBox = this->_panel->setLineCheckbox(KEP::TranslationUtility::gettext("Use Level Editor camera"), &this->_useLevelEditorCamera, this->_category);
+	checkBox->text->setEnabled(false);
+	checkBox = this->_panel->setLineCheckbox(KEP::TranslationUtility::gettext("Fast travel mode"), &this->_enableFastTravelMap, this->_category);
+	checkBox->text->setEnabled(false);
+	checkBox = this->_panel->setLineCheckbox(KEP::TranslationUtility::gettext("NPC Inventory"), &this->_enableNpcInventory, this->_category);
+	checkBox->text->setEnabled(false);
 
 	auto button = this->_panel->setLineTextButton("", KEP::TranslationUtility::gettext_main("Save config"), this->_category, 0.7f, "Kenshi_Button2");
 	button->callback = new MyGUI::delegates::CMethodDelegate1<GamePlayOptionsTab, DataPanelLine*>(MyGUI::delegates::GetDelegateUnlink(this), this, &GamePlayOptionsTab::_saveSettings);
@@ -75,14 +78,22 @@ void KEP::tools::GamePlayOptionsTab::refresh()
 
 	this->_panel->setLine(KEP::GUIColor::getMain() + KEP::TranslationUtility::gettext_main("Advanced options"), "", this->_category, false, true);
 
-	this->_panel->setLineSliderEditable(KEP::TranslationUtility::gettext_main("Hunger time"), this->_category, true, 0.25f, 8.0f, &gameplayOptions->hungerTime);
-	this->_panel->setLineSliderEditable(KEP::TranslationUtility::gettext_main("Chance of death"), this->_category, true, 0.5f, 4.0f, &gameplayOptions->deathFrequency);
-	this->_panel->setLineSliderEditable(KEP::TranslationUtility::gettext_main("Global damage multiplier"), this->_category, true, 0.5f, 4.0f, &gameplayOptions->globalDamageMultiplier);
-	this->_panel->setLineSliderEditable(KEP::TranslationUtility::gettext_main("Production speed"), this->_category, true, 0.5f, 2.0f, &gameplayOptions->productionSpeed);
-	this->_panel->setLineSliderEditable(KEP::TranslationUtility::gettext_main("Research speed"), this->_category, true, 0.5f, 2.0f, &gameplayOptions->researchSpeed);
-	this->_panel->setLineSliderEditable(KEP::TranslationUtility::gettext_main("Building speed"), this->_category, true, 0.5f, 2.0f, &gameplayOptions->buildingSpeed);
-	this->_panel->setLineSliderEditable(KEP::TranslationUtility::gettext_main("Number of nests multiplier"), this->_category, true, 0.5f, 4.0f, &gameplayOptions->numNestsMult);
-	this->_panel->setLineCheckbox(KEP::TranslationUtility::gettext_main("Bandits loot the player"), &gameplayOptions->banditsLootPlayer, this->_category);
+	auto slider = this->_panel->setLineSliderEditable(KEP::TranslationUtility::gettext_main("Hunger time"), this->_category, true, 0.25f, 8.0f, &gameplayOptions->hungerTime);
+	slider->nameText->setEnabled(false);
+	slider = this->_panel->setLineSliderEditable(KEP::TranslationUtility::gettext_main("Chance of death"), this->_category, true, 0.5f, 4.0f, &gameplayOptions->deathFrequency);
+	slider->nameText->setEnabled(false);
+	slider = this->_panel->setLineSliderEditable(KEP::TranslationUtility::gettext_main("Global damage multiplier"), this->_category, true, 0.5f, 4.0f, &gameplayOptions->globalDamageMultiplier);
+	slider->nameText->setEnabled(false);
+	slider = this->_panel->setLineSliderEditable(KEP::TranslationUtility::gettext_main("Production speed"), this->_category, true, 0.5f, 2.0f, &gameplayOptions->productionSpeed);
+	slider->nameText->setEnabled(false);
+	slider = this->_panel->setLineSliderEditable(KEP::TranslationUtility::gettext_main("Research speed"), this->_category, true, 0.5f, 2.0f, &gameplayOptions->researchSpeed);
+	slider->nameText->setEnabled(false);
+	slider = this->_panel->setLineSliderEditable(KEP::TranslationUtility::gettext_main("Building speed"), this->_category, true, 0.5f, 2.0f, &gameplayOptions->buildingSpeed);
+	slider->nameText->setEnabled(false);
+	slider = this->_panel->setLineSliderEditable(KEP::TranslationUtility::gettext_main("Number of nests multiplier"), this->_category, true, 0.5f, 4.0f, &gameplayOptions->numNestsMult);
+	slider->nameText->setEnabled(false);
+	checkBox = this->_panel->setLineCheckbox(KEP::TranslationUtility::gettext_main("Bandits loot the player"), &gameplayOptions->banditsLootPlayer, this->_category);
+	checkBox->text->setEnabled(false);
 
 	this->_panel->addSpace(this->_category, 1.0f);
 }

@@ -45,7 +45,7 @@ public:
 		hand _0x28;
 	};
 
-	ogre_unordered_map<int, lektor<AIPackage*>>::type _0x8; //0x8
+	ogre_unordered_map<int, lektor<AIPackage*>>::type packages; //0x8
 	AIPackage* currentPackage; //0x48
 	int currentPriority; //0x50
 	std::string replacementAI; //0x58
