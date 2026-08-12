@@ -218,10 +218,10 @@ namespace
 		{
 			if (*iter != nullptr)
 			{
-				if (armourGrade < 5 && UtilityT::randomInt(0, 100) < upgradeChance)
-					++armourGrade;
-
-				Item* item = ou->theFactory->createItem(*iter, hand(0, 0, NULL_ITEM, 0, 0), nullptr, nullptr, KEP::functions->convertRarityToLevel(armourGrade), uniformFaction);
+				int upgrade = 0;
+				if (armourGrade < 5)
+					upgrade = UtilityT::randomInt(0, 100) < upgradeChance;
+				Item* item = ou->theFactory->createItem(*iter, hand(0, 0, NULL_ITEM, 0, 0), nullptr, nullptr, KEP::functions->convertRarityToLevel(armourGrade + upgrade), uniformFaction);
 				if (item != nullptr)
 					self->inventory->addItem(item, 1, false, true);
 			}
