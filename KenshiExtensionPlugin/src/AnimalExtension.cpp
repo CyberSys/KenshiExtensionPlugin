@@ -85,7 +85,7 @@ namespace
 				if (armourGrade < 5 && UtilityT::randomInt(0, 100) < upgradeChance)
 					++armourGrade;
 
-				Item* item = ou->theFactory->createItem(baseData, hand(), nullptr, nullptr, KEP::functions->convertRarityToLevel(armourGrade), nullptr);
+				Item* item = ou->theFactory->createItem(baseData, hand(0, 0, NULL_ITEM, 0, 0), nullptr, nullptr, KEP::functions->convertRarityToLevel(armourGrade), nullptr);
 				if (item != nullptr)
 					self->inventory->addItem(item, 1, false, true);
 			}

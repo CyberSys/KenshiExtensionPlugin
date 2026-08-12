@@ -204,7 +204,7 @@ namespace
 
 			auto materialData = selector.chooseAnItem();
 			if (materialData != nullptr)
-				return ou->theFactory->createItem(manufacturer, hand(), weapon, materialData, 0, nullptr);
+				return ou->theFactory->createItem(manufacturer, hand(0, 0, NULL_ITEM, 0, 0), weapon, materialData, 0, nullptr);
 		}
 		}
 
@@ -246,12 +246,12 @@ namespace
 			auto materialData = selector.chooseAnItem();
 			if (materialData != nullptr)
 			{
-				self->naturalWeapon = (Sword*)ou->theFactory->createItem(gamedata, hand(), weaponMesh, materialData, 0, nullptr);
+				self->naturalWeapon = (Sword*)ou->theFactory->createItem(gamedata, hand(0, 0, NULL_ITEM, 0, 0), weaponMesh, materialData, 0, nullptr);
 				return;
 			}
 		}
 
-		self->naturalWeapon = (Sword*)ou->theFactory->createItem(gamedata, hand(), weaponMesh, nullptr, 0, nullptr);
+		self->naturalWeapon = (Sword*)ou->theFactory->createItem(gamedata, hand(0, 0, NULL_ITEM, 0, 0), weaponMesh, nullptr, 0, nullptr);
 	}
 }
 

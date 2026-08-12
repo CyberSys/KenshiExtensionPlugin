@@ -85,7 +85,7 @@ namespace
 					auto baseData = ou->gamedata.getData(iter->sid + ".TECH.1", RESEARCH);
 					if (baseData != nullptr)
 					{
-						auto item = ou->theFactory->createItem(baseData, hand(), nullptr, nullptr, 0, nullptr);
+						auto item = ou->theFactory->createItem(baseData, hand(0, 0, NULL_ITEM, 0, 0), nullptr, nullptr, 0, nullptr);
 						if (item == nullptr)
 						{
 							Logger::logMessage("[CharacterHuman::setupInventorySections] Blueprints '" + iter->sid + "' does not exist.", Logger::Warning);
@@ -160,7 +160,7 @@ namespace
 			auto baseData = selector.chooseAnItem_absoluteScore();
 			if (baseData != nullptr)
 			{
-				auto item = ou->theFactory->createItem(baseData, hand(), nullptr, nullptr, 0, nullptr);
+				auto item = ou->theFactory->createItem(baseData, hand(0, 0, NULL_ITEM, 0, 0), nullptr, nullptr, 0, nullptr);
 				if (item == nullptr)
 					Logger::logMessage("[CharacterHuman::setupInventorySections] Backpack '" + baseData->name + "' not found.", Logger::Warning);
 				else
@@ -221,7 +221,7 @@ namespace
 				if (armourGrade < 5 && UtilityT::randomInt(0, 100) < upgradeChance)
 					++armourGrade;
 
-				Item* item = ou->theFactory->createItem(*iter, hand(), nullptr, nullptr, KEP::functions->convertRarityToLevel(armourGrade), uniformFaction);
+				Item* item = ou->theFactory->createItem(*iter, hand(0, 0, NULL_ITEM, 0, 0), nullptr, nullptr, KEP::functions->convertRarityToLevel(armourGrade), uniformFaction);
 				if (item != nullptr)
 					self->inventory->addItem(item, 1, false, true);
 			}
@@ -255,7 +255,7 @@ namespace
 				FitnessSelector<uint32_t> rairitySelector;
 				KEP::functions->crossbowLevelSelector(rairitySelector, self->platoon->me->squadTemplate);
 
-				auto item = ou->theFactory->createItem(baseData, hand(), nullptr, nullptr, KEP::functions->convertRarityToLevel(rairitySelector.chooseAnItem()), nullptr);
+				auto item = ou->theFactory->createItem(baseData, hand(0, 0, NULL_ITEM, 0, 0), nullptr, nullptr, KEP::functions->convertRarityToLevel(rairitySelector.chooseAnItem()), nullptr);
 				if (item == nullptr)
 				{
 					Logger::logMessage("[CharacterHuman::setupInventorySections] Item '" + baseData->name + "' does not exist.", Logger::Warning);
@@ -271,7 +271,7 @@ namespace
 							auto ammo = crossbow->gunClass->ammoType;
 							if (ammo != nullptr)
 							{
-								auto ammoItem = ou->theFactory->createItem(ammo, hand(), nullptr, nullptr, 0, nullptr);
+								auto ammoItem = ou->theFactory->createItem(ammo, hand(0, 0, NULL_ITEM, 0, 0), nullptr, nullptr, 0, nullptr);
 								self->giveItem(ammoItem, false, true);
 							}
 						}
@@ -392,7 +392,7 @@ namespace
 					auto baseData = ou->gamedata.getData(iter->sid, RESEARCH);
 					if (baseData != nullptr)
 					{
-						auto item = ou->theFactory->createItem(baseData, hand(), nullptr, nullptr, 0, nullptr);
+						auto item = ou->theFactory->createItem(baseData, hand(0, 0, NULL_ITEM, 0, 0), nullptr, nullptr, 0, nullptr);
 						if (item == nullptr)
 						{
 							Logger::logMessage("[CharacterHuman::setupInventorySections] Blueprints '" + iter->sid + "' does not exist.", Logger::Warning);
@@ -424,7 +424,7 @@ namespace
 					auto baseData = ou->gamedata.getData(iter->sid, ITEM);
 					if (baseData != nullptr)
 					{
-						auto item = ou->theFactory->createItem(baseData, hand(), nullptr, nullptr, 0, nullptr);
+						auto item = ou->theFactory->createItem(baseData, hand(0, 0, NULL_ITEM, 0, 0), nullptr, nullptr, 0, nullptr);
 						if (item == nullptr)
 						{
 							Logger::logMessage("[CharacterHuman::setupInventorySections] Item '" + iter->sid + "' does not exist.", Logger::Warning);
