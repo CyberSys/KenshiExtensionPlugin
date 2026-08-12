@@ -456,11 +456,13 @@ namespace
 		if (!self->canBlock())
 			return HIT_FLESH;
 
-		bool aoeDodge = false;
+		bool canDodge = false;
+		bool blockFailed = false;
+		bool caughtInTheAttack = who != nullptr && who->getAttackTarget().getCharacter() != self->me;
 		auto currentTechnique = self->currentTechnique;
 		if (currentTechnique != nullptr)
 		{
-			aoeDodge = self->combatState != BLOCK && self->combatState != STUMBLE && self->combatState != CHOP_WEAPON && self->combatModeActive;
+			canDodge = self->combatState != STUMBLE && self->combatState != CHOP_WEAPON && self->combatModeActive;
 			if (currentTechnique->isDodge)
 			{
 				float progress = self->animation->getAnimationProgress(currentTechnique);
@@ -477,22 +479,22 @@ namespace
 							return HIT_SWORD;
 					}
 
-					aoeDodge = self->blockingTargetH.getCharacter() != who;
+					blockFailed = true;
 				}
 				else
 				{
-					aoeDodge = !self->animation->stillPlayingAnActionOrSomething();
+					canDodge = !self->animation->stillPlayingAnActionOrSomething();
 				}
 			}
 		}
 		else
 		{
-			aoeDodge = self->combatState != STUMBLE && self->combatModeActive;
+			canDodge = self->combatState != STUMBLE && self->combatModeActive;
 		}
 
 		if (who != nullptr && who->getDataType() == CHARACTER)
 		{
-			if (aoeDodge)
+			if (canDodge && caughtInTheAttack || blockFailed)
 			{
 				auto opponentAttackSkill = who->stats->getMeleeAttack();
 				auto technique = _chooseDogde(self->stats, opponentAttackSkill);
@@ -507,7 +509,7 @@ namespace
 						self->stats->xpDodgeEvent(opponentAttackSkill, true);
 						self->animation->startCombatAnimation(technique, self->stats->blockSpeed * technique->animSpeedMultiplier, "");
 						self->stateTimer = 0.2f;
-						self->techniqueIntegrityCheckTimer = 1.0f;
+						self->techniqueIntegrityCheckTimer = self->stats->calculateTechniqueInegrityCheckTimer();
 						self->blockingTarget = who;
 						self->blockingTargetH = who->getHandle();
 
@@ -581,7 +583,7 @@ namespace
 						self->stats->xpDodgeEvent(opponentAttackSkill, true);
 						self->animation->startCombatAnimation(technique, self->stats->blockSpeed * technique->animSpeedMultiplier, "");
 						combat->stateTimer = 0.2f;
-						combat->techniqueIntegrityCheckTimer = 1.0f;
+						combat->techniqueIntegrityCheckTimer = self->stats->calculateTechniqueInegrityCheckTimer();
 						combat->blockingTarget = attacker;
 						combat->blockingTargetH = attacker->getHandle();
 
