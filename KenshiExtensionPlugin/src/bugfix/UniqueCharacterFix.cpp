@@ -286,7 +286,7 @@ namespace
 
 		const std::string refKey = "leader";
 
-		for (auto leaderIter = campaign->campaginData->specialLeaders.begin(); leaderIter != campaign->campaginData->specialLeaders.end(); ++leaderIter)
+		for (auto leaderIter = campaign->data->specialLeaders.begin(); leaderIter != campaign->data->specialLeaders.end(); ++leaderIter)
 		{
 			hand uniqueNPCHandle = (uniqueNPCMgr.*KEP::externalFunctions->FUN_009AFCA0)(*leaderIter);
 			if (uniqueNPCHandle.type != NULL_ITEM)
@@ -296,7 +296,7 @@ namespace
 					auto platoon = uniqueNPCHandle.getPlatoon();
 					if (platoon != nullptr && platoon->owner == self->me)
 					{
-						campaign->vfunc0x70(platoon, true);
+						campaign->addPlatoon(platoon, true);
 						break;
 					}
 				}
@@ -325,7 +325,7 @@ namespace
 
 					hand handle;
 					auto plat = ou->theFactory->createRandomSquad(self->me, spawnPos, homeTown, 999, nullptr, squads[0], nullptr, nullptr, nullptr, true, handle, nullptr, 1.0f, SQ_ROAMING, false);
-					campaign->vfunc0x70(plat, false);
+					campaign->addPlatoon(plat, false);
 					break;
 				}
 			}
@@ -337,7 +337,7 @@ namespace
 			{
 				if (KEP::externalFunctions->FUN_009C3510(*platoonIter, campaign, nullptr))
 				{
-					campaign->vfunc0x70(*platoonIter, false);
+					campaign->addPlatoon(*platoonIter, false);
 					if (campaign->numForcesMin < campaign->numForces) return;
 				}
 			}
@@ -347,7 +347,7 @@ namespace
 				for (auto platoonsIter = self->forces.begin(); platoonsIter != self->forces.end(); ++platoonsIter)
 				{
 					if (platoonsIter->second == nullptr && (KEP::externalFunctions->FUN_009C3510(platoonsIter->first, campaign, *tonwIter)))
-						campaign->vfunc0x70(platoonsIter->first, false);
+						campaign->addPlatoon(platoonsIter->first, false);
 
 					if (campaign->numForcesMin < campaign->numForces)
 						return;

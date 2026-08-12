@@ -12,7 +12,9 @@ You should have received a copy of the GNU General Public License along with thi
 #include <kenshi/util/lektor.h>
 #include <kenshi/util/hand.h>
 #include <kenshi/util/TimeOfDay.h>
+#include <kenshi/FitnessSelector.h>
 #include <kenshi/WorldEventStateQuery.h>
+#include <kenshi/AI/AI.h>
 
 enum MoveSpeed;
 class Faction;
@@ -21,6 +23,22 @@ class Platoon;
 class AreaBiomeGroup;
 class CampaignTriggerData;
 class CampaignInstance;
+
+enum Phase
+{
+	P_START,
+	P_ASSUALT,
+	P_RETREAT,
+	P_VICTORY
+};
+
+enum WarCampaignEnum
+{
+	ASSAULT_TOWN,
+	CONQUER_TOWN,
+	DEFEND_TOWN,
+	TRADER_VISIT
+};
 
 // KenshiLibでは未定義
 class CampaignData
@@ -42,7 +60,7 @@ public:
 	lektor<GameData*> specialLeaders;
 	FitnessSelector<GameData*> squadToUse;
 	float repeatLimit;
-	uint32_t key;
+	WarCampaignEnum key;
 	TimeOfDay possTime;
 	bool hasPt2AI;
 	Faction* factionOverride;
@@ -53,7 +71,7 @@ public:
 	FitnessSelector<CampaignTriggerData*> lossTrigger;
 	FitnessSelector<CampaignTriggerData*> victoryTrigger;
 
-	virtual RootObject* vfunc0x0(Faction*, TownBase*);
+	virtual RootObjectBase* vfunc0x0(Faction*, TownBase*);
 	virtual float vfunc0x8(Faction*, TownBase*);
 	virtual bool vfunc0x10();
 	virtual CampaignInstance* vfunc0x18(int, Faction*, hand&, hand&);
@@ -64,9 +82,9 @@ class CampaignInstance
 {
 public:
 	int forces;
-	CampaignData* campaginData;
-	TimeOfDay update;
-	TimeOfDay update2;
+	CampaignData* data;
+	TimeOfDay _update;
+	TimeOfDay _update2;
 	MoveSpeed travelSpeedUnloaded;
 	MoveSpeed travelSpeedLoaded;
 	int numForcesMin;
@@ -74,14 +92,12 @@ public:
 	int numForces;
 	bool rd;
 	bool trig;
-	hand handle;
-	Ogre::Vector3 pos;
-	itemType type;
+	TargetInfo target;
 	Faction* owner;
 	Faction* enemy;
 	hand leader;
 	hand home;
-	uint32_t phase;
+	Phase phase;
 	bool canTalkBeforeArrival;
 	lektor<hand> squads;
 
@@ -94,12 +110,19 @@ public:
 	virtual Platoon* getLeaderPlatoon();
 	virtual bool isEnemy(Character*);
 	virtual std::string getDisplayName();
-	virtual void func0x48();
-	virtual void func0x50();
-	virtual void func0x58();
-	virtual uint32_t getUnloadedPlatoonJob(Platoon*);
+	virtual bool func0x48();
+	virtual void update();
+	virtual bool win();
+	virtual UnloadedPlatoonJob getUnloadedPlatoonJob(Platoon*);
 	virtual GameData* getCampaginAI(Platoon*);
-	virtual void vfunc0x70(Platoon*, bool);
+	virtual void addPlatoon(Platoon*, bool);
 	virtual bool func0x78(Character*);
 	virtual void changeLeader(Platoon*);
+	virtual TargetInfo getMyTarget(Platoon*);
+	virtual MoveSpeed getUnloadedSpeed();
+	virtual MoveSpeed getLoadedSpeed();
+	virtual hand getTargetHandle();
+	virtual Ogre::Vector3 getPosition(Platoon*);
+	virtual Ogre::Vector3 getPositionForWaypoint(Platoon*);
+	virtual bool isNearly();
 };
