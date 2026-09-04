@@ -128,9 +128,6 @@
     <ClCompile Include="src\settings.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
-    <ClCompile Include="src\functions.cpp">
-      <Filter>Source Files</Filter>
-    </ClCompile>
     <ClCompile Include="src\patch_system.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>

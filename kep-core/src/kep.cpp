@@ -7,7 +7,10 @@ This program is distributed in the hope that it will be useful, but WITHOUT ANY 
 You should have received a copy of the GNU General Public License along with this program. If not, see <https://www.gnu.org/licenses/>.
 --------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------*/
 #include "pch.h"
-#include <kep.h>
+#include <kep/version_info.h>
+#include <kep/translation.h>
+#include <kep/utility.h>
+#include <kep/config_manager.h>
 #include <kep/patch_system.h>
 
 #include <core/Functions.h>
@@ -16,74 +19,6 @@ You should have received a copy of the GNU General Public License along with thi
 namespace
 {
 	KEP::VersionInfo KenshiLibVersion;
-
-	void setKenshiLibVersion()
-	{
-		auto hKenshiLib = GetModuleHandleA("KenshiLib.dll");
-
-		FARPROC procAddr = nullptr;
-		if (GetProcAddress(hKenshiLib, "??0AI@@QEAA@PEAVStateBroadcastData@@PEAVCharacter@@@Z") != nullptr)
-		{
-			KenshiLibVersion = KEP::VersionInfo(0, 3, 4);
-		}
-		else if (GetProcAddress(hKenshiLib, "?shou@@3PEAVSharedKing@@EA") != nullptr)
-		{
-			KenshiLibVersion = KEP::VersionInfo(0, 3, 3);
-		}
-		else if (GetProcAddress(hKenshiLib, "??0RobotLimbItem@@QEAA@PEAVGameData@@0Vhand@@H@Z") != nullptr)
-		{
-			KenshiLibVersion = KEP::VersionInfo(0, 3, 2);
-		}
-		else if (GetProcAddress(hKenshiLib, "?au@@3PEAVKingOfRenderThread@@EA") != nullptr)
-		{
-			KenshiLibVersion = KEP::VersionInfo(0, 3, 1);
-		}
-		else if (GetProcAddress(hKenshiLib, "?gui@@3PEAVForgottenGUI@@EA") != nullptr)
-		{
-			KenshiLibVersion = KEP::VersionInfo(0, 3, 0);
-		}
-		else if (GetProcAddress(hKenshiLib, "??0DataPanelLine_KeyConfig@@QEAA@AEBV?$basic_string@DU?$char_traits@D@std@@V?$allocator@D@2@@std@@0H@Z") != nullptr)
-		{
-			KenshiLibVersion = KEP::VersionInfo(0, 2, 3);
-		}
-		else if (GetProcAddress(hKenshiLib, "??0NavMesh@@QEAA@XZ") != nullptr)
-		{
-			KenshiLibVersion = KEP::VersionInfo(0, 2, 2);
-		}
-		else if (GetProcAddress(hKenshiLib, "??0CraftingInventoryLayout@@QEAA@AEBV?$basic_string@DU?$char_traits@D@std@@V?$allocator@D@2@@std@@HH@Z") != nullptr)
-		{
-			KenshiLibVersion = KEP::VersionInfo(0, 2, 1);
-		}
-		else if (GetProcAddress(hKenshiLib, "??0ForgottenGUI@@QEAA@XZ") != nullptr)
-		{
-			KenshiLibVersion = KEP::VersionInfo(0, 2, 0);
-		}
-		else if (GetProcAddress(hKenshiLib, "??0AppearanceBase@@QEAA@PEAVAnimationClass@@PEAVGameDataCopyStandalone@@PEAVCharacter@@PEAVGameData@@@Z") != nullptr)
-		{
-			KenshiLibVersion = KEP::VersionInfo(0, 1, 5);
-		}
-		else if (GetProcAddress(hKenshiLib, "??0TownBase@@QEAA@PEAVGameData@@@Z") != nullptr)
-		{
-			KenshiLibVersion = KEP::VersionInfo(0, 1, 4);
-		}
-		else if (GetProcAddress(hKenshiLib, "??0GameplayOptions@@QEAA@XZ") != nullptr)
-		{
-			KenshiLibVersion = KEP::VersionInfo(0, 1, 3);
-		}
-		else if (GetProcAddress(hKenshiLib, "?getInstance@ResourceLoader@@SAPEAV1@XZ") != nullptr)
-		{
-			KenshiLibVersion = KEP::VersionInfo(0, 1, 2);
-		}
-		else if (GetProcAddress(hKenshiLib, "??0ParticlePool@@QEAA@HM@Z") != nullptr)
-		{
-			KenshiLibVersion = KEP::VersionInfo(0, 1, 1);
-		}
-		else
-		{
-			KenshiLibVersion = KEP::VersionInfo(0, 1, 0);
-		}
-		DebugLog("Detected KenshiLib version: " + KenshiLibVersion.toString());
-	}
 }
 
 const KEP::VersionInfo& KEP::getKenshiLibVersion()
@@ -98,7 +33,6 @@ void KEP::initialize()
 	auto version = versionInfo.GetVersion();
 	auto baseAddr = reinterpret_cast<uintptr_t>(GetModuleHandleA(nullptr));
 
-	functions->init(platform, version, baseAddr);
 	TranslationUtility::init(platform, version, baseAddr);
 	KEP::GUIColor::init(platform, version, baseAddr);
 	

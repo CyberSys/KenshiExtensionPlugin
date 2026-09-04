@@ -102,7 +102,6 @@ KEP::ExternalFunctions::ExternalFunctions()
 	, FUN_008DBF80(nullptr)
 	, FUN_008DC0D0(nullptr)
 	, FUN_000D5FD0(nullptr)
-	, FUN_00830B90(nullptr)
 	, FUN_00340EB0(nullptr)
 	, FUN_00343720(nullptr)
 	, FUN_001A4FB0(nullptr)
@@ -114,7 +113,6 @@ KEP::ExternalFunctions::ExternalFunctions()
 	, FUN_000D8310(nullptr)
 	, FUN_004B0B60(nullptr)
 	, FUN_002C9840(nullptr)
-	, FUN_0082E2E0(nullptr)
 	, FUN_002CA350(nullptr)
 	, FUN_0079EAB0(nullptr)
 {
@@ -142,7 +140,6 @@ void KEP::ExternalFunctions::init(unsigned int platform, const std::string& vers
 			*(uintptr_t*)&this->FUN_008DBF80 = baseAddr + 0x8dbf80;
 			*(uintptr_t*)&this->FUN_008DC0D0 = baseAddr + 0x8dc0d0;
 			*(uintptr_t*)&this->FUN_000D5FD0 = baseAddr + 0xd5fd0;
-			*(uintptr_t*)&this->FUN_00830B90 = baseAddr + 0x830b90;
 			*(uintptr_t*)&this->FUN_00340EB0 = baseAddr + 0x340eb0;
 			*(uintptr_t*)&this->FUN_00343720 = baseAddr + 0x343720;
 			*(uintptr_t*)&this->FUN_001A4FB0 = baseAddr + 0x1a4fb0;
@@ -154,7 +151,6 @@ void KEP::ExternalFunctions::init(unsigned int platform, const std::string& vers
 			*(uintptr_t*)&this->FUN_000D8310 = baseAddr + 0xd8310;
 			*(uintptr_t*)&this->FUN_004B0B60 = baseAddr + 0x4b0b60;
 			*(uintptr_t*)&this->FUN_002C9840 = baseAddr + 0x2c9840;
-			*(uintptr_t*)&this->FUN_0082E2E0 = baseAddr + 0x82e2e0;
 			*(uintptr_t*)&this->FUN_002CA350 = baseAddr + 0x2ca350;
 			*(uintptr_t*)&this->FUN_0079EAB0 = baseAddr + 0x79eab0;
 		}
@@ -174,7 +170,6 @@ void KEP::ExternalFunctions::init(unsigned int platform, const std::string& vers
 			*(uintptr_t*)&this->FUN_008DBF80 = baseAddr + 0x008dce50;
 			*(uintptr_t*)&this->FUN_008DC0D0 = baseAddr + 0x008dcfa0;
 			*(uintptr_t*)&this->FUN_000D5FD0 = baseAddr + 0x000d6010;
-			*(uintptr_t*)&this->FUN_00830B90 = baseAddr + 0x00831a60;
 			*(uintptr_t*)&this->FUN_00340EB0 = baseAddr + 0x00340f10;
 			*(uintptr_t*)&this->FUN_00343720 = baseAddr + 0x00343780;
 			*(uintptr_t*)&this->FUN_001A4FB0 = baseAddr + 0x001a4ff0;
@@ -186,7 +181,6 @@ void KEP::ExternalFunctions::init(unsigned int platform, const std::string& vers
 			*(uintptr_t*)&this->FUN_000D8310 = baseAddr + 0x000d8350;
 			*(uintptr_t*)&this->FUN_004B0B60 = baseAddr + 0x004b15f0;
 			*(uintptr_t*)&this->FUN_002C9840 = baseAddr + 0x002c9880;
-			*(uintptr_t*)&this->FUN_0082E2E0 = baseAddr + 0x0082f1b0;
 			*(uintptr_t*)&this->FUN_002CA350 = baseAddr + 0x002ca390;
 			*(uintptr_t*)&this->FUN_0079EAB0 = baseAddr + 0x0079f650;
 		}
@@ -209,7 +203,6 @@ void KEP::ExternalFunctions::init(unsigned int platform, const std::string& vers
 			*(uintptr_t*)&this->FUN_008DBF80 = baseAddr + 0x8db6a0;
 			*(uintptr_t*)&this->FUN_008DC0D0 = baseAddr + 0x8db7f0;
 			*(uintptr_t*)&this->FUN_000D5FD0 = baseAddr + 0xd5fd0;
-			*(uintptr_t*)&this->FUN_00830B90 = baseAddr + 0x8304d0;
 			*(uintptr_t*)&this->FUN_00340EB0 = baseAddr + 0x340a60;
 			*(uintptr_t*)&this->FUN_00343720 = baseAddr + 0x3432d0;
 			*(uintptr_t*)&this->FUN_001A4FB0 = baseAddr + 0x1a4b40;
@@ -221,7 +214,6 @@ void KEP::ExternalFunctions::init(unsigned int platform, const std::string& vers
 			*(uintptr_t*)&this->FUN_000D8310 = baseAddr + 0xd8310;
 			*(uintptr_t*)&this->FUN_004B0B60 = baseAddr + 0x4b0e70;
 			*(uintptr_t*)&this->FUN_002C9840 = baseAddr + 0x2c93d0;
-			*(uintptr_t*)&this->FUN_0082E2E0 = baseAddr + 0x82dc20;
 			*(uintptr_t*)&this->FUN_002CA350 = baseAddr + 0x2c9ee0;
 			*(uintptr_t*)&this->FUN_0079EAB0 = baseAddr + 0x79e3f0;
 		}
@@ -241,7 +233,6 @@ void KEP::ExternalFunctions::init(unsigned int platform, const std::string& vers
 			*(uintptr_t*)&this->FUN_008DBF80 = baseAddr + 0x008dc590;
 			*(uintptr_t*)&this->FUN_008DC0D0 = baseAddr + 0x008dc6e0;
 			*(uintptr_t*)&this->FUN_000D5FD0 = baseAddr + 0x000d5ff0;
-			*(uintptr_t*)&this->FUN_00830B90 = baseAddr + 0x008313c0;
 			*(uintptr_t*)&this->FUN_00340EB0 = baseAddr + 0x003408b0;
 			*(uintptr_t*)&this->FUN_00343720 = baseAddr + 0x00343120;
 			*(uintptr_t*)&this->FUN_001A4FB0 = baseAddr + 0x001a4990;
@@ -253,7 +244,6 @@ void KEP::ExternalFunctions::init(unsigned int platform, const std::string& vers
 			*(uintptr_t*)&this->FUN_000D8310 = baseAddr + 0x000d8330;
 			*(uintptr_t*)&this->FUN_004B0B60 = baseAddr + 0x004b0f90;
 			*(uintptr_t*)&this->FUN_002C9840 = baseAddr + 0x002c9220;
-			*(uintptr_t*)&this->FUN_0082E2E0 = baseAddr + 0x0082eb10;
 			*(uintptr_t*)&this->FUN_002CA350 = baseAddr + 0x002c9d30;
 			*(uintptr_t*)&this->FUN_0079EAB0 = baseAddr + 0x007b2380;
 		}

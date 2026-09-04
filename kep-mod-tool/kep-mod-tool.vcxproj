@@ -132,12 +132,13 @@
       <ConformanceMode>true</ConformanceMode>
       <PrecompiledHeader>Use</PrecompiledHeader>
       <PrecompiledHeaderFile>pch.h</PrecompiledHeaderFile>
+      <MultiProcessorCompilation>true</MultiProcessorCompilation>
     </ClCompile>
     <Link>
       <SubSystem>Windows</SubSystem>
       <GenerateDebugInformation>true</GenerateDebugInformation>
       <EnableUAC>false</EnableUAC>
-      <AdditionalDependencies>KenshiLib.lib;OgreMain_x64.lib;MyGUIEngine_x64.lib;kep-core-x64.lib;%(AdditionalDependencies)</AdditionalDependencies>
+      <AdditionalDependencies>KenshiLib.lib;OgreMain_x64.lib;MyGUIEngine_x64.lib;kep-core-preload-x64.lib;%(AdditionalDependencies)</AdditionalDependencies>
     </Link>
   </ItemDefinitionGroup>
   <ItemGroup>

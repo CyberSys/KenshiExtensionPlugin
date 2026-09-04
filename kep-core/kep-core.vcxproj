@@ -71,7 +71,7 @@
   </ImportGroup>
   <PropertyGroup Label="UserMacros" />
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|x64'">
-    <TargetName>$(ProjectName)-$(Platform)</TargetName>
+    <TargetName>$(ProjectName)-preload-$(Platform)</TargetName>
     <IncludePath>$(BOOST_INCLUDE_PATH);$(KENSHILIB_DIR)/Include/ogre;$(KENSHILIB_DIR)/Include;$(SolutionDir)thirdparty/rapidjson\include;$(ProjectDir)/pch;$(ProjectDir)/include;$(IncludePath)</IncludePath>
     <LibraryPath>$(BOOST_INCLUDE_PATH)/stage/lib;$(KENSHILIB_DIR)/Libraries;$(LibraryPath)</LibraryPath>
   </PropertyGroup>
@@ -180,7 +180,6 @@
       <PrecompiledHeader Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">Create</PrecompiledHeader>
       <PrecompiledHeader Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">Create</PrecompiledHeader>
     </ClCompile>
-    <ClCompile Include="src\functions.cpp" />
     <ClCompile Include="src\kep.cpp" />
     <ClCompile Include="src\patch_system.cpp" />
     <ClCompile Include="src\settings.cpp" />

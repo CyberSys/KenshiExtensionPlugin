@@ -247,7 +247,7 @@ void KEP::tools::PlatoonTool::_triggerDialog(DataPanelLine* line)
 
 	for (auto iter = characters.begin(); iter != characters.end(); ++iter)
 	{
-		auto target = reinterpret_cast<Character*>(*iter);
+		auto target = static_cast<Character*>(*iter);
 		if (target != nullptr && target != character && !character->isAlly(target, false) && !target->isAnimal() && !target->isUnconcious())
 		{
 			float distance = target->getPosition().distance(pos);
@@ -299,7 +299,7 @@ void KEP::tools::PlatoonTool::_triggerPlayerConversation(DataPanelLine* line)
 
 	for (auto iter = characters.begin(); iter != characters.end(); ++iter)
 	{
-		auto target = reinterpret_cast<Character*>(*iter);
+		auto target = static_cast<Character*>(*iter);
 		if (target != nullptr && target != character && target->isPlayerCharacter() && !target->isAnimal() && !target->isUnconcious())
 		{
 			float distance = target->getPosition().distance(pos);

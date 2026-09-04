@@ -267,6 +267,7 @@ void KEP::tools::InformationPanel::refresh()
 			{
 				this->_panel->clearPage(cat_building);
 				this->_panel->clearPage(cat_character);
+				this->_panel->clearPage(cat_combat);
 				this->_panel->clearPage(cat_vips);
 
 				_lastSelected = gui->selectedObject;
@@ -599,7 +600,7 @@ void KEP::tools::InformationPanel::_displayUniqueNpcInformation()
 		else
 		{
 			if (iter->second.state == IMPRISONED)
-				textColor = KEP::GUIColor::getSecondary();
+				textColor = KEP::GUIColor::getGreyedBright();
 			else
 				textColor = KEP::GUIColor::getMain();
 		}

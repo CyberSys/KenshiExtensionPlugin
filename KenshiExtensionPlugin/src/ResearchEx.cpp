@@ -16,22 +16,20 @@ You should have received a copy of the GNU General Public License along with thi
 #include <kenshi/GameWorld.h>
 #include <kenshi/KingOfRenderThread.h>
 #include <kenshi/PlayerInterface.h>
-
-#include <extern/Research.h>
+#include <kenshi/Research.h>
 
 #include <kep/functions.h>
-#include <ExternalFunctions.h>
 #include <Settings.h>
 #include <ResearchEx.h>
 
 namespace
 {
-	void (*Research_FUN_00830b90_orig)(Research*, GameData*);
-	void Research_FUN_00830b90_hook(Research* self, GameData* gameData)
+	void (*Research_upgradeShit_orig)(Research*, GameData*);
+	void Research_upgradeShit_hook(Research* self, GameData* gameData)
 	{
 		if (!KEP::settings._fixBuildingImprovements)
 		{
-			Research_FUN_00830b90_orig(self, gameData);
+			Research_upgradeShit_orig(self, gameData);
 			return;
 		}
 
@@ -40,22 +38,22 @@ namespace
 
 		for (auto it = improveBuildings.begin(); it != improveBuildings.end(); ++it)
 		{
-			auto& buidingUpgrade = self->buildingUpgradeResearchs[*it];
+			auto& buidingUpgrade = self->buildingUpgrades[*it];
 			buidingUpgrade.productionMult *= gameData->fdata["production mult"];
-			buidingUpgrade.powerOutput += gameData->idata["power increase"];
+			buidingUpgrade.powerBoost += gameData->idata["power increase"];
 			buidingUpgrade.powerCapacity += gameData->idata["power capacity increase"];
 		}
 	}
 
-	void (*Research_createBlueprint_orig)(Research*, GameData*);
-	void Research_createBlueprint_hook(Research* self, GameData* from)
+	void (*Research__createBlueprintsFor_orig)(Research*, GameData*);
+	void Research__createBlueprintsFor_hook(Research* self, GameData* from)
 	{
 		const auto idSuffix = ".TECH.1";
 		auto data = ou->gamedata.getData(from->stringID + idSuffix, RESEARCH);
 		if (data != nullptr)
 			return;
 
-		Research_createBlueprint_orig(self, from);
+		Research__createBlueprintsFor_orig(self, from);
 
 		data = ou->gamedata.getData(from->stringID + idSuffix, RESEARCH);
 		if (!KEP::settings._researchEx || data == nullptr)
@@ -92,8 +90,8 @@ namespace
 	}
 
 	bool once = false;
-	void (*Research_init_orig)(Research*);
-	void Research_init_hook(Research* self)
+	void (*Research__setup_orig)(Research*);
+	void Research__setup_hook(Research* self)
 	{
 		if (!once)
 		{
@@ -115,7 +113,7 @@ namespace
 			}
 			once = true;
 		}
-		Research_init_orig(self);
+		Research__setup_orig(self);
 	}
 
 	void (*KingOfRenderThread_newGameWithCharEdit_orig)(KingOfRenderThread*, GameData*);
@@ -134,7 +132,7 @@ namespace
 					{
 						auto dat = ou->gamedata.getData(iter->sid + "." + Ogre::StringConverter::toString(i), RESEARCH);
 						if (dat != nullptr)
-							KEP::functions->Research_complete(ou->player->technology, dat);
+							ou->player->technology->completeResearch(dat);
 					}
 				}
 			}
@@ -147,7 +145,7 @@ namespace
 			{
 				auto dat = ou->gamedata.getData(*iter + ".TECH.1", RESEARCH);
 				if (dat != nullptr)
-					KEP::functions->Research_complete(ou->player->technology, dat);
+					ou->player->technology->completeResearch(dat);
 			}
 		}
 	}
@@ -156,14 +154,14 @@ namespace
 
 void KEP::ResearchEx::init()
 {
-	if (KenshiLib::SUCCESS != KenshiLib::QueueHook(externalFunctions->FUN_00830B90, &Research_FUN_00830b90_hook, &Research_FUN_00830b90_orig))
-		ErrorLog("FUN_00830B90] could not install hook!");
+	if (KenshiLib::SUCCESS != KenshiLib::QueueHook(KenshiLib::GetRealAddress(&Research::upgradeShit), &Research_upgradeShit_hook, &Research_upgradeShit_orig))
+		ErrorLog("Research::upgradeShit] could not install hook!");
 
-	if (KenshiLib::SUCCESS != KenshiLib::QueueHook(KEP::functions->Research_createBlueprint, &Research_createBlueprint_hook, &Research_createBlueprint_orig))
-		ErrorLog("[Research::createBlueprint] could not install hook!");
+	if (KenshiLib::SUCCESS != KenshiLib::QueueHook(KenshiLib::GetRealAddress(&Research::_createBlueprintsFor), &Research__createBlueprintsFor_hook, &Research__createBlueprintsFor_orig))
+		ErrorLog("[Research::_createBlueprintsFor] could not install hook!");
 
-	if (KenshiLib::SUCCESS != KenshiLib::QueueHook(KEP::functions->Research_init, &Research_init_hook, &Research_init_orig))
-		ErrorLog("[Research::init] could not install hook!");
+	if (KenshiLib::SUCCESS != KenshiLib::QueueHook(KenshiLib::GetRealAddress(&Research::_setup), &Research__setup_hook, &Research__setup_orig))
+		ErrorLog("[Research::_setup] could not install hook!");
 
 	if (KenshiLib::SUCCESS != KenshiLib::QueueHook(KenshiLib::GetRealAddress(&KingOfRenderThread::newGameWithCharEdit), &KingOfRenderThread_newGameWithCharEdit_hook, &KingOfRenderThread_newGameWithCharEdit_orig))
 		ErrorLog("[KingOfRenderThread::newGameWithCharEdit] could not install hook!");

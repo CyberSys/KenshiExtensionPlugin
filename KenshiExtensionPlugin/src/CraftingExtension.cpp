@@ -24,8 +24,7 @@ You should have received a copy of the GNU General Public License along with thi
 #include <kenshi/Character.h>
 #include <extern/ProductionBuilding.h>
 #include <kenshi/Building/CraftingBuilding.h>
-
-#include <extern/Research.h>
+#include <kenshi/Research.h>
 
 #include <kep/translation.h>
 #include <UtilityFunction.h>
@@ -99,7 +98,7 @@ namespace
 			lektor<GameDataGroup> enableWeaponList;
 			lektor<WeaponTypeStruct> craftWeaponList;
 
-			KEP::externalFunctions->FUN_0082E2E0(ou->player->technology, enableWeaponList, MATERIAL_SPECS_WEAPON, NULL_ITEM);
+			ou->player->technology->getAvailableCrafts(enableWeaponList, MATERIAL_SPECS_WEAPON, NULL_ITEM);
 
 			uint32_t count = 0;
 			for (auto enableWeaponIter = enableWeaponList.begin(); enableWeaponIter != enableWeaponList.end(); ++enableWeaponIter)
@@ -158,7 +157,7 @@ namespace
 			}
 			else
 			{
-				KEP::externalFunctions->FUN_0082E2E0(ou->player->technology, enableWeaponList, WEAPON, NULL_ITEM);
+				ou->player->technology->getAvailableCrafts(enableWeaponList, WEAPON, NULL_ITEM);
 				std::sort(enableWeaponList.begin(), enableWeaponList.end(), GameDataGroupLess());
 
 				for (auto enableWeaponIter = enableWeaponList.begin(); enableWeaponIter != enableWeaponList.end(); ++enableWeaponIter)
@@ -194,7 +193,7 @@ namespace
 			return;
 
 		lektor<GameDataGroup> enableItemList;
-		KEP::externalFunctions->FUN_0082E2E0(ou->player->technology, enableItemList, type, NULL_ITEM);
+		ou->player->technology->getAvailableCrafts(enableItemList, type, NULL_ITEM);
 		std::sort(enableItemList.begin(), enableItemList.end(), GameDataGroupLess());
 
 		for (auto enableIter = enableItemList.begin(); enableIter != enableItemList.end(); ++enableIter)

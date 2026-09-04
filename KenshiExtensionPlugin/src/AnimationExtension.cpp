@@ -172,6 +172,14 @@ namespace
 		}
 	}
 
+	float _calculateBlockChanceMult(float unarmed)
+	{
+		float blockChanceMult = KEP::lerp(unarmed * 0.01f, 0.5f, 1.5f);
+		if (1.0f < blockChanceMult)
+			blockChanceMult = 1.0f + (blockChanceMult - 1.0f) * 0.2f;
+		return KEP::clamp(blockChanceMult, 0.5f, 1.1f);
+	}
+
 	CombatTechniqueData* (*CharStats_chooseBlock_orig)(CharStats*, CutDirection, float, CutOrigination, Character*);
 	CombatTechniqueData* CharStats_chooseBlock_hook(CharStats* self, CutDirection dir, float opponentAttackSkill, CutOrigination from, Character* opponent)
 	{
@@ -185,7 +193,7 @@ namespace
 		if (opponent->isAnimal() == nullptr && opponent->stats->currentWeaponType == SKILL_UNARMED)
 		{
 			if (KEP::settings._fixUnarmedBlockChance)
-				blockChance = KEP::clamp(KEP::lerp(self->unarmed * 0.01f, 0.5f, 1.1f), 0.5f, 1.1f);
+				blockChance = _calculateBlockChanceMult(self->unarmed);
 			else
 				blockChance = KEP::clamp(KEP::linear(self->unarmed, 0.75f, 1.1f), 0.5f, 1.1f);
 		}
@@ -403,14 +411,14 @@ namespace
 		}
 	}
 
-	CombatTechniqueData* _chooseDogde(CharStats* self, CutDirection dir, float opponentAttackSkill, CutOrigination from, Character* opponent)
+	CombatTechniqueData* _chooseDodge(CharStats* self, CutDirection dir, float opponentAttackSkill, CutOrigination from, Character* opponent)
 	{
 		auto direction = self->me->convertCutDirection(dir, from);
 		float dodgeChance = self->calculateDodgeChance(opponentAttackSkill, false);
 
 		if (KEP::settings._fixUnarmedBlockChance && opponent != nullptr && opponent->isAnimal() == nullptr && self->currentWeaponType != SKILL_UNARMED && opponent->stats->currentWeaponType == SKILL_UNARMED)
 		{
-			dodgeChance *= KEP::clamp(KEP::lerp(self->unarmed * 0.01f, 0.5f, 1.1f), 0.5f, 1.1f);
+			dodgeChance *= _calculateBlockChanceMult(self->unarmed);
 			if (95.0f < dodgeChance)
 				dodgeChance = 95.0f;
 		}
@@ -489,7 +497,7 @@ namespace
 							return HIT_SWORD;
 					}
 
-					blockFailed = true;
+					blockFailed = !caughtInTheAttack;
 				}
 				else
 				{
@@ -507,7 +515,7 @@ namespace
 			if (canDodge && caughtInTheAttack || blockFailed)
 			{
 				auto opponentAttackSkill = who->stats->getMeleeAttack();
-				auto technique = _chooseDogde(self->stats, dir, opponentAttackSkill, self->me->getAttackOriginationDirection(who), who);
+				auto technique = _chooseDodge(self->stats, dir, opponentAttackSkill, self->me->getAttackOriginationDirection(who), who);
 				if (technique != nullptr)
 				{
 					if (technique->isDodge)
@@ -516,7 +524,8 @@ namespace
 						self->animation->layer[1]->stopActionAnimations();
 						self->combatState = BLOCK;
 						self->nextMove = BLOCK;
-						self->stats->xpDodgeEvent(opponentAttackSkill, true);
+						if (!blockFailed)
+							self->stats->xpDodgeEvent(opponentAttackSkill, true);
 						self->animation->startCombatAnimation(technique, self->stats->blockSpeed * technique->animSpeedMultiplier, "");
 						self->stateTimer = 0.2f;
 						self->techniqueIntegrityCheckTimer = self->stats->calculateTechniqueInegrityCheckTimer();
@@ -534,7 +543,7 @@ namespace
 						return HIT_MISSED;
 					}
 				}
-				else if (self->stats->currentWeaponType != SKILL_UNARMED)
+				else if (!blockFailed && self->stats->currentWeaponType != SKILL_UNARMED)
 				{
 					self->stats->xpDodgeEvent(opponentAttackSkill, false);
 				}
@@ -578,7 +587,7 @@ namespace
 			if (attacker != nullptr && combat->canBlock() && (combat->combatState != CHOP_WEAPON ||  !combat->animation->stillPlayingAnActionOrSomething()) && combat->combatModeActive)
 			{
 				auto opponentAttackSkill = attacker->stats->getStat(attacker->rangedCombat->currentStat, false);
-				auto technique = _chooseDogde(self->stats, CUT_PIERCED, opponentAttackSkill, self->getAttackOriginationDirection(attacker), nullptr);
+				auto technique = _chooseDodge(self->stats, CUT_PIERCED, opponentAttackSkill, self->getAttackOriginationDirection(attacker), nullptr);
 				if (technique != nullptr)
 				{
 					combat->currentTechnique = technique;

@@ -108,7 +108,7 @@ void KEP::ConfigManager::create(OptionsWindow* win)
 	auto pluginOptionTab = win->tabs->insertItemAt(index, boost::locale::gettext("KEP")); // キーコンフィグの次にプラグイン設定を表示させる
 	auto pluginOptionPanel = gui->createDatapanel("kep_options", pluginOptionTab, true);
 
-	this->category = 0x30;
+	this->category = 47;
 	auto result = std::find(catList.begin(), catList.end(), this->category);
 	if (result != catList.end())
 		this->category = maxCat + 1;

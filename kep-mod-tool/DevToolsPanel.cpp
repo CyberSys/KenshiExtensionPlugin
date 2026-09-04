@@ -50,6 +50,7 @@ You should have received a copy of the GNU General Public License along with thi
 #include <kenshi/gui/TitleScreen.h>
 #include <kenshi/gui/ManagementScreen.h>
 #include <kenshi/ZoneMapContent.h>
+#include <kenshi/Research.h>
 #include <extern/TownBase.h>
 #include <extern/UseableStuff.h>
 #include <kenshi/AI/AI.h>
@@ -312,7 +313,7 @@ void KEP::tools::DevToolsPanel::_teleportTheSelected(DataPanelLine* line)
 
 void KEP::tools::DevToolsPanel::_completeResearch(DataPanelLine* line)
 {
-	KEP::functions->Research_addResearchProgress(ou->player->technology, 1000000.0f);
+	ou->player->technology->progressResearch(1000000.0f);
 }
 
 void KEP::tools::DevToolsPanel::_completeAllResearch(DataPanelLine* line)
@@ -321,10 +322,8 @@ void KEP::tools::DevToolsPanel::_completeAllResearch(DataPanelLine* line)
 	ou->gamedata.getDataOfType(list, RESEARCH);
 	for (auto iter = list.begin(); iter != list.end(); ++iter)
 	{
-		if (!functions->Research_completed(ou->player->technology, *iter))
-		{
-			functions->Research_complete(ou->player->technology, *iter);
-		}
+		if (!ou->player->technology->isFinished(*iter))
+			ou->player->technology->completeResearch(*iter);
 	}
 	KEP::functions->MessageRoller_clear(ou->messageRoller);
 }

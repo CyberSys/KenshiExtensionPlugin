@@ -7,16 +7,51 @@ This program is distributed in the hope that it will be useful, but WITHOUT ANY 
 You should have received a copy of the GNU General Public License along with this program. If not, see <https://www.gnu.org/licenses/>.
 --------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------*/
 #include "pch.h"
+
 #include <boost/filesystem.hpp>
 
+#include <kenshi/Globals.h>
+#include <kenshi/GameWorld.h>
+#include <kenshi/ModInfo.h>
+
 #include <Debug.h>
-#include <kep.h>
+#include <kep/config_manager.h>
+#include <kep/utility.h>
+#include <kep/settings.h>
 
 namespace fs = boost::filesystem;
 
 namespace
 {
 	std::string kepDirectory;
+
+	BOOL startup(const std::string& path)
+	{
+		fs::path modulePath(path);
+		if (!fs::exists(modulePath / "LICENSE") || !fs::exists(modulePath / "NOTICE.md"))
+		{
+			ErrorLog("License file not found.");
+			return FALSE;
+		}
+
+		bool isKepPath = false;
+		auto& mods = ou->availabelModsOrderedList;
+		for (uint32_t i = 0; i < mods.size(); ++i)
+		{
+			if (mods[i]->name == "KenshiExtensionPlugin" && fs::equivalent(fs::path(mods[i]->path), modulePath))
+			{
+				isKepPath = true;
+				break;
+			}
+		}
+
+		if (!isKepPath)
+		{
+			ErrorLog("Location error.");
+			return FALSE;
+		}
+		return TRUE;
+	}
 }
 
 const std::string& KEP::getPluginPath()
@@ -26,14 +61,7 @@ const std::string& KEP::getPluginPath()
 
 __declspec(dllexport) void startPlugin()
 {
-	DebugLog("kep-core 1.1.2");
-
-	fs::path modulePath = kepDirectory;
-	if (!fs::exists(modulePath / "LICENSE") || !fs::exists(modulePath / "NOTICE.md"))
-	{
-		ErrorLog("License file not found.");
-		return;
-	}
+	DebugLog("kep-core 1.2.0");
 
 	KEP::coreOptions.init(kepDirectory + "\\kep_core_settings.json");
 	if (!KEP::coreOptions.getEnablePlugin())
@@ -68,7 +96,7 @@ BOOL APIENTRY DllMain(HMODULE hModule, DWORD  ul_reason_for_call, LPVOID lpReser
 				kepDirectory = fs::path(buf.data()).branch_path().string();
 			}
 		}
-		break;
+		return startup(kepDirectory);
 	}
 	case DLL_THREAD_ATTACH:
 	case DLL_THREAD_DETACH:

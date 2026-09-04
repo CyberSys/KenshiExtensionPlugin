@@ -37,6 +37,7 @@ You should have received a copy of the GNU General Public License along with thi
 #include <extern/AreaBiomeGroup.h>
 #include <extern/TownBase.h>
 #include <extern/BuildingInterior.h>
+#include <extern/InventoryManager.h>
 
 #include <kep/translation.h>
 #include <kep/functions.h>

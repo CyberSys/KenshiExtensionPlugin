@@ -52,9 +52,11 @@ namespace
 	std::string myDirectory;
 }
 
+boost::scoped_ptr<FunctionPointers> KEP::functions(new FunctionPointers());
+
 __declspec(dllexport) void startPlugin()
 {
-	DebugLog("kep 0.17.2");
+	DebugLog("kep 0.17.3");
 
 	auto versionInfo = KenshiLib::GetKenshiVersion();
 	auto platform = versionInfo.GetPlatform();
@@ -75,6 +77,7 @@ __declspec(dllexport) void startPlugin()
 
 	auto baseAddr = reinterpret_cast<uintptr_t>(GetModuleHandleA(nullptr));
 	
+	KEP::functions->init(platform, version, baseAddr);
 	KEP::externalGlobals->init(platform, version, baseAddr);
 	KEP::externalFunctions->init(platform, version, baseAddr);
 

@@ -42,6 +42,8 @@ You should have received a copy of the GNU General Public License along with thi
 #include <InformationPanel.h>
 #include <GamePlayOptionsTab.h>
 
+boost::scoped_ptr<FunctionPointers> KEP::functions(new FunctionPointers());
+
 namespace
 {
 	void (*GameWorld_processKeys_orig)(GameWorld*);
@@ -253,6 +255,7 @@ void KEP::tools::initHook()
 		}
 	}
 
+	KEP::functions->init(platform, version, baseAddr);
 
 	if (KenshiLib::SUCCESS != KenshiLib::QueueHook(KenshiLib::GetRealAddress(&GameWorld::processKeys), &GameWorld_processKeys_hook, &GameWorld_processKeys_orig))
 		ErrorLog("[GameWorld::processKeys] could not install hook!");

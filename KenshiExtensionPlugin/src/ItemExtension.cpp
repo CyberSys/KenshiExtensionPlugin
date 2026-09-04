@@ -27,8 +27,6 @@ You should have received a copy of the GNU General Public License along with thi
 #include <kenshi/util/StringPair.h>
 #include <kenshi/Faction.h>
 
-#include <extern/Research.h>
-
 #include <kep/utility.h>
 #include <kep/functions.h>
 #include <kep/translation.h>

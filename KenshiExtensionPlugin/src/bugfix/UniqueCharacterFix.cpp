@@ -30,6 +30,7 @@ You should have received a copy of the GNU General Public License along with thi
 
 #include <extern/UniqueNPCManager.h>
 #include <extern/AreaBiomeGroup.h>
+#include <extern/InventoryManager.h>
 
 #include <kep/functions.h>
 #include <ExternalFunctions.h>
